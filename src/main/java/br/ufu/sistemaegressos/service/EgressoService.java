@@ -52,10 +52,7 @@ public class EgressoService {
     }
 
     private void atualizarCamposEgresso(EgressoModel egresso, EgressoAtualizarDTO egressoAtualizarDTO) {
-        Optional.ofNullable(egressoAtualizarDTO.getCpf()).ifPresent(egresso::setCpf);
-        Optional.ofNullable(egressoAtualizarDTO.getNome()).ifPresent(egresso::setNome);
         Optional.ofNullable(egressoAtualizarDTO.getNomeSocial()).ifPresent(egresso::setNomeSocial);
-        Optional.ofNullable(egressoAtualizarDTO.getEmail()).ifPresent(egresso::setEmail);
         Optional.ofNullable(egressoAtualizarDTO.getEmailSecundario()).ifPresent(egresso::setEmailSecundario);
         Optional.ofNullable(egressoAtualizarDTO.getTelefone()).ifPresent(egresso::setTelefone);
         Optional.ofNullable(egressoAtualizarDTO.getTelefoneSecundario()).ifPresent(egresso::setTelefoneSecundario);

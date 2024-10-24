@@ -9,15 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EgressoAtualizarDTO {
-    @Size(max = 14)
-    private String cpf;
-    @Size(max = 255)
-    private String nome;
     @Size(max = 255)
     private String nomeSocial;
     @Email
-    @Size(max = 255)
-    private String email;
     @Size(max = 255)
     private String emailSecundario;
     @Size(max = 255)
