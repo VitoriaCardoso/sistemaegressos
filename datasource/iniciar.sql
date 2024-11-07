@@ -18,3 +18,14 @@ CREATE TABLE egressos_ufu.egresso (
     link_linkedin VARCHAR(255),
     data_atualizacao TIMESTAMP
 );
+
+DROP TABLE IF EXISTS egressos_ufu.depoimento;
+
+CREATE TABLE egressos_ufu.depoimento (
+    id SERIAL PRIMARY KEY,
+    cpf VARCHAR(14) NOT NULL,
+    texto_depoimento VARCHAR(10000) NOT NULL,
+    data_cadastro DATE NOT NULL,
+    privado BOOLEAN NOT NULL,
+    FOREIGN KEY (cpf) REFERENCES egressos_ufu.egresso (cpf)
+);
