@@ -3,6 +3,7 @@ package br.ufu.sistemaegressos.model;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Entity
@@ -17,14 +18,14 @@ public class DepoimentoModel {
     private String texto_depoimento;
 
     @Column(name = "data_cadastro", nullable = false)
-    private LocalDate data_cadastro;
+    private Timestamp data_cadastro;
 
     @Column(name = "privado", nullable = false)
     private Boolean privado;
 
     @ManyToOne
     @JoinColumn(name = "cpf", referencedColumnName = "cpf", nullable = false)
-    private EgressoModelgressoModel;
+    private EgressoModel egressoModel;
 
     public String getId() {
         return id;
@@ -42,11 +43,11 @@ public class DepoimentoModel {
         this.texto_depoimento = texto_depoimento;
     }
 
-    public LocalDate getData_cadastro() {
+    public Timestamp getData_cadastro() {
         return data_cadastro;
     }
 
-    public void setData_cadastro(LocalDate data_cadastro) {
+    public void setData_cadastro(Timestamp data_cadastro) {
         this.data_cadastro = data_cadastro;
     }
 
