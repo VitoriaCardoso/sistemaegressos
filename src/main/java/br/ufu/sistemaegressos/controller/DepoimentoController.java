@@ -29,8 +29,8 @@ public class DepoimentoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DepoimentoModel> buscarDepoimentoPeloID(@PathVariable String cpf) {
-        Optional<DepoimentoModel> depoimento = depoimentoService.listarPeloId(cpf);
+    public ResponseEntity<DepoimentoModel> buscarDepoimentoPeloID(@PathVariable String id) {
+        Optional<DepoimentoModel> depoimento = depoimentoService.listarPeloId(id);
         return depoimento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

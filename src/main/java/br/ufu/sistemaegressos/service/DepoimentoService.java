@@ -36,6 +36,6 @@ public class DepoimentoService {
         return depoimentoRepository.save(depoimento);
     }
 
-    public void excluir(String cpf){ depoimentoRepository.deleteById(cpf);}
+    public void excluir(String id){ depoimentoRepository.deleteById(id);}
 
 }
