@@ -12,24 +12,39 @@ import java.sql.Timestamp;
 public class EgressoModel {
 
     @Id
-    @Column(name = "cpf", nullable = false)
+    @Column(nullable = false)
     private String cpf;
 
-    @Column(name = "nome", nullable = false, length = 45)
+    @Column(nullable = false)
     private String nome;
 
-    @Column(name = "nome_social", nullable = false, length = 45)
-    private String nomeSocial;
+    private String nome_social;
 
-    @Column(name = "email", nullable = false, length = 45)
+    @Column(nullable = false)
     private String email;
 
-    public String getLinkLinkedin() {
-        return linkLinkedin;
+    private String email_secundario;
+
+    @Column(nullable = false, length = 15)
+    private String telefone;
+
+    @Column(length = 15)
+    private String telefone_secundario;
+
+    private String link_lattes;
+
+    private String link_orcid;
+
+    private String link_linkedin;
+
+    private Timestamp data_atualizacao;
+
+    public String getLink_linkedin() {
+        return link_linkedin;
     }
 
-    public void setLinkLinkedin(String linkLinkedin) {
-        this.linkLinkedin = linkLinkedin;
+    public void setLink_linkedin(String link_linkedin) {
+        this.link_linkedin = link_linkedin;
     }
 
     public String getCpf() {
@@ -48,12 +63,12 @@ public class EgressoModel {
         this.nome = nome;
     }
 
-    public String getNomeSocial() {
-        return nomeSocial;
+    public String getNome_social() {
+        return nome_social;
     }
 
-    public void setNomeSocial(String nomeSocial) {
-        this.nomeSocial = nomeSocial;
+    public void setNome_social(String nome_social) {
+        this.nome_social = nome_social;
     }
 
     public String getEmail() {
@@ -64,12 +79,12 @@ public class EgressoModel {
         this.email = email;
     }
 
-    public String getEmailSecundario() {
-        return emailSecundario;
+    public String getEmail_secundario() {
+        return email_secundario;
     }
 
-    public void setEmailSecundario(String emailSecundario) {
-        this.emailSecundario = emailSecundario;
+    public void setEmail_secundario(String email_secundario) {
+        this.email_secundario = email_secundario;
     }
 
     public String getTelefone() {
@@ -80,68 +95,36 @@ public class EgressoModel {
         this.telefone = telefone;
     }
 
-    public String getTelefoneSecundario() {
-        return telefoneSecundario;
+    public String getTelefone_secundario() {
+        return telefone_secundario;
     }
 
-    public void setTelefoneSecundario(String telefoneSecundario) {
-        this.telefoneSecundario = telefoneSecundario;
+    public void setTelefone_secundario(String telefone_secundario) {
+        this.telefone_secundario = telefone_secundario;
     }
 
-    public Integer getIdPessoa() {
-        return idPessoa;
+    public String getLink_lattes() {
+        return link_lattes;
     }
 
-    public void setIdPessoa(Integer idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setLink_lattes(String link_lattes) {
+        this.link_lattes = link_lattes;
     }
 
-    public String getLinkLattes() {
-        return linkLattes;
+    public String getLink_orcid() {
+        return link_orcid;
     }
 
-    public void setLinkLattes(String linkLattes) {
-        this.linkLattes = linkLattes;
+    public void setLink_orcid(String link_orcid) {
+        this.link_orcid = link_orcid;
     }
 
-    public String getLinkOrcid() {
-        return linkOrcid;
+    public Timestamp getData_atualizacao() {
+        return data_atualizacao;
     }
 
-    public void setLinkOrcid(String linkOrcid) {
-        this.linkOrcid = linkOrcid;
+    public void setData_atualizacao(Timestamp data_atualizacao) {
+        this.data_atualizacao = data_atualizacao;
     }
-
-    public Timestamp getDataAtualizacao() {
-        return dataAtualizacao;
-    }
-
-    public void setDataAtualizacao(Timestamp dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
-    }
-
-    @Column(name = "email_secundario", length = 45)
-    private String emailSecundario;
-
-    @Column(name = "telefone", nullable = false, length = 45)
-    private String telefone;
-
-    @Column(name = "telefone_secundario", length = 45)
-    private String telefoneSecundario;
-
-    @Column(name = "id_pessoa", nullable = false)
-    private Integer idPessoa;
-
-    @Column(name = "link_lattes", length = 45)
-    private String linkLattes;
-
-    @Column(name = "link_orcid", length = 45)
-    private String linkOrcid;
-
-    @Column(name = "link_linkedin", length = 45)
-    private String linkLinkedin;
-
-    @Column(name = "data_atualizacao")
-    private Timestamp dataAtualizacao;
 }
 

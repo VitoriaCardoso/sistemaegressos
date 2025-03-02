@@ -1,31 +1,35 @@
 package br.ufu.sistemaegressos.model;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "depoimento", schema = "egressos_ufu")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DepoimentoModel {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(nullable = false)
     private String id;
 
-    @Column(name = "texto_depoimento", nullable = false, length = 100000)
+    @Column(nullable = false)
     private String texto_depoimento;
 
-    @Column(name = "data_cadastro", nullable = false)
+    @Column(nullable = false)
     private Timestamp data_cadastro;
 
-    @Column(name = "privado", nullable = false)
-    private Boolean privado;
+    @Column(nullable = false, length = 7)
+    private String privacidade;
 
     @ManyToOne
-    @JoinColumn(name = "cpf", referencedColumnName = "cpf", nullable = false)
-    private EgressoModel egressoModel;
+    @JoinColumn(name = "matricula_academica", referencedColumnName = "matricula", nullable = false)
+    private InformacaoAcademicaModel informacao_academica;
 
     public String getId() {
         return id;
@@ -51,19 +55,19 @@ public class DepoimentoModel {
         this.data_cadastro = data_cadastro;
     }
 
-    public Boolean getPrivado() {
-        return privado;
+    public String getPrivacidade() {
+        return privacidade;
     }
 
-    public void setPrivado(Boolean privado) {
-        this.privado = privado;
+    public void setPrivacidade(String privacidade) {
+        this.privacidade = privacidade;
     }
 
-    public EgressoModel getEgressoModel() {
-        return egressoModel;
+    public InformacaoAcademicaModel getInformacaoAcademica() {
+        return informacao_academica;
     }
 
-    public void setEgressoModel(EgressoModel egressoModel) {
-        this.egressoModel = egressoModel;
+    public void setInformacaoAcademica(InformacaoAcademicaModel informacaoAcademica) {
+        this.informacao_academica = informacaoAcademica;
     }
 }

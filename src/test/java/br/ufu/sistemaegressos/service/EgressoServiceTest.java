@@ -16,9 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 class EgressoServiceTest {
@@ -39,14 +37,14 @@ class EgressoServiceTest {
         egresso = new EgressoModel();
         egresso.setCpf("12345678900");
         egresso.setNome("João Silva");
-        egresso.setDataAtualizacao(new Timestamp(System.currentTimeMillis()));
+        egresso.setData_atualizacao(new Timestamp(System.currentTimeMillis()));
 
         criarDTO = new EgressoCriarDTO();
         criarDTO.setCpf("12345678900");
         criarDTO.setNome("João Silva");
 
         atualizarDTO = new EgressoAtualizarDTO();
-        atualizarDTO.setNomeSocial("João S.");
+        atualizarDTO.setNome_social("João S.");
         atualizarDTO.setTelefone("999999999");
     }
 
@@ -93,7 +91,7 @@ class EgressoServiceTest {
         EgressoModel result = egressoService.atualizar("12345678900", atualizarDTO);
 
         assertNotNull(result);
-        assertEquals("João S.", result.getNomeSocial());
+        assertEquals("João S.", result.getNome_social());
         assertEquals("999999999", result.getTelefone());
         verify(egressoRepository, times(1)).findById("12345678900");
         verify(egressoRepository, times(1)).save(any(EgressoModel.class));

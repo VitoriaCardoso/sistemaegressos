@@ -10,39 +10,38 @@ import lombok.Setter;
 @Setter
 public class EgressoAtualizarDTO {
     @Size(max = 255)
-    private String nomeSocial;
+    private String nome_social;
     @Email
     @Size(max = 255)
-    private String emailSecundario;
+    private String email_secundario;
     @Size(max = 255)
     @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx")
     private String telefone;
     @Size(max = 255)
     @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx")
-    private String telefoneSecundario;
-    @Size(max = 255)
-    private Integer idPessoa;
-    @Size(max = 255)
-    private String linkLattes;
-    @Size(max = 255)
-    private String linkOrcid;
-    @Size(max = 255)
-    private String linkLinkedin;
+    private String telefone_secundario;
 
-    public @Size(max = 255) String getNomeSocial() {
-        return nomeSocial;
+    @Size(max = 255)
+    private String link_lattes;
+    @Size(max = 255)
+    private String link_orcid;
+    @Size(max = 255)
+    private String link_linkedin;
+
+    public @Size(max = 255) String getNome_social() {
+        return nome_social;
     }
 
-    public void setNomeSocial(@Size(max = 255) String nomeSocial) {
-        this.nomeSocial = nomeSocial;
+    public void setNome_social(@Size(max = 255) String nome_social) {
+        this.nome_social = nome_social;
     }
 
-    public @Email @Size(max = 255) String getEmailSecundario() {
-        return emailSecundario;
+    public @Email @Size(max = 255) String getEmail_secundario() {
+        return email_secundario;
     }
 
-    public void setEmailSecundario(@Email @Size(max = 255) String emailSecundario) {
-        this.emailSecundario = emailSecundario;
+    public void setEmail_secundario(@Email @Size(max = 255) String email_secundario) {
+        this.email_secundario = email_secundario;
     }
 
     public @Size(max = 255) @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx") String getTelefone() {
@@ -53,44 +52,36 @@ public class EgressoAtualizarDTO {
         this.telefone = telefone;
     }
 
-    public @Size(max = 255) @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx") String getTelefoneSecundario() {
-        return telefoneSecundario;
+    public @Size(max = 255) @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx") String getTelefone_secundario() {
+        return telefone_secundario;
     }
 
-    public void setTelefoneSecundario(@Size(max = 255) @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx") String telefoneSecundario) {
-        this.telefoneSecundario = telefoneSecundario;
+    public void setTelefone_secundario(@Size(max = 255) @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx") String telefone_secundario) {
+        this.telefone_secundario = telefone_secundario;
     }
 
-    public @Size(max = 255) Integer getIdPessoa() {
-        return idPessoa;
+    public @Size(max = 255) String getLink_lattes() {
+        return link_lattes;
     }
 
-    public void setIdPessoa(@Size(max = 255) Integer idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setLink_lattes(@Size(max = 255) String link_lattes) {
+        this.link_lattes = link_lattes;
     }
 
-    public @Size(max = 255) String getLinkLattes() {
-        return linkLattes;
+    public @Size(max = 255) String getLink_orcid() {
+        return link_orcid;
     }
 
-    public void setLinkLattes(@Size(max = 255) String linkLattes) {
-        this.linkLattes = linkLattes;
+    public void setLink_orcid(@Size(max = 255) String link_orcid) {
+        this.link_orcid = link_orcid;
     }
 
-    public @Size(max = 255) String getLinkOrcid() {
-        return linkOrcid;
+    public @Size(max = 255) String getLink_linkedin() {
+        return link_linkedin;
     }
 
-    public void setLinkOrcid(@Size(max = 255) String linkOrcid) {
-        this.linkOrcid = linkOrcid;
-    }
-
-    public @Size(max = 255) String getLinkLinkedin() {
-        return linkLinkedin;
-    }
-
-    public void setLinkLinkedin(@Size(max = 255) String linkLinkedin) {
-        this.linkLinkedin = linkLinkedin;
+    public void setLink_linkedin(@Size(max = 255) String link_linkedin) {
+        this.link_linkedin = link_linkedin;
     }
 
 }

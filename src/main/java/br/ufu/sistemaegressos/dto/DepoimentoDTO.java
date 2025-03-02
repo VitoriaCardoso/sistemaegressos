@@ -11,24 +11,17 @@ import java.time.LocalDate;
 public class DepoimentoDTO {
     @NotBlank
     @NotNull
-    private String id;
-    @NotBlank
-    @NotNull
     private String texto_depoimento;
     @NotBlank
     @NotNull
     private LocalDate data_cadastro;
     @NotBlank
     @NotNull
-    private Boolean privado;
+    private String privacidade;
 
-    public @NotBlank @NotNull String getId() {
-        return id;
-    }
-
-    public void setId(@NotBlank @NotNull String id) {
-        this.id = id;
-    }
+    @NotBlank
+    @NotNull
+    private String matricula_academica;
 
     public @NotBlank @NotNull String getTexto_depoimento() {
         return texto_depoimento;
@@ -46,11 +39,19 @@ public class DepoimentoDTO {
         this.data_cadastro = data_cadastro;
     }
 
-    public @NotBlank @NotNull Boolean getPrivado() {
-        return privado;
+    public String getPrivacidade() {
+        return privacidade;
     }
 
-    public void setPrivado(@NotBlank @NotNull Boolean privado) {
-        this.privado = privado;
+    public void setPrivacidade(String privacidade) {
+        this.privacidade = privacidade;
+    }
+
+    public String getMatricula_academica() {
+        return matricula_academica;
+    }
+
+    public void setMatricula_academica(String matricula_academica) {
+        this.matricula_academica = matricula_academica;
     }
 }

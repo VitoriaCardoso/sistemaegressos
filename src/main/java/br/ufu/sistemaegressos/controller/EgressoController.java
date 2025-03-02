@@ -52,4 +52,16 @@ public class EgressoController {
         egressoService.excluir(cpf);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/filtro")
+    public List<EgressoModel> buscarEgressoPorFiltro(@RequestParam(required = false) String nome,
+                                                     @RequestParam(required = false) String cpf,
+                                                     @RequestParam(required = false) String campus,
+                                                     @RequestParam(required = false) String nomeCurso,
+                                                     @RequestParam(required = false) String codigoCurso,
+                                                     @RequestParam(required = false) String titulacao,
+                                                     @RequestParam(required = false) String dataIngresso,
+                                                     @RequestParam(required = false) String dataConclusao) {
+        return egressoService.buscarPorFiltro(nome, cpf, campus, nomeCurso, codigoCurso, titulacao, dataIngresso, dataConclusao);
+    }
 }

@@ -32,7 +32,7 @@ public class EgressoService {
     public EgressoModel criar(EgressoCriarDTO egressoDTO) {
         EgressoModel egresso = new EgressoModel();
         BeanUtils.copyProperties(egressoDTO, egresso);
-        egresso.setDataAtualizacao(new Timestamp(System.currentTimeMillis()));
+        egresso.setData_atualizacao(new Timestamp(System.currentTimeMillis()));
         return egressoRepository.save(egresso);
     }
 
@@ -41,7 +41,7 @@ public class EgressoService {
         if (optionalEgresso.isPresent()) {
             EgressoModel egresso = optionalEgresso.get();
             atualizarCamposEgresso(egresso, egressoDTO);
-            egresso.setDataAtualizacao(new Timestamp(System.currentTimeMillis()));
+            egresso.setData_atualizacao(new Timestamp(System.currentTimeMillis()));
             return egressoRepository.save(egresso);
         }
         return null;
@@ -52,13 +52,19 @@ public class EgressoService {
     }
 
     private void atualizarCamposEgresso(EgressoModel egresso, EgressoAtualizarDTO egressoAtualizarDTO) {
-        Optional.ofNullable(egressoAtualizarDTO.getNomeSocial()).ifPresent(egresso::setNomeSocial);
-        Optional.ofNullable(egressoAtualizarDTO.getEmailSecundario()).ifPresent(egresso::setEmailSecundario);
+        Optional.ofNullable(egressoAtualizarDTO.getNome_social()).ifPresent(egresso::setNome_social);
+        Optional.ofNullable(egressoAtualizarDTO.getEmail_secundario()).ifPresent(egresso::setEmail_secundario);
         Optional.ofNullable(egressoAtualizarDTO.getTelefone()).ifPresent(egresso::setTelefone);
-        Optional.ofNullable(egressoAtualizarDTO.getTelefoneSecundario()).ifPresent(egresso::setTelefoneSecundario);
-        Optional.ofNullable(egressoAtualizarDTO.getIdPessoa()).ifPresent(egresso::setIdPessoa);
-        Optional.ofNullable(egressoAtualizarDTO.getLinkLattes()).ifPresent(egresso::setLinkLattes);
-        Optional.ofNullable(egressoAtualizarDTO.getLinkOrcid()).ifPresent(egresso::setLinkOrcid);
-        Optional.ofNullable(egressoAtualizarDTO.getLinkLinkedin()).ifPresent(egresso::setLinkLinkedin);
+        Optional.ofNullable(egressoAtualizarDTO.getTelefone_secundario()).ifPresent(egresso::setTelefone_secundario);
+        Optional.ofNullable(egressoAtualizarDTO.getLink_lattes()).ifPresent(egresso::setLink_lattes);
+        Optional.ofNullable(egressoAtualizarDTO.getLink_orcid()).ifPresent(egresso::setLink_orcid);
+        Optional.ofNullable(egressoAtualizarDTO.getLink_linkedin()).ifPresent(egresso::setLink_linkedin);
+    }
+
+    public List<EgressoModel> buscarPorFiltro(String nome, String cpf, String campus,
+                                              String nomeCurso, String codigoCurso,
+                                              String titulacao, String dataIngresso,
+                                              String dataConclusao) {
+        return egressoRepository.buscarPorFiltro(nome, cpf, nomeCurso, titulacao, dataIngresso, dataConclusao);
     }
 }

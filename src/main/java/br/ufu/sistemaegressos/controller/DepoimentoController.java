@@ -1,10 +1,7 @@
 package br.ufu.sistemaegressos.controller;
 
 import br.ufu.sistemaegressos.dto.DepoimentoDTO;
-import br.ufu.sistemaegressos.dto.EgressoCriarDTO;
 import br.ufu.sistemaegressos.model.DepoimentoModel;
-import br.ufu.sistemaegressos.model.EgressoModel;
-import br.ufu.sistemaegressos.repository.DepoimentoRepository;
 import br.ufu.sistemaegressos.service.DepoimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,4 +41,10 @@ public class DepoimentoController {
         depoimentoService.excluir(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/egresso/{cpf}")
+    public List<DepoimentoModel> listarPorCpfEgresso(@PathVariable String cpf) {
+        return depoimentoService.listarPorCpfEgresso(cpf);
+    }
+
 }
