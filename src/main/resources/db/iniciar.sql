@@ -100,7 +100,7 @@ CREATE TABLE egressos_ufu.publicacao (
     id UUID PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
     autores VARCHAR(255) NOT NULL,
-    ano_publicacao YEAR NOT NULL,
+    ano_publicacao INTEGER NOT NULL,
     veiculo VARCHAR(45) NOT NULL,
     url_publicacao VARCHAR(255) NOT NULL,
     matricula_academica VARCHAR(45) NOT NULL,
