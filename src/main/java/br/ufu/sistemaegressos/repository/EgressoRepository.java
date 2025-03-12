@@ -20,4 +20,5 @@ public interface EgressoRepository extends JpaRepository<EgressoModel, String> {
             "AND (COALESCE(:dataConclusao, '') = '' OR ia.data_conclusao = :dataConclusao)")
     List<EgressoModel> buscarPorFiltro(String nome, String cpf, String nomeCurso,
                                        String titulacao, String dataIngresso, String dataConclusao);
+
 }

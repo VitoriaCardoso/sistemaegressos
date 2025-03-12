@@ -46,7 +46,7 @@ class DepoimentoServiceTest {
     public void testListarTodos() {
         when(depoimentoRepository.findAll()).thenReturn(Arrays.asList(depoimento));
 
-        List<DepoimentoModel> result = depoimentoService.listarTodos();
+        List<DepoimentoModel> result = depoimentoService.listarTodos("Santa Monica", 1000, "Economia", "Doutorado");
 
         assertNotNull(result);
         assertEquals(1, result.size());

@@ -2,6 +2,7 @@ package br.ufu.sistemaegressos.controller;
 
 import br.ufu.sistemaegressos.dto.DepoimentoDTO;
 import br.ufu.sistemaegressos.model.DepoimentoModel;
+import br.ufu.sistemaegressos.model.InformacaoAcademicaModel;
 import br.ufu.sistemaegressos.service.DepoimentoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,6 +37,8 @@ public class DepoimentoControllerTest {
 
     private DepoimentoModel depoimento;
 
+    private InformacaoAcademicaModel informacaoAcademicaModel;
+
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
@@ -43,18 +46,21 @@ public class DepoimentoControllerTest {
         depoimento.setId("1639e15f-4c29-42e2-b148-300e7e479643");
         depoimento.setTexto_depoimento("Depoimento de teste");
         depoimento.setData_cadastro(new Timestamp(System.currentTimeMillis()));
+        informacaoAcademicaModel.setNome_instituicao("UFU");
+
+        depoimento.setInformacaoAcademica(informacaoAcademicaModel);
     }
 
     @Test
     public void testBuscarTodosDepoimentos() throws Exception {
-        when(depoimentoService.listarTodos()).thenReturn(Arrays.asList(depoimento));
+        when(depoimentoService.listarTodos("Santa Monica", 1000, "Economia", "Doutorado")).thenReturn(Arrays.asList(depoimento));
 
         mockMvc.perform(get("/api/depoimentos"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value("1639e15f-4c29-42e2-b148-300e7e479643"))
                 .andExpect(jsonPath("$[0].texto_depoimento").value("Depoimento de teste"));
 
-        verify(depoimentoService, times(1)).listarTodos();
+        verify(depoimentoService, times(1)).listarTodos("Santa Monica", 1000, "Economia", "Doutorado");
     }
 
     @Test

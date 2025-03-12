@@ -21,8 +21,8 @@ public class DepoimentoController {
     }
 
     @GetMapping
-    public List<DepoimentoModel> buscarTodosDepoimentos() {
-        return depoimentoService.listarTodos();
+    public List<DepoimentoModel> buscarTodosDepoimentos(String campus, Integer totalEstudantes, String curso, String titulacao) {
+        return depoimentoService.listarTodos(campus,totalEstudantes,curso,titulacao);
     }
 
     @GetMapping("/{id}")

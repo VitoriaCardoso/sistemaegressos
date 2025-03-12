@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,16 +25,63 @@ public class DepoimentoService {
         this.informacaoAcademicaRepository = informacaoAcademicaRepository;
     }
 
-    public List<DepoimentoModel> listarTodos(){
+    public List<DepoimentoModel> listarTodos(String campus, Integer totalEstudantes, String curso, String titulacao) {
         List<DepoimentoModel> depoimentos = depoimentoRepository.findAll();
+        List<DepoimentoModel> resultado = new ArrayList<>();
+
+        // Buscar total de estudantes agrupados por curso e campus
+        List<Object[]> totalEstudantesPorCursoECampus = informacaoAcademicaRepository.contarEstudantesPorCursoECampus();
+        Map<String, Map<String, Long>> totalEstudantesMap = new HashMap<>();
+
+        for (Object[] row : totalEstudantesPorCursoECampus) {
+            String nomeCurso = (String) row[0];
+            String nomeCampus = (String) row[1];
+            Long total = (Long) row[2];
+
+            totalEstudantesMap
+                    .computeIfAbsent(nomeCampus, k -> new HashMap<>())
+                    .put(nomeCurso, total);
+        }
+
         for (DepoimentoModel depoimento : depoimentos) {
-            if (depoimento.getInformacaoAcademica() != null) {
-                depoimento.getInformacaoAcademica().setInformacao_profissional(null);
-                depoimento.getInformacaoAcademica().setComunicados(null);
+            boolean adicionar = true;
+            InformacaoAcademicaModel infoAcademica = depoimento.getInformacaoAcademica();
+
+            if (infoAcademica == null) {
+                continue;
+            }
+
+            if (campus != null && (infoAcademica.getNome_instituicao() == null || !infoAcademica.getNome_instituicao().equalsIgnoreCase(campus))) {
+                adicionar = false;
+            }
+
+            if (curso != null && (infoAcademica.getNome_curso() == null || !infoAcademica.getNome_curso().equalsIgnoreCase(curso))) {
+                adicionar = false;
+            }
+
+            if (totalEstudantes != null) {
+                Long estudantes = totalEstudantesMap
+                        .getOrDefault(infoAcademica.getNome_instituicao(), new HashMap<>())
+                        .getOrDefault(infoAcademica.getNome_curso(), 0L);
+
+                if (estudantes.intValue() != totalEstudantes) {
+                    adicionar = false;
+                }
+            }
+
+            if (titulacao != null && (infoAcademica.getTitulacao() == null || !infoAcademica.getTitulacao().equalsIgnoreCase(titulacao))) {
+                adicionar = false;
+            }
+
+            if (adicionar) {
+                infoAcademica.setInformacao_profissional(null);
+                infoAcademica.setComunicados(null);
+                resultado.add(depoimento);
             }
         }
-        return depoimentos;
+        return resultado;
     }
+
 
     public Optional<DepoimentoModel> listarPeloId(String id) {
         Optional<DepoimentoModel> depoimento = depoimentoRepository.findById(id);
