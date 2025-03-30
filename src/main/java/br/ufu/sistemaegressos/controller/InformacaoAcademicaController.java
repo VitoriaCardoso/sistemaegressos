@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/informacao-academica")
@@ -31,13 +32,13 @@ public class InformacaoAcademicaController {
         return informacaoAcademicaService.criar(dto);
     }
 
-    @PutMapping("/{matricula}")
-    public InformacaoAcademicaModel atualizarInformacaoAcademica(@PathVariable String matricula, @RequestBody InformacaoAcademicaDTO dto) {
-        return informacaoAcademicaService.atualizar(matricula, dto);
+    @PutMapping("/{id}")
+    public InformacaoAcademicaModel atualizarInformacaoAcademica(@PathVariable UUID id, @RequestBody InformacaoAcademicaDTO dto) {
+        return informacaoAcademicaService.atualizar(id, dto);
     }
 
-    @DeleteMapping("/{matricula}")
-    public void excluirInformacaoAcademica(@PathVariable String matricula) {
-        informacaoAcademicaService.excluir(matricula);
+    @DeleteMapping("/{id}")
+    public void excluirInformacaoAcademica(@PathVariable UUID id) {
+        informacaoAcademicaService.excluir(id);
     }
 }

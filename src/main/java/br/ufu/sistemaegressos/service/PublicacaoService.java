@@ -38,7 +38,7 @@ public class PublicacaoService {
 
     public PublicacaoModel criar(PublicacaoDTO publicacaoDTO) {
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
-                .findById(publicacaoDTO.getMatricula_academica())
+                .findById(publicacaoDTO.getId_informacao_academica())
                 .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada"));
 
         PublicacaoModel publicacao = new PublicacaoModel();

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.BeanUtils;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -67,7 +67,7 @@ public class ComunicadoService {
     public ComunicadoModel criarComunicado(ComunicadoDTO comunicadoDTO) {
         ComunicadoModel comunicado = new ComunicadoModel();
         BeanUtils.copyProperties(comunicadoDTO, comunicado);
-        comunicado.setData_envio(new Timestamp(System.currentTimeMillis()));
+        comunicado.setData_envio(LocalDate.now());
 
         comunicado = comunicadoRepository.save(comunicado);
 

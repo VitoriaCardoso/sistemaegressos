@@ -3,12 +3,12 @@ package br.ufu.sistemaegressos.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "comunicado", schema = "egressos_ufu")
+@Table(name = "comunicado")
 public class ComunicadoModel {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -31,12 +31,11 @@ public class ComunicadoModel {
     private String nivel_curso_destino;
 
     @Column(nullable = false)
-    private Timestamp data_envio;
+    private LocalDate data_envio;
 
     @ManyToMany
     @JoinTable(
             name = "comunicado_destino",
-            schema = "egressos_ufu",
             joinColumns = @JoinColumn(name = "id_comunicado"),
             inverseJoinColumns = @JoinColumn(name = "matricula_academica")
     )
@@ -98,11 +97,11 @@ public class ComunicadoModel {
         this.nivel_curso_destino = nivel_curso_destino;
     }
 
-    public Timestamp getData_envio() {
+    public LocalDate getData_envio() {
         return data_envio;
     }
 
-    public void setData_envio(Timestamp data_envio) {
+    public void setData_envio(LocalDate data_envio) {
         this.data_envio = data_envio;
     }
 }

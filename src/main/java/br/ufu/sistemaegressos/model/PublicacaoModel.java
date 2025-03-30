@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "publicacao", schema = "egressos_ufu")
+@Table(name = "publicacao")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PublicacaoModel {
     @Id
@@ -30,7 +30,7 @@ public class PublicacaoModel {
     private String url_publicacao;
 
     @ManyToOne
-    @JoinColumn(name = "matricula_academica", referencedColumnName = "matricula", nullable = false)
+    @JoinColumn(name = "id_informacao_academica", referencedColumnName = "id", nullable = false)
     private InformacaoAcademicaModel informacao_academica;
 
     public String getId() {

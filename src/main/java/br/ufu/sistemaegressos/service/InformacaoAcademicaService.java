@@ -1,10 +1,8 @@
 package br.ufu.sistemaegressos.service;
 
 import br.ufu.sistemaegressos.dto.InformacaoAcademicaDTO;
-import br.ufu.sistemaegressos.model.DepoimentoModel;
 import br.ufu.sistemaegressos.model.InformacaoAcademicaModel;
 import br.ufu.sistemaegressos.model.EgressoModel;
-import br.ufu.sistemaegressos.model.InformacaoProfissionalModel;
 import br.ufu.sistemaegressos.repository.InformacaoAcademicaRepository;
 import br.ufu.sistemaegressos.repository.EgressoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,8 +46,8 @@ public class InformacaoAcademicaService {
         return informacaoAcademicaRepository.save(informacaoAcademica);
     }
 
-    public InformacaoAcademicaModel atualizar(String matricula, InformacaoAcademicaDTO dto) {
-        Optional<InformacaoAcademicaModel> optionalInformacao = informacaoAcademicaRepository.findById(matricula);
+    public InformacaoAcademicaModel atualizar(UUID id, InformacaoAcademicaDTO dto) {
+        Optional<InformacaoAcademicaModel> optionalInformacao = informacaoAcademicaRepository.findById(id);
         if (optionalInformacao.isPresent()) {
             InformacaoAcademicaModel informacaoAcademica = optionalInformacao.get();
             BeanUtils.copyProperties(dto, informacaoAcademica);
@@ -58,7 +56,7 @@ public class InformacaoAcademicaService {
         return null;
     }
 
-    public void excluir(String matricula) {
-        informacaoAcademicaRepository.deleteById(matricula);
+    public void excluir(UUID id) {
+        informacaoAcademicaRepository.deleteById(id);
     }
 }

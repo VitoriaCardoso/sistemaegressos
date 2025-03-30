@@ -7,7 +7,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -68,11 +67,11 @@ public class InformacaoProfissionalService {
     public InformacaoProfissionalModel criarInformacaoProfissional(InformacaoProfissionalDTO dto) {
         InformacaoProfissionalModel informacaoProfissional = new InformacaoProfissionalModel();
         BeanUtils.copyProperties(dto, informacaoProfissional);
-        informacaoProfissional.setData_inicio(new Timestamp(System.currentTimeMillis()));
+        informacaoProfissional.setData_inicio(dto.getData_inicio());
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
-                .findById(dto.getMatricula_academica())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para matrícula: " + dto.getMatricula_academica()));
+                .findById(dto.getId_informacao_academica())
+                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para matrícula: " + dto.getId_informacao_academica()));
 
         informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
 
@@ -96,8 +95,8 @@ public class InformacaoProfissionalService {
         BeanUtils.copyProperties(dto, informacaoProfissional);
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
-                .findById(dto.getMatricula_academica())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para matrícula: " + dto.getMatricula_academica()));
+                .findById(dto.getId_informacao_academica())
+                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para matrícula: " + dto.getId_informacao_academica()));
 
         informacaoProfissional.getInformacao_academica().clear();
         informacaoProfissional.getInformacao_academica().add(informacaoAcademica);

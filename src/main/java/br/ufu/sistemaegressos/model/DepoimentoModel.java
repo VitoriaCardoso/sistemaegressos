@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "depoimento", schema = "egressos_ufu")
+@Table(name = "depoimento")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DepoimentoModel {
 
@@ -22,13 +22,13 @@ public class DepoimentoModel {
     private String texto_depoimento;
 
     @Column(nullable = false)
-    private Timestamp data_cadastro;
+    private LocalDate data_cadastro;
 
     @Column(nullable = false, length = 7)
     private String privacidade;
 
     @ManyToOne
-    @JoinColumn(name = "matricula_academica", referencedColumnName = "matricula", nullable = false)
+    @JoinColumn(name = "id_informacao_academica", referencedColumnName = "id", nullable = false)
     private InformacaoAcademicaModel informacao_academica;
 
     public String getId() {
@@ -47,11 +47,11 @@ public class DepoimentoModel {
         this.texto_depoimento = texto_depoimento;
     }
 
-    public Timestamp getData_cadastro() {
+    public LocalDate getData_cadastro() {
         return data_cadastro;
     }
 
-    public void setData_cadastro(Timestamp data_cadastro) {
+    public void setData_cadastro(LocalDate data_cadastro) {
         this.data_cadastro = data_cadastro;
     }
 

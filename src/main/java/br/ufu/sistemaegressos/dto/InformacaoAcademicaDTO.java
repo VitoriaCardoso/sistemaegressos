@@ -1,20 +1,41 @@
 package br.ufu.sistemaegressos.dto;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.UUID;
 
 public class InformacaoAcademicaDTO {
 
+    private UUID id;
     private String matricula;
     private String nome_instituicao;
     private String tipo_instituicao;
     private String nome_curso;
     private String titulacao;
-    private Timestamp data_ingresso;
-    private Timestamp data_conclusao;
+    private LocalDate data_ingresso;
+    private LocalDate data_conclusao;
     private String cidade;
     private String estado;
     private String pais;
     private String egresso_cpf;
+    private String codigo_curso;
+    private String campus;
+    private Boolean ativo;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
     public String getNome_instituicao() {
         return nome_instituicao;
@@ -48,19 +69,19 @@ public class InformacaoAcademicaDTO {
         this.titulacao = titulacao;
     }
 
-    public Timestamp getData_ingresso() {
+    public LocalDate getData_ingresso() {
         return data_ingresso;
     }
 
-    public void setData_ingresso(Timestamp data_ingresso) {
+    public void setData_ingresso(LocalDate data_ingresso) {
         this.data_ingresso = data_ingresso;
     }
 
-    public Timestamp getData_conclusao() {
+    public LocalDate getData_conclusao() {
         return data_conclusao;
     }
 
-    public void setData_conclusao(Timestamp data_conclusao) {
+    public void setData_conclusao(LocalDate data_conclusao) {
         this.data_conclusao = data_conclusao;
     }
 
@@ -80,14 +101,6 @@ public class InformacaoAcademicaDTO {
         this.estado = estado;
     }
 
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
     public String getPais() {
         return pais;
     }
@@ -102,5 +115,29 @@ public class InformacaoAcademicaDTO {
 
     public void setEgresso_cpf(String egresso_cpf) {
         this.egresso_cpf = egresso_cpf;
+    }
+
+    public String  getCodigo_curso() {
+        return codigo_curso;
+    }
+
+    public void setCodigo_curso(String codigo_curso) {
+        this.codigo_curso = codigo_curso;
+    }
+
+    public String getCampus() {
+        return campus;
+    }
+
+    public void setCampus(String campus) {
+        this.campus = campus;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }

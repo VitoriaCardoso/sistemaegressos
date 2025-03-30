@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,8 +61,8 @@ public class EgressoController {
                                                      @RequestParam(required = false) String nomeCurso,
                                                      @RequestParam(required = false) String codigoCurso,
                                                      @RequestParam(required = false) String titulacao,
-                                                     @RequestParam(required = false) String dataIngresso,
-                                                     @RequestParam(required = false) String dataConclusao) {
+                                                     @RequestParam(required = false) LocalDate dataIngresso,
+                                                     @RequestParam(required = false) LocalDate dataConclusao) {
         return egressoService.buscarPorFiltro(nome, cpf, campus, nomeCurso, codigoCurso, titulacao, dataIngresso, dataConclusao);
     }
 }

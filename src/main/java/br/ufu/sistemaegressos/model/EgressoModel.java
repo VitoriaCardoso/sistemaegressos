@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
+
 @Entity
-@Table(name = "egresso", schema = "egressos_ufu")
+@Table(name = "egresso")
 @Getter
 @Setter
 public class EgressoModel {
@@ -37,7 +38,7 @@ public class EgressoModel {
 
     private String link_linkedin;
 
-    private Timestamp data_atualizacao;
+    private LocalDate data_atualizacao;
 
     public String getLink_linkedin() {
         return link_linkedin;
@@ -119,11 +120,11 @@ public class EgressoModel {
         this.link_orcid = link_orcid;
     }
 
-    public Timestamp getData_atualizacao() {
+    public LocalDate getData_atualizacao() {
         return data_atualizacao;
     }
 
-    public void setData_atualizacao(Timestamp data_atualizacao) {
+    public void setData_atualizacao(LocalDate data_atualizacao) {
         this.data_atualizacao = data_atualizacao;
     }
 }

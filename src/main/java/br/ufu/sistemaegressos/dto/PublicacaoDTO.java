@@ -1,5 +1,7 @@
 package br.ufu.sistemaegressos.dto;
 
+import java.util.UUID;
+
 public class PublicacaoDTO {
 
     private String titulo;
@@ -7,7 +9,7 @@ public class PublicacaoDTO {
     private Integer ano_publicacao;
     private String veiculo;
     private String url_publicacao;
-    private String matricula_academica;
+    private UUID id_informacao_academica;
 
     public String getTitulo() {
         return titulo;
@@ -49,11 +51,11 @@ public class PublicacaoDTO {
         this.url_publicacao = url_publicacao;
     }
 
-    public String getMatricula_academica() {
-        return matricula_academica;
+    public UUID getId_informacao_academica() {
+        return id_informacao_academica;
     }
 
-    public void setMatricula_academica(String matricula_academica) {
-        this.matricula_academica = matricula_academica;
+    public void setId_informacao_academica(UUID id_informacao_academica) {
+        this.id_informacao_academica = id_informacao_academica;
     }
 }

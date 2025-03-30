@@ -3,15 +3,19 @@ package br.ufu.sistemaegressos.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
-@Table(name = "informacao_academica", schema = "egressos_ufu")
+@Table(name = "informacao_academica")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class InformacaoAcademicaModel {
 
     @Id
+    @GeneratedValue
+    private UUID id;
+
     @Column(length = 45)
     private String matricula;
 
@@ -28,9 +32,9 @@ public class InformacaoAcademicaModel {
     private String titulacao;
 
     @Column(nullable = false)
-    private Timestamp data_ingresso;
+    private LocalDate data_ingresso;
 
-    private Timestamp data_conclusao;
+    private LocalDate data_conclusao;
 
     @Column(length = 45, nullable = false)
     private String cidade;
@@ -40,6 +44,15 @@ public class InformacaoAcademicaModel {
 
     @Column(length = 45, nullable = false)
     private String pais;
+
+    @Column(nullable = true)
+    private String codigo_curso;
+
+    @Column(length = 45, nullable = false)
+    private String campus;
+
+    @Column(nullable = false)
+    private Boolean ativo;
 
     @ManyToOne
     @JoinColumn(name = "egresso_cpf", referencedColumnName = "cpf", nullable = false)
@@ -51,12 +64,12 @@ public class InformacaoAcademicaModel {
     @ManyToMany(mappedBy = "informacao_academica")
     private Set<ComunicadoModel> comunicados;
 
-    public Set<ComunicadoModel> getComunicados() {
-        return comunicados;
+    public UUID getId() {
+        return id;
     }
 
-    public void setComunicados(Set<ComunicadoModel> comunicados) {
-        this.comunicados = comunicados;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getMatricula() {
@@ -99,19 +112,19 @@ public class InformacaoAcademicaModel {
         this.titulacao = titulacao;
     }
 
-    public Timestamp getData_ingresso() {
+    public LocalDate getData_ingresso() {
         return data_ingresso;
     }
 
-    public void setData_ingresso(Timestamp data_ingresso) {
+    public void setData_ingresso(LocalDate data_ingresso) {
         this.data_ingresso = data_ingresso;
     }
 
-    public Timestamp getData_conclusao() {
+    public LocalDate getData_conclusao() {
         return data_conclusao;
     }
 
-    public void setData_conclusao(Timestamp data_conclusao) {
+    public void setData_conclusao(LocalDate data_conclusao) {
         this.data_conclusao = data_conclusao;
     }
 
@@ -139,6 +152,22 @@ public class InformacaoAcademicaModel {
         this.pais = pais;
     }
 
+    public String getCodigo_curso() {
+        return codigo_curso;
+    }
+
+    public void setCodigo_curso(String codigo_curso) {
+        this.codigo_curso = codigo_curso;
+    }
+
+    public String getCampus() {
+        return campus;
+    }
+
+    public void setCampus(String campus) {
+        this.campus = campus;
+    }
+
     public EgressoModel getEgresso() {
         return egresso;
     }
@@ -153,5 +182,21 @@ public class InformacaoAcademicaModel {
 
     public void setInformacao_profissional(Set<InformacaoProfissionalModel> informacao_profissional) {
         this.informacao_profissional = informacao_profissional;
+    }
+
+    public Set<ComunicadoModel> getComunicados() {
+        return comunicados;
+    }
+
+    public void setComunicados(Set<ComunicadoModel> comunicados) {
+        this.comunicados = comunicados;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }

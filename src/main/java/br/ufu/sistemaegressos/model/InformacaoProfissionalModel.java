@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "informacao_profissional", schema = "egressos_ufu")
+@Table(name = "informacao_profissional")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class InformacaoProfissionalModel {
 
@@ -43,16 +43,15 @@ public class InformacaoProfissionalModel {
     private Double media_salarial;
 
     @Column(nullable = false)
-    private Timestamp data_inicio;
+    private LocalDate data_inicio;
 
-    private Timestamp data_fim;
+    private LocalDate data_fim;
 
     @ManyToMany
     @JoinTable(
             name = "informacao_academica_profissional",
-            schema = "egressos_ufu",
             joinColumns = @JoinColumn(name = "id_informacao_profissional"),
-            inverseJoinColumns = @JoinColumn(name = "matricula_academica")
+            inverseJoinColumns = @JoinColumn(name = "id_informacao_academica")
     )
     private Set<InformacaoAcademicaModel> informacao_academica = new HashSet<>();
 
@@ -128,19 +127,19 @@ public class InformacaoProfissionalModel {
         this.media_salarial = media_salarial;
     }
 
-    public Timestamp getData_inicio() {
+    public LocalDate getData_inicio() {
         return data_inicio;
     }
 
-    public void setData_inicio(Timestamp data_inicio) {
+    public void setData_inicio(LocalDate data_inicio) {
         this.data_inicio = data_inicio;
     }
 
-    public Timestamp getData_fim() {
+    public LocalDate getData_fim() {
         return data_fim;
     }
 
-    public void setData_fim(Timestamp data_fim) {
+    public void setData_fim(LocalDate data_fim) {
         this.data_fim = data_fim;
     }
 

@@ -1,6 +1,6 @@
 package br.ufu.sistemaegressos.dto;
-
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.UUID;
 
 public class InformacaoProfissionalDTO {
 
@@ -12,9 +12,9 @@ public class InformacaoProfissionalDTO {
     private String nivel_cargo;
     private String funcao;
     private Double media_salarial;
-    private Timestamp data_inicio;
-    private Timestamp data_fim;
-    private String matricula_academica;
+    private LocalDate data_inicio;
+    private LocalDate data_fim;
+    private UUID id_informacao_academica;
 
     public String getEmpresa() {
         return empresa;
@@ -80,27 +80,27 @@ public class InformacaoProfissionalDTO {
         this.media_salarial = media_salarial;
     }
 
-    public Timestamp getData_inicio() {
+    public LocalDate getData_inicio() {
         return data_inicio;
     }
 
-    public void setData_inicio(Timestamp data_inicio) {
+    public void setData_inicio(LocalDate data_inicio) {
         this.data_inicio = data_inicio;
     }
 
-    public Timestamp getData_fim() {
+    public LocalDate getData_fim() {
         return data_fim;
     }
 
-    public void setData_fim(Timestamp data_fim) {
+    public void setData_fim(LocalDate data_fim) {
         this.data_fim = data_fim;
     }
 
-    public String getMatricula_academica() {
-        return matricula_academica;
+    public UUID getId_informacao_academica() {
+        return id_informacao_academica;
     }
 
-    public void setMatricula_academica(String matriculaAcademica) {
-        this.matricula_academica = matriculaAcademica;
+    public void setId_informacao_academica(UUID id_informacao_academica) {
+        this.id_informacao_academica = id_informacao_academica;
     }
 }

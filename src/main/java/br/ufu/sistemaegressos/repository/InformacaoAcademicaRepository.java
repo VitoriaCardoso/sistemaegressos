@@ -7,10 +7,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoAcademicaModel, String> {
+public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoAcademicaModel, UUID> {
 
     @Query("SELECT ia FROM InformacaoAcademicaModel ia WHERE ia.egresso.cpf = :cpf")
     List<InformacaoAcademicaModel> buscarPorEgresso(String cpf);
@@ -19,7 +19,7 @@ public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoA
     List<InformacaoAcademicaModel> buscarPorNomeCurso(String nomeCurso);
 
     @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.nome_curso = :nomeCurso AND i.campus = :campus")
-    Long contarEstudantesPorCursoECampus(@Param("curso") String nomeCurso, @Param("campus") String campus);
+    Long contarEstudantesPorCursoECampus(@Param("nomeCurso") String nomeCurso, @Param("campus") String campus);
 
     @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.ativo = true")
     Long contarEstudantesAtivos();
@@ -27,14 +27,12 @@ public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoA
     @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.ativo = false")
     Long contarEstudantesInativos();
 
-    @Query("SELECT i.nome_curso, i.nome_instituicao, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.nome_curso, i.nome_instituicao")
+    @Query("SELECT i.nome_curso, i.nome_instituicao, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.nome_curso, i.campus")
     List<Object[]> contarEstudantesPorCursoECampus();
 
-
-    @Query("SELECT i.campus, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.nomeCurso")
+    @Query("SELECT i.campus, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.campus")
     List<Object[]> contarEstudantesPorCampus();
 
     @Query("SELECT i.titulacao, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.titulacao")
     List<Object[]> contarEstudantesPorTitulacao();
-
 }

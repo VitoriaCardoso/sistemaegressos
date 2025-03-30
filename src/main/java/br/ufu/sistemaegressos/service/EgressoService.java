@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +32,7 @@ public class EgressoService {
     public EgressoModel criar(EgressoCriarDTO egressoDTO) {
         EgressoModel egresso = new EgressoModel();
         BeanUtils.copyProperties(egressoDTO, egresso);
-        egresso.setData_atualizacao(new Timestamp(System.currentTimeMillis()));
+        egresso.setData_atualizacao(LocalDate.now());
         return egressoRepository.save(egresso);
     }
 
@@ -41,7 +41,7 @@ public class EgressoService {
         if (optionalEgresso.isPresent()) {
             EgressoModel egresso = optionalEgresso.get();
             atualizarCamposEgresso(egresso, egressoDTO);
-            egresso.setData_atualizacao(new Timestamp(System.currentTimeMillis()));
+            egresso.setData_atualizacao(LocalDate.now());
             return egressoRepository.save(egresso);
         }
         return null;
@@ -63,8 +63,8 @@ public class EgressoService {
 
     public List<EgressoModel> buscarPorFiltro(String nome, String cpf, String campus,
                                               String nomeCurso, String codigoCurso,
-                                              String titulacao, String dataIngresso,
-                                              String dataConclusao) {
-        return egressoRepository.buscarPorFiltro(nome, cpf, nomeCurso, titulacao, dataIngresso, dataConclusao);
+                                              String titulacao, LocalDate dataIngresso,
+                                              LocalDate dataConclusao) {
+        return egressoRepository.buscarPorFiltro(nome, cpf, campus, nomeCurso, codigoCurso, titulacao, dataIngresso, dataConclusao);
     }
 }
