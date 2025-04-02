@@ -72,7 +72,7 @@ public class InformacaoProfissionalService {
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
                 .findById(dto.getId_informacao_academica())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para matrícula: " + dto.getId_informacao_academica()));
+                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId_informacao_academica()));
 
         informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
 
@@ -97,7 +97,7 @@ public class InformacaoProfissionalService {
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
                 .findById(dto.getId_informacao_academica())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para matrícula: " + dto.getId_informacao_academica()));
+                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId_informacao_academica()));
 
         informacaoProfissional.getInformacao_academica().clear();
         informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
