@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/informacao-profissional")
@@ -26,7 +27,7 @@ public class InformacaoProfissionalController {
     }
 
     @GetMapping("/{id}")
-    public InformacaoProfissionalModel listarPorId(@PathVariable String id) {
+    public InformacaoProfissionalModel listarPorId(@PathVariable UUID id) {
         return informacaoProfissionalService.listarPeloId(id)
                 .orElseThrow(() -> new RuntimeException("Informação profissional não encontrada"));
     }
@@ -43,12 +44,12 @@ public class InformacaoProfissionalController {
     }
 
     @PutMapping("/{id}")
-    public InformacaoProfissionalModel atualizarInformacaoProfissional(@PathVariable String id, @RequestBody InformacaoProfissionalDTO dto) {
+    public InformacaoProfissionalModel atualizarInformacaoProfissional(@PathVariable UUID id, @RequestBody InformacaoProfissionalDTO dto) {
         return informacaoProfissionalService.atualizarInformacaoProfissional(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public void excluirInformacaoProfissional(@PathVariable String id) {
+    public void excluirInformacaoProfissional(@PathVariable UUID id) {
         informacaoProfissionalService.excluirInformacaoProfissional(id);
     }
 }

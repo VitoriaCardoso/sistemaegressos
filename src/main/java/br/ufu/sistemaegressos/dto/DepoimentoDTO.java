@@ -17,14 +17,6 @@ public class DepoimentoDTO {
     @NotNull
     private LocalDate data_cadastro;
 
-    public UUID getId_informacao_academica() {
-        return id_informacao_academica;
-    }
-
-    public void setId_informacao_academica(UUID id_informacao_academica) {
-        this.id_informacao_academica = id_informacao_academica;
-    }
-
     @NotBlank
     @NotNull
     private String privacidade;
@@ -55,5 +47,13 @@ public class DepoimentoDTO {
 
     public void setPrivacidade(String privacidade) {
         this.privacidade = privacidade;
+    }
+
+    public UUID getId_informacao_academica() {
+        return id_informacao_academica;
+    }
+
+    public void setId_informacao_academica(UUID id_informacao_academica) {
+        this.id_informacao_academica = id_informacao_academica;
     }
 }

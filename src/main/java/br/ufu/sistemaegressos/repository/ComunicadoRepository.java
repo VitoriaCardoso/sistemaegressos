@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface ComunicadoRepository extends JpaRepository<ComunicadoModel, String> {
+public interface ComunicadoRepository extends JpaRepository<ComunicadoModel, UUID> {
 
     @Query("SELECT c FROM ComunicadoModel c WHERE c.curso_destino = :cursoDestino AND c.nivel_curso_destino = :nivelCursoDestino")
     List<ComunicadoModel> buscarComunicadoPorCursoEnivel(String cursoDestino, String nivelCursoDestino);

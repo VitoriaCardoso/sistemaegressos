@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,7 +54,7 @@ public class PublicacaoService {
         return publicacao;
     }
 
-    public PublicacaoModel atualizar(String id, PublicacaoDTO publicacaoDTO) {
+    public PublicacaoModel atualizar(UUID id, PublicacaoDTO publicacaoDTO) {
         Optional<PublicacaoModel> optionalPublicacao = publicacaoRepository.findById(id);
         if (optionalPublicacao.isPresent()) {
             PublicacaoModel publicacao = optionalPublicacao.get();
@@ -63,7 +64,7 @@ public class PublicacaoService {
         return null;
     }
 
-    public void excluir(String id) {
+    public void excluir(UUID id) {
         publicacaoRepository.deleteById(id);
     }
 }

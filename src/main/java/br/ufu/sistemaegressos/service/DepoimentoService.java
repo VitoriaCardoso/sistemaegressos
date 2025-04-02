@@ -83,7 +83,7 @@ public class DepoimentoService {
     }
 
 
-    public Optional<DepoimentoModel> listarPeloId(String id) {
+    public Optional<DepoimentoModel> listarPeloId(UUID id) {
         Optional<DepoimentoModel> depoimento = depoimentoRepository.findById(id);
         if (depoimento.isPresent()) {
             InformacaoAcademicaModel informacaoAcademica = depoimento.get().getInformacaoAcademica();
@@ -110,7 +110,7 @@ public class DepoimentoService {
         return depoimentoRepository.save(depoimento);
     }
 
-    public void excluir(String id){ depoimentoRepository.deleteById(id);}
+    public void excluir(UUID id){ depoimentoRepository.deleteById(id);}
 
     public List<DepoimentoModel> listarPorCpfEgresso(String cpf) {
         List<DepoimentoModel> depoimentos = depoimentoRepository.buscarPorEgresso(cpf);

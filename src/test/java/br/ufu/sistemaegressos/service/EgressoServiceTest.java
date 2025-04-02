@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +37,7 @@ class EgressoServiceTest {
         egresso = new EgressoModel();
         egresso.setCpf("12345678900");
         egresso.setNome("João Silva");
-        egresso.setData_atualizacao(new Timestamp(System.currentTimeMillis()));
+        egresso.setData_atualizacao(LocalDate.now());
 
         criarDTO = new EgressoCriarDTO();
         criarDTO.setCpf("12345678900");

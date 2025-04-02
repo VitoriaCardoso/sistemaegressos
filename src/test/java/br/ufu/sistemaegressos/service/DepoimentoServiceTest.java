@@ -10,9 +10,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,9 +36,9 @@ class DepoimentoServiceTest {
         MockitoAnnotations.openMocks(this);
 
         depoimento = new DepoimentoModel();
-        depoimento.setId("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7");
+        depoimento.setId(UUID.fromString("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7"));
         depoimento.setTexto_depoimento("Depoimento de teste");
-        depoimento.setData_cadastro(new Timestamp(System.currentTimeMillis()));
+        depoimento.setData_cadastro(LocalDate.now());
 
         depoimentoDTO = new DepoimentoDTO();
         depoimentoDTO.setTexto_depoimento("Depoimento de teste");
@@ -56,13 +58,13 @@ class DepoimentoServiceTest {
 
     @Test
     public void testListarPeloId() {
-        when(depoimentoRepository.findById("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7")).thenReturn(Optional.of(depoimento));
+        when(depoimentoRepository.findById(UUID.fromString("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7"))).thenReturn(Optional.of(depoimento));
 
-        Optional<DepoimentoModel> result = depoimentoService.listarPeloId("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7");
+        Optional<DepoimentoModel> result = depoimentoService.listarPeloId(UUID.fromString("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7"));
 
         assertTrue(result.isPresent());
         assertEquals("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7", result.get().getId());
-        verify(depoimentoRepository, times(1)).findById("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7");
+        verify(depoimentoRepository, times(1)).findById(UUID.fromString("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7"));
     }
 
     @Test
@@ -78,10 +80,10 @@ class DepoimentoServiceTest {
 
     @Test
     public void testExcluir() {
-        doNothing().when(depoimentoRepository).deleteById("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7");
+        doNothing().when(depoimentoRepository).deleteById(UUID.fromString("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7"));
 
-        depoimentoService.excluir("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7");
+        depoimentoService.excluir(UUID.fromString("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7"));
 
-        verify(depoimentoRepository, times(1)).deleteById("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7");
+        verify(depoimentoRepository, times(1)).deleteById(UUID.fromString("f682e29a-dbb0-4c11-ac31-d9a89c72ebe7"));
     }
 }

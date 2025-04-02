@@ -15,8 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -43,9 +45,9 @@ public class DepoimentoControllerTest {
     public void setup() {
         MockitoAnnotations.openMocks(this);
         depoimento = new DepoimentoModel();
-        depoimento.setId("1639e15f-4c29-42e2-b148-300e7e479643");
+        depoimento.setId(UUID.fromString("1639e15f-4c29-42e2-b148-300e7e479643"));
         depoimento.setTexto_depoimento("Depoimento de teste");
-        depoimento.setData_cadastro(new Timestamp(System.currentTimeMillis()));
+        depoimento.setData_cadastro(LocalDate.now());
         informacaoAcademicaModel.setNome_instituicao("UFU");
 
         depoimento.setInformacaoAcademica(informacaoAcademicaModel);
@@ -65,14 +67,14 @@ public class DepoimentoControllerTest {
 
     @Test
     public void testBuscarDepoimentoPeloID() throws Exception {
-        when(depoimentoService.listarPeloId("1639e15f-4c29-42e2-b148-300e7e479643")).thenReturn(Optional.of(depoimento));
+        when(depoimentoService.listarPeloId(UUID.fromString("1639e15f-4c29-42e2-b148-300e7e479643"))).thenReturn(Optional.of(depoimento));
 
         mockMvc.perform(get("/api/depoimentos/1639e15f-4c29-42e2-b148-300e7e479643"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value("1639e15f-4c29-42e2-b148-300e7e479643"))
                 .andExpect(jsonPath("$.texto_depoimento").value("Depoimento de teste"));
 
-        verify(depoimentoService, times(1)).listarPeloId("1639e15f-4c29-42e2-b148-300e7e479643");
+        verify(depoimentoService, times(1)).listarPeloId(UUID.fromString("1639e15f-4c29-42e2-b148-300e7e479643"));
     }
 
     @Test
@@ -94,11 +96,11 @@ public class DepoimentoControllerTest {
 
     @Test
     public void testExcluirDepoimento() throws Exception {
-        doNothing().when(depoimentoService).excluir("1639e15f-4c29-42e2-b148-300e7e479643");
+        doNothing().when(depoimentoService).excluir(UUID.fromString("1639e15f-4c29-42e2-b148-300e7e479643"));
 
         mockMvc.perform(delete("/api/depoimentos/1639e15f-4c29-42e2-b148-300e7e479643"))
                 .andExpect(status().isNoContent());
 
-        verify(depoimentoService, times(1)).excluir("1639e15f-4c29-42e2-b148-300e7e479643");
+        verify(depoimentoService, times(1)).excluir(UUID.fromString("1639e15f-4c29-42e2-b148-300e7e479643"));
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/depoimentos")
@@ -26,7 +27,7 @@ public class DepoimentoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DepoimentoModel> buscarDepoimentoPeloID(@PathVariable String id) {
+    public ResponseEntity<DepoimentoModel> buscarDepoimentoPeloID(@PathVariable UUID id) {
         Optional<DepoimentoModel> depoimento = depoimentoService.listarPeloId(id);
         return depoimento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -37,7 +38,7 @@ public class DepoimentoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirDepoimento(@PathVariable String id) {
+    public ResponseEntity<Void> excluirDepoimento(@PathVariable UUID id) {
         depoimentoService.excluir(id);
         return ResponseEntity.noContent().build();
     }

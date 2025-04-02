@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +39,7 @@ public class InformacaoProfissionalService {
         return informacoesProfissionais;
     }
 
-    public Optional<InformacaoProfissionalModel> listarPeloId(String id) {
+    public Optional<InformacaoProfissionalModel> listarPeloId(UUID id) {
         Optional<InformacaoProfissionalModel> informacaoProfissional = informacaoProfissionalRepository.findById(id);
         if (informacaoProfissional.isPresent()) {
             Set<InformacaoAcademicaModel> informacoesAcademicas = informacaoProfissional.get().getInformacao_academica();
@@ -87,7 +88,7 @@ public class InformacaoProfissionalService {
         return informacaoProfissional;
     }
 
-    public InformacaoProfissionalModel atualizarInformacaoProfissional(String id, InformacaoProfissionalDTO dto) {
+    public InformacaoProfissionalModel atualizarInformacaoProfissional(UUID id, InformacaoProfissionalDTO dto) {
         InformacaoProfissionalModel informacaoProfissional = informacaoProfissionalRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Informação profissional não encontrada para o ID: " + id));
@@ -104,7 +105,7 @@ public class InformacaoProfissionalService {
         return informacaoProfissionalRepository.save(informacaoProfissional);
     }
 
-    public void excluirInformacaoProfissional(String id) {
+    public void excluirInformacaoProfissional(UUID id) {
         informacaoProfissionalRepository.deleteById(id);
     }
 }

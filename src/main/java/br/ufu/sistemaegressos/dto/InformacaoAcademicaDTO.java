@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class InformacaoAcademicaDTO {
-
-    private UUID id;
     private String matricula;
     private String nome_instituicao;
     private String tipo_instituicao;
@@ -20,14 +18,6 @@ public class InformacaoAcademicaDTO {
     private String codigo_curso;
     private String campus;
     private Boolean ativo;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getMatricula() {
         return matricula;

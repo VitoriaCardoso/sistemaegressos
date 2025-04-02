@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "comunicado")
@@ -14,7 +15,7 @@ public class ComunicadoModel {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(nullable = false)
-    private String id;
+    private UUID id;
 
     @Column(length = 45, nullable = false)
     private String titulo;
@@ -41,11 +42,11 @@ public class ComunicadoModel {
     )
     private Set<InformacaoAcademicaModel> informacao_academica = new HashSet<>();
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

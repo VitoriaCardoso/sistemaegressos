@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface PublicacaoRepository extends JpaRepository<PublicacaoModel, String> {
+public interface PublicacaoRepository extends JpaRepository<PublicacaoModel, UUID> {
     @Query("SELECT p FROM PublicacaoModel p WHERE p.informacao_academica.egresso.cpf = :cpf")
     List<PublicacaoModel> buscarPublicacaoPorEgresso(String cpf);
 }

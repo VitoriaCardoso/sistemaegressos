@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "publicacao")
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -12,7 +14,7 @@ public class PublicacaoModel {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(nullable = false)
-    private String id;
+    private UUID id;
 
     @Column(nullable = false)
     private String titulo;
@@ -33,11 +35,11 @@ public class PublicacaoModel {
     @JoinColumn(name = "id_informacao_academica", referencedColumnName = "id", nullable = false)
     private InformacaoAcademicaModel informacao_academica;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

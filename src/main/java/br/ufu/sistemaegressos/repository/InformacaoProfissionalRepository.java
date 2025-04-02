@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface InformacaoProfissionalRepository extends JpaRepository<InformacaoProfissionalModel, String> {
+public interface InformacaoProfissionalRepository extends JpaRepository<InformacaoProfissionalModel, UUID> {
     @Query("SELECT ip FROM InformacaoProfissionalModel ip " +
             "JOIN ip.informacao_academica ia " +
             "JOIN ia.egresso e " +

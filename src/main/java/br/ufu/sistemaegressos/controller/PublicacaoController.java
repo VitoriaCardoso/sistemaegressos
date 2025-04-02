@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/publicacoes")
@@ -32,12 +33,12 @@ public class PublicacaoController {
     }
 
     @PutMapping("/{id}")
-    public PublicacaoModel atualizarPublicacao(@PathVariable String id, @RequestBody PublicacaoDTO publicacaoDTO) {
+    public PublicacaoModel atualizarPublicacao(@PathVariable UUID id, @RequestBody PublicacaoDTO publicacaoDTO) {
         return publicacaoService.atualizar(id, publicacaoDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void excluirPublicacao(@PathVariable String id) {
+    public void excluirPublicacao(@PathVariable UUID id) {
         publicacaoService.excluir(id);
     }
 }
