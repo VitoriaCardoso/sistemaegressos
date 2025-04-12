@@ -51,7 +51,7 @@ public class DepoimentoService {
                 continue;
             }
 
-            if (campus != null && (infoAcademica.getNome_instituicao() == null || !infoAcademica.getNome_instituicao().equalsIgnoreCase(campus))) {
+            if (campus != null && (infoAcademica.getInstitution_name() == null || !infoAcademica.getInstitution_name().equalsIgnoreCase(campus))) {
                 adicionar = false;
             }
 
@@ -61,7 +61,7 @@ public class DepoimentoService {
 
             if (totalEstudantes != null) {
                 Long estudantes = totalEstudantesMap
-                        .getOrDefault(infoAcademica.getNome_instituicao(), new HashMap<>())
+                        .getOrDefault(infoAcademica.getInstitution_name(), new HashMap<>())
                         .getOrDefault(infoAcademica.getNome_curso(), 0L);
 
                 if (estudantes.intValue() != totalEstudantes) {
@@ -69,7 +69,7 @@ public class DepoimentoService {
                 }
             }
 
-            if (titulacao != null && (infoAcademica.getTitulacao() == null || !infoAcademica.getTitulacao().equalsIgnoreCase(titulacao))) {
+            if (titulacao != null && (infoAcademica.getCourse_level() == null || !infoAcademica.getCourse_level().equalsIgnoreCase(titulacao))) {
                 adicionar = false;
             }
 

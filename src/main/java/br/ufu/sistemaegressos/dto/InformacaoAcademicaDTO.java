@@ -1,21 +1,20 @@
 package br.ufu.sistemaegressos.dto;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class InformacaoAcademicaDTO {
     private String matricula;
-    private String nome_instituicao;
-    private String tipo_instituicao;
-    private String nome_curso;
-    private String titulacao;
-    private LocalDate data_ingresso;
-    private LocalDate data_conclusao;
-    private String cidade;
-    private String estado;
-    private String pais;
+    private String institution_name;
+    private String institution_type;
+    private String course_name;
+    private String course_level;
+    private LocalDate start_date;
+    private LocalDate end_date;
+    private String city;
+    private String state;
+    private String country;
     private String egresso_cpf;
-    private String codigo_curso;
+    private String registration_number;
     private String campus;
     private Boolean ativo;
 
@@ -27,76 +26,76 @@ public class InformacaoAcademicaDTO {
         this.matricula = matricula;
     }
 
-    public String getNome_instituicao() {
-        return nome_instituicao;
+    public String getInstitution_name() {
+        return institution_name;
     }
 
-    public void setNome_instituicao(String nome_instituicao) {
-        this.nome_instituicao = nome_instituicao;
+    public void setInstitution_name(String institution_name) {
+        this.institution_name = institution_name;
     }
 
-    public String getTipo_instituicao() {
-        return tipo_instituicao;
+    public String getInstitution_type() {
+        return institution_type;
     }
 
-    public void setTipo_instituicao(String tipo_instituicao) {
-        this.tipo_instituicao = tipo_instituicao;
+    public void setInstitution_type(String institution_type) {
+        this.institution_type = institution_type;
     }
 
-    public String getNome_curso() {
-        return nome_curso;
+    public String getCourse_name() {
+        return course_name;
     }
 
-    public void setNome_curso(String nome_curso) {
-        this.nome_curso = nome_curso;
+    public void setCourse_name(String course_name) {
+        this.course_name = course_name;
     }
 
-    public String getTitulacao() {
-        return titulacao;
+    public String getCourse_level() {
+        return course_level;
     }
 
-    public void setTitulacao(String titulacao) {
-        this.titulacao = titulacao;
+    public void setCourse_level(String course_level) {
+        this.course_level = course_level;
     }
 
-    public LocalDate getData_ingresso() {
-        return data_ingresso;
+    public LocalDate getStart_date() {
+        return start_date;
     }
 
-    public void setData_ingresso(LocalDate data_ingresso) {
-        this.data_ingresso = data_ingresso;
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
     }
 
-    public LocalDate getData_conclusao() {
-        return data_conclusao;
+    public LocalDate getEnd_date() {
+        return end_date;
     }
 
-    public void setData_conclusao(LocalDate data_conclusao) {
-        this.data_conclusao = data_conclusao;
+    public void setEnd_date(LocalDate end_date) {
+        this.end_date = end_date;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getCity() {
+        return city;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getState() {
+        return state;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getPais() {
-        return pais;
+    public String getCountry() {
+        return country;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getEgresso_cpf() {
@@ -107,12 +106,12 @@ public class InformacaoAcademicaDTO {
         this.egresso_cpf = egresso_cpf;
     }
 
-    public String  getCodigo_curso() {
-        return codigo_curso;
+    public String getRegistration_number() {
+        return registration_number;
     }
 
-    public void setCodigo_curso(String codigo_curso) {
-        this.codigo_curso = codigo_curso;
+    public void setRegistration_number(String registration_number) {
+        this.registration_number = registration_number;
     }
 
     public String getCampus() {

@@ -36,6 +36,16 @@ public class InformacaoAcademicaService {
         }).collect(Collectors.toList());
     }
 
+    public List<InformacaoAcademicaModel> buscarPorInformacaoAcademica(UUID id) {
+        List<InformacaoAcademicaModel> informacaoAcademica = informacaoAcademicaRepository.buscarPorInformacaoAcademica(id);
+
+        return informacaoAcademica.stream().map(informacao -> {
+            informacao.setInformacao_profissional(null);
+            informacao.setComunicados(null);
+            return informacao;
+        }).collect(Collectors.toList());
+    }
+
     public InformacaoAcademicaModel criar(InformacaoAcademicaDTO dto) {
         EgressoModel egresso = egressoRepository.findById(dto.getEgresso_cpf())
                 .orElseThrow(() -> new RuntimeException("Egresso não encontrado"));

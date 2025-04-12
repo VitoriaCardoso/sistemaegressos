@@ -17,36 +17,36 @@ public class InformacaoAcademicaModel {
     private UUID id;
 
     @Column(length = 45)
-    private String matricula;
+    private String matricula;                   // Matricula
 
     @Column(nullable = false)
-    private String nome_instituicao;
+    private String institution_name;             // Nome Instituição
 
     @Column(nullable = false)
-    private String tipo_instituicao;
+    private String institution_type;             // Tipo Instituição
 
     @Column(nullable = false)
-    private String nome_curso;
+    private String course_name;                  // Nome Curso
 
     @Column(length = 45, nullable = false)
-    private String titulacao;
+    private String course_level;                 // Titulacao
 
     @Column(nullable = false)
-    private LocalDate data_ingresso;
+    private LocalDate start_date;                // Data Ingresso
 
-    private LocalDate data_conclusao;
-
-    @Column(length = 45, nullable = false)
-    private String cidade;
+    private LocalDate end_date;                  // Data Conslusão
 
     @Column(length = 45, nullable = false)
-    private String estado;
+    private String city;                        // Cidade
 
     @Column(length = 45, nullable = false)
-    private String pais;
+    private String state;                       // Estado
+
+    @Column(length = 45, nullable = false)
+    private String country;                      // Pais
 
     @Column(nullable = true)
-    private String codigo_curso;
+    private String registration_number;           // Código do curso
 
     @Column(length = 45, nullable = false)
     private String campus;
@@ -80,84 +80,84 @@ public class InformacaoAcademicaModel {
         this.matricula = matricula;
     }
 
-    public String getNome_instituicao() {
-        return nome_instituicao;
+    public String getInstitution_name() {
+        return institution_name;
     }
 
-    public void setNome_instituicao(String nome_instituicao) {
-        this.nome_instituicao = nome_instituicao;
+    public void setInstitution_name(String institution_name) {
+        this.institution_name = institution_name;
     }
 
     public String getTipo_instituicao() {
-        return tipo_instituicao;
+        return institution_type;
     }
 
-    public void setTipo_instituicao(String tipo_instituicao) {
-        this.tipo_instituicao = tipo_instituicao;
+    public void setTipo_instituicao(String institution_type) {
+        this.institution_type = institution_type;
     }
 
     public String getNome_curso() {
-        return nome_curso;
+        return course_name;
     }
 
-    public void setNome_curso(String nome_curso) {
-        this.nome_curso = nome_curso;
+    public void setNome_curso(String course_name) {
+        this.course_name = course_name;
     }
 
-    public String getTitulacao() {
-        return titulacao;
+    public String getCourse_level() {
+        return course_level;
     }
 
-    public void setTitulacao(String titulacao) {
-        this.titulacao = titulacao;
+    public void setCourse_level(String course_level) {
+        this.course_level = course_level;
     }
 
-    public LocalDate getData_ingresso() {
-        return data_ingresso;
+    public LocalDate getStart_date() {
+        return start_date;
     }
 
-    public void setData_ingresso(LocalDate data_ingresso) {
-        this.data_ingresso = data_ingresso;
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
     }
 
-    public LocalDate getData_conclusao() {
-        return data_conclusao;
+    public LocalDate getEnd_date() {
+        return end_date;
     }
 
-    public void setData_conclusao(LocalDate data_conclusao) {
-        this.data_conclusao = data_conclusao;
+    public void setEnd_date(LocalDate end_date) {
+        this.end_date = end_date;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getCity() {
+        return city;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getState() {
+        return state;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getPais() {
-        return pais;
+    public String getCountry() {
+        return country;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getCodigo_curso() {
-        return codigo_curso;
+    public String getRegistration_number() {
+        return registration_number;
     }
 
-    public void setCodigo_curso(String codigo_curso) {
-        this.codigo_curso = codigo_curso;
+    public void setRegistration_number(String registration_number) {
+        this.registration_number = registration_number;
     }
 
     public String getCampus() {

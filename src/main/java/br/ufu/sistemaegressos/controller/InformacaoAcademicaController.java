@@ -6,12 +6,12 @@ import br.ufu.sistemaegressos.service.InformacaoAcademicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/informacao-academica")
+@RequestMapping("/api/informacoes/academicas")
+@CrossOrigin("http://localhost:4200")
 public class InformacaoAcademicaController {
 
     private final InformacaoAcademicaService informacaoAcademicaService;
@@ -24,6 +24,12 @@ public class InformacaoAcademicaController {
     @GetMapping("/egresso/{cpf}")
     public List<InformacaoAcademicaModel> buscarPorEgresso(@PathVariable String cpf) {
         return informacaoAcademicaService.buscarPorEgresso(cpf);
+    }
+
+    @GetMapping("/editar/{id}")
+    public List<InformacaoAcademicaModel> buscarPorInformacaoAcademica(@PathVariable UUID id) {
+        System.out.println("Dados enviados para o frontend: " + informacaoAcademicaService.buscarPorInformacaoAcademica(id));
+        return informacaoAcademicaService.buscarPorInformacaoAcademica(id);
     }
 
     @PostMapping

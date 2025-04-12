@@ -14,7 +14,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
@@ -48,7 +47,7 @@ public class DepoimentoControllerTest {
         depoimento.setId(UUID.fromString("1639e15f-4c29-42e2-b148-300e7e479643"));
         depoimento.setTexto_depoimento("Depoimento de teste");
         depoimento.setData_cadastro(LocalDate.now());
-        informacaoAcademicaModel.setNome_instituicao("UFU");
+        informacaoAcademicaModel.setInstitution_name("UFU");
 
         depoimento.setInformacaoAcademica(informacaoAcademicaModel);
     }

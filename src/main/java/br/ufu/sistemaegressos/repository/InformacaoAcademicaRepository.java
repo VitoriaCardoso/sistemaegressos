@@ -15,11 +15,11 @@ public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoA
     @Query("SELECT ia FROM InformacaoAcademicaModel ia WHERE ia.egresso.cpf = :cpf")
     List<InformacaoAcademicaModel> buscarPorEgresso(String cpf);
 
-    @Query("SELECT i FROM InformacaoAcademicaModel i WHERE i.nome_curso = :nomeCurso")
-    List<InformacaoAcademicaModel> buscarPorNomeCurso(String nomeCurso);
+    @Query("SELECT i FROM InformacaoAcademicaModel i WHERE i.course_name = :courseName")
+    List<InformacaoAcademicaModel> buscarPorNomeCurso(String courseName);
 
-    @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.nome_curso = :nomeCurso AND i.campus = :campus")
-    Long contarEstudantesPorCursoECampus(@Param("nomeCurso") String nomeCurso, @Param("campus") String campus);
+    @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.course_name = :courseName AND i.campus = :campus")
+    Long contarEstudantesPorCursoECampus(@Param("courseName") String courseName, @Param("campus") String campus);
 
     @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.ativo = true")
     Long contarEstudantesAtivos();
@@ -27,12 +27,15 @@ public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoA
     @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.ativo = false")
     Long contarEstudantesInativos();
 
-    @Query("SELECT i.nome_curso, i.nome_instituicao, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.nome_curso, i.campus")
+    @Query("SELECT i.course_name, i.course_level, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.course_name, i.campus")
     List<Object[]> contarEstudantesPorCursoECampus();
 
     @Query("SELECT i.campus, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.campus")
     List<Object[]> contarEstudantesPorCampus();
 
-    @Query("SELECT i.titulacao, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.titulacao")
+    @Query("SELECT i.course_level, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.course_level")
     List<Object[]> contarEstudantesPorTitulacao();
+
+    @Query("SELECT ia FROM InformacaoAcademicaModel ia WHERE ia.id = :id")
+    List<InformacaoAcademicaModel> buscarPorInformacaoAcademica(@Param("id")UUID id);
 }

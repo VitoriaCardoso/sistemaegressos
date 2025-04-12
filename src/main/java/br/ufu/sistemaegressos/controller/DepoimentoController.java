@@ -4,6 +4,7 @@ import br.ufu.sistemaegressos.dto.DepoimentoDTO;
 import br.ufu.sistemaegressos.model.DepoimentoModel;
 import br.ufu.sistemaegressos.service.DepoimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -33,11 +34,13 @@ public class DepoimentoController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public DepoimentoModel criarDepoimento(@RequestBody DepoimentoDTO depoimentoDTO) {
         return depoimentoService.criarDepoimento(depoimentoDTO);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> excluirDepoimento(@PathVariable UUID id) {
         depoimentoService.excluir(id);
         return ResponseEntity.noContent().build();

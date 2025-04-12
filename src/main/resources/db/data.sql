@@ -83,7 +83,7 @@ INSERT INTO egresso (cpf, nome, nome_social, email, email_secundario, telefone, 
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-INSERT INTO informacao_academica (id, matricula, nome_instituicao, tipo_instituicao, nome_curso, titulacao, campus, codigo_curso, data_ingresso, data_conclusao, cidade, estado, pais, egresso_cpf) VALUES
+INSERT INTO informacao_academica (id, matricula, institution_name, institution_type, course_name, course_level, campus, registration_number, start_date, end_date, city, state, country, egresso_cpf) VALUES
 (uuid_generate_v4(),'31111BSI111', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Sistemas de Informação: Bacharelado - Integral - Monte Carmelo', 'Bacharelado', 'Monte Carmelo', '1137717BI', '2015-03-19', '2024-04-25', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-01'),
 (uuid_generate_v4(),'31111BSI112', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Sistemas de Informação: Bacharelado - Integral - Monte Carmelo', 'Bacharelado', 'Monte Carmelo', '1137717BI', '2017-03-27', '2024-04-25', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-02'),
 (uuid_generate_v4(),'31111BSI113', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Sistemas de Informação: Bacharelado - Integral - Monte Carmelo', 'Bacharelado', 'Monte Carmelo', '1137717BI', '2014-09-19', '2024-04-25', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-03'),

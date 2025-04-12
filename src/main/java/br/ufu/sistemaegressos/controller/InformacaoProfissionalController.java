@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/informacao-profissional")
+@RequestMapping("/api/informacao/profissional")
 public class InformacaoProfissionalController {
 
     private final InformacaoProfissionalService informacaoProfissionalService;

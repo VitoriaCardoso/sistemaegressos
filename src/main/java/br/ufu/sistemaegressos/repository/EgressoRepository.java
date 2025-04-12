@@ -16,18 +16,18 @@ public interface EgressoRepository extends JpaRepository<EgressoModel, String> {
             "WHERE (:nome IS NULL OR e.nome LIKE %:nome%) " +
             "AND (:cpf IS NULL OR e.cpf = :cpf) " +
             "AND (:campus IS NULL OR ia.campus LIKE %:campus%) " +
-            "AND (:nomeCurso IS NULL OR ia.nome_curso LIKE %:nomeCurso%) " +
-            "AND (:codigoCurso IS NULL OR ia.codigo_curso = :codigoCurso) " +
-            "AND (:titulacao IS NULL OR ia.titulacao = :titulacao) " +
-            "AND (:dataIngresso IS NULL OR ia.data_ingresso = :dataIngresso) " +
-            "AND (:dataConclusao IS NULL OR ia.data_conclusao = :dataConclusao)")
+            "AND (:courseName IS NULL OR ia.course_name LIKE %:courseName%) " +
+            "AND (:registrationNumber IS NULL OR ia.registration_number = :registrationNumber) " +
+            "AND (:courseLevel IS NULL OR ia.course_level = :courseLevel) " +
+            "AND (:startDate IS NULL OR ia.start_date = :startDate) " +
+            "AND (:endDate IS NULL OR ia.end_date = :endDate)")
     List<EgressoModel> buscarPorFiltro(@Param("nome") String nome,
                                        @Param("cpf") String cpf,
                                        @Param("campus") String campus,
-                                       @Param("nomeCurso") String nomeCurso,
-                                       @Param("codigoCurso") String codigoCurso,
-                                       @Param("titulacao") String titulacao,
-                                       @Param("dataIngresso") LocalDate dataIngresso,
-                                       @Param("dataConclusao") LocalDate dataConclusao);
+                                       @Param("courseName") String courseName,
+                                       @Param("registrationNumber") String registrationNumber,
+                                       @Param("courseLevel") String courseLevel,
+                                       @Param("startDate") LocalDate startDate,
+                                       @Param("endDate") LocalDate endDate);
 
 }
