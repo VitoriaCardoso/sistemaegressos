@@ -23,8 +23,13 @@ public class DepoimentoController {
     }
 
     @GetMapping
-    public List<DepoimentoModel> buscarTodosDepoimentos(String campus, Integer totalEstudantes, String curso, String titulacao) {
-        return depoimentoService.listarTodos(campus,totalEstudantes,curso,titulacao);
+    public List<DepoimentoModel> buscarTodosDepoimentos(
+            @RequestParam(required = false) String campus,
+            @RequestParam(required = false) Integer totalEstudantes,
+            @RequestParam(required = false) String curso,
+            @RequestParam(required = false) String titulacao
+    ) {
+        return depoimentoService.listarTodos(campus, totalEstudantes, curso, titulacao);
     }
 
     @GetMapping("/{id}")

@@ -36,7 +36,7 @@ CREATE TABLE informacao_academica (
     state VARCHAR(45) NOT NULL,
     country VARCHAR(45) NOT NULL,
     egresso_cpf VARCHAR(14) NOT NULL,
-    ativo BOOLEAN DEFAULT TRUE,
+    ativo BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (egresso_cpf) REFERENCES egresso (cpf)
 );
 

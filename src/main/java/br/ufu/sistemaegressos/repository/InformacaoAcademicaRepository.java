@@ -27,7 +27,7 @@ public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoA
     @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.ativo = false")
     Long contarEstudantesInativos();
 
-    @Query("SELECT i.course_name, i.course_level, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.course_name, i.campus")
+    @Query("SELECT i.course_name, i.campus, i.course_level, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.course_name, i.campus, i.course_level")
     List<Object[]> contarEstudantesPorCursoECampus();
 
     @Query("SELECT i.campus, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.campus")

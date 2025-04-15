@@ -36,7 +36,7 @@ public class DepoimentoService {
         for (Object[] row : totalEstudantesPorCursoECampus) {
             String nomeCurso = (String) row[0];
             String nomeCampus = (String) row[1];
-            Long total = (Long) row[2];
+            Long total = (Long) row[3];
 
             totalEstudantesMap
                     .computeIfAbsent(nomeCampus, k -> new HashMap<>())
@@ -44,6 +44,10 @@ public class DepoimentoService {
         }
 
         for (DepoimentoModel depoimento : depoimentos) {
+            if (!Arrays.asList("Público", "Anônimo").contains(depoimento.getPrivacidade())) {
+                continue;
+            }
+
             boolean adicionar = true;
             InformacaoAcademicaModel infoAcademica = depoimento.getInformacaoAcademica();
 
