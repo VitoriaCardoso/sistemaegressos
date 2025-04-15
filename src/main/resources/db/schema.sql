@@ -51,16 +51,16 @@ CREATE TABLE depoimento (
 
 CREATE TABLE informacao_profissional (
     id UUID PRIMARY KEY,
-    empresa VARCHAR(255) NOT NULL,
-    categoria VARCHAR(45) NOT NULL,
-    tipo VARCHAR(45) NOT NULL,
-    localidade VARCHAR(45) NOT NULL,
-    cargo VARCHAR(45) NOT NULL,
-    nivel_cargo VARCHAR(45) NOT NULL,
-    funcao VARCHAR(255),
-    media_salarial DECIMAL,
-    data_inicio DATE NOT NULL,
-    data_fim DATE
+    company_name VARCHAR(255) NOT NULL,
+    category VARCHAR(45) NOT NULL,
+    job_type VARCHAR(45) NOT NULL,
+    location VARCHAR(45) NOT NULL,
+    job_title VARCHAR(45) NOT NULL,
+    job_level VARCHAR(45) NOT NULL,
+    function VARCHAR(255),
+    salary DECIMAL,
+    start_date DATE NOT NULL,
+    end_date DATE
 );
 
 CREATE TABLE informacao_academica_profissional (

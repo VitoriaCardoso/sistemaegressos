@@ -1,6 +1,7 @@
 package br.ufu.sistemaegressos.controller;
 
 import br.ufu.sistemaegressos.dto.InformacaoProfissionalDTO;
+import br.ufu.sistemaegressos.model.InformacaoAcademicaModel;
 import br.ufu.sistemaegressos.model.InformacaoProfissionalModel;
 import br.ufu.sistemaegressos.service.InformacaoProfissionalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/informacao/profissional")
+@CrossOrigin("http://localhost:4200")
 public class InformacaoProfissionalController {
 
     private final InformacaoProfissionalService informacaoProfissionalService;
@@ -26,7 +28,7 @@ public class InformacaoProfissionalController {
         return informacaoProfissionalService.listarTodos();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/editar/{id}")
     public InformacaoProfissionalModel listarPorId(@PathVariable UUID id) {
         return informacaoProfissionalService.listarPeloId(id)
                 .orElseThrow(() -> new RuntimeException("Informação profissional não encontrada"));

@@ -165,3 +165,10 @@ INSERT INTO informacao_academica (id, matricula, institution_name, institution_t
 (uuid_generate_v4(),'11111BCC141', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Ciência da Computação: Bacharelado - Integral', 'Bacharelado', 'Santa Mônica', '1452BI', '2018-09-10', '2024-05-09', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-79'),
 (uuid_generate_v4(),'11111BCC142', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Ciência da Computação: Bacharelado - Integral', 'Bacharelado', 'Santa Mônica', '1452BI', '2017-08-11', '2023-12-04', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-80'),
 (uuid_generate_v4(),'11111BCC143', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Ciência da Computação: Bacharelado - Integral', 'Bacharelado', 'Santa Mônica', '1452BI', '2019-08-07', '2024-04-25', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-81');
+
+
+INSERT INTO informacao_profissional (id, company_name, category, job_type, location, job_title,
+	job_level, job_function, salary, start_date, end_date) VALUES
+(uuid_generate_v4(), 'Tech Solutions', 'TI', 'CLT', 'São Paulo - SP', 'Desenvolvedor Backend','Pleno', 'Desenvolvimento de APIs e microsserviços', 7000.00, '2024-02-01', NULL),
+(uuid_generate_v4(), 'Inova Digital', 'TI', 'PJ', 'Belo Horizonte - MG', 'Analista de Sistemas','Sênior', 'Análise de requisitos e modelagem', 9500.00, '2023-10-01', '2024-04-01'),
+(uuid_generate_v4(), 'CloudTech', 'TI', 'CLT', 'Uberlândia - MG', 'Engenheiro de Software','Júnior', 'Desenvolvimento de soluções em nuvem', 6200.00, '2022-06-01', NULL);

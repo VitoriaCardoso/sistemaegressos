@@ -68,11 +68,11 @@ public class InformacaoProfissionalService {
     public InformacaoProfissionalModel criarInformacaoProfissional(InformacaoProfissionalDTO dto) {
         InformacaoProfissionalModel informacaoProfissional = new InformacaoProfissionalModel();
         BeanUtils.copyProperties(dto, informacaoProfissional);
-        informacaoProfissional.setData_inicio(dto.getData_inicio());
+        informacaoProfissional.setStart_date(dto.getStart_date());
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
-                .findById(dto.getId_informacao_academica())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId_informacao_academica()));
+                .findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId()));
 
         informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
 
@@ -96,8 +96,8 @@ public class InformacaoProfissionalService {
         BeanUtils.copyProperties(dto, informacaoProfissional);
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
-                .findById(dto.getId_informacao_academica())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId_informacao_academica()));
+                .findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId()));
 
         informacaoProfissional.getInformacao_academica().clear();
         informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
