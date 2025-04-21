@@ -55,7 +55,7 @@ public class DepoimentoService {
                 continue;
             }
 
-            if (campus != null && (infoAcademica.getInstitution_name() == null || !infoAcademica.getInstitution_name().equalsIgnoreCase(campus))) {
+            if (campus != null && (infoAcademica.getCampus() == null || !infoAcademica.getCampus().equalsIgnoreCase(campus))) {
                 adicionar = false;
             }
 
