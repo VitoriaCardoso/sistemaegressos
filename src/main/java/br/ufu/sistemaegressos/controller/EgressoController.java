@@ -58,11 +58,10 @@ public class EgressoController {
     public List<EgressoModel> buscarEgressoPorFiltro(@RequestParam(required = false) String nome,
                                                      @RequestParam(required = false) String cpf,
                                                      @RequestParam(required = false) String campus,
-                                                     @RequestParam(required = false) String nomeCurso,
-                                                     @RequestParam(required = false) String codigoCurso,
+                                                     @RequestParam(required = false) String curso,
                                                      @RequestParam(required = false) String titulacao,
                                                      @RequestParam(required = false) LocalDate dataIngresso,
                                                      @RequestParam(required = false) LocalDate dataConclusao) {
-        return egressoService.buscarPorFiltro(nome, cpf, campus, nomeCurso, codigoCurso, titulacao, dataIngresso, dataConclusao);
+        return egressoService.buscarPorFiltro(nome, cpf, campus, curso, titulacao, dataIngresso, dataConclusao);
     }
 }

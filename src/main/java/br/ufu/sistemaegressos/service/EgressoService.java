@@ -62,9 +62,9 @@ public class EgressoService {
     }
 
     public List<EgressoModel> buscarPorFiltro(String nome, String cpf, String campus,
-                                              String nomeCurso, String codigoCurso,
+                                              String curso,
                                               String titulacao, LocalDate dataIngresso,
                                               LocalDate dataConclusao) {
-        return egressoRepository.buscarPorFiltro(nome, cpf, campus, nomeCurso, codigoCurso, titulacao, dataIngresso, dataConclusao);
+        return egressoRepository.buscarPorFiltro(nome, cpf, campus, curso, titulacao, dataIngresso, dataConclusao);
     }
 }
