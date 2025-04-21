@@ -10,16 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface ComunicadoRepository extends JpaRepository<ComunicadoModel, UUID> {
+    @Query("SELECT c FROM ComunicadoModel c WHERE (:cursoDestino IS NULL OR c.curso_destino = :cursoDestino) AND (:nivelCursoDestino IS NULL OR c.nivel_curso_destino = :nivelCursoDestino) AND (:paraTodos IS NULL OR c.para_todos = :paraTodos)")
+    List<ComunicadoModel> buscarComunicadosFiltrados(String cursoDestino, String nivelCursoDestino, Boolean paraTodos);
 
-    @Query("SELECT c FROM ComunicadoModel c WHERE c.curso_destino = :cursoDestino AND c.nivel_curso_destino = :nivelCursoDestino")
-    List<ComunicadoModel> buscarComunicadoPorCursoEnivel(String cursoDestino, String nivelCursoDestino);
-
-    @Query("SELECT c FROM ComunicadoModel c WHERE c.curso_destino = :cursoDestino")
-    List<ComunicadoModel> buscarComunicadoPorCurso(String cursoDestino);
-
-    @Query("SELECT c FROM ComunicadoModel c WHERE c.nivel_curso_destino = :nivelCursoDestino")
-    List<ComunicadoModel> buscarComunicadosPorNivelCurso(String nivelCursoDestino);
-
-    @Query("SELECT c FROM ComunicadoModel c WHERE c.para_todos = :paraTodos")
-    List<ComunicadoModel> buscarComunicadosParaTodos(Boolean paraTodos);
 }

@@ -1,5 +1,6 @@
 package br.ufu.sistemaegressos.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "comunicado")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ComunicadoModel {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -38,7 +40,7 @@ public class ComunicadoModel {
     @JoinTable(
             name = "comunicado_destino",
             joinColumns = @JoinColumn(name = "id_comunicado"),
-            inverseJoinColumns = @JoinColumn(name = "matricula_academica")
+            inverseJoinColumns = @JoinColumn(name = "id_informacao_academica")
     )
     private Set<InformacaoAcademicaModel> informacao_academica = new HashSet<>();
 
