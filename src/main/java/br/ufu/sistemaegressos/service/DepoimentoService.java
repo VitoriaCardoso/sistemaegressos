@@ -124,4 +124,35 @@ public class DepoimentoService {
             return depoimento;
         }).collect(Collectors.toList());
     }
+
+    public DepoimentoModel atualizar(UUID id, DepoimentoDTO depoimentoDTO) {
+        Optional<DepoimentoModel> depoimentoOptional = depoimentoRepository.findById(id);
+
+        if (depoimentoOptional.isEmpty()) {
+            throw new RuntimeException("Depoimento não encontrado com o id: " + id);
+        }
+
+        DepoimentoModel depoimentoExistente = depoimentoOptional.get();
+
+        if (depoimentoDTO.getTexto_depoimento() != null) {
+            depoimentoExistente.setTexto_depoimento(depoimentoDTO.getTexto_depoimento());
+        }
+
+        if (depoimentoDTO.getPrivacidade() != null) {
+            depoimentoExistente.setPrivacidade(depoimentoDTO.getPrivacidade());
+        }
+
+        if (depoimentoDTO.getId_informacao_academica() != null) {
+            Optional<InformacaoAcademicaModel> infoAcademicaOptional = informacaoAcademicaRepository.findById(depoimentoDTO.getId_informacao_academica());
+            if (infoAcademicaOptional.isPresent()) {
+                InformacaoAcademicaModel info = infoAcademicaOptional.get();
+                info.setComunicados(null);
+                info.setInformacao_profissional(null);
+                depoimentoExistente.setInformacaoAcademica(info);
+            } else {
+                throw new RuntimeException("Informação acadêmica não encontrada para a matrícula: " + depoimentoDTO.getId_informacao_academica());
+            }
+        }
+        return depoimentoRepository.save(depoimentoExistente);
+    }
 }

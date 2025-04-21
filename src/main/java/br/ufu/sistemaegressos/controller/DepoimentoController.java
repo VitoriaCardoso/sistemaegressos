@@ -56,4 +56,9 @@ public class DepoimentoController {
         return depoimentoService.listarPorCpfEgresso(cpf);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<DepoimentoModel> atualizar(@PathVariable UUID id, @RequestBody DepoimentoDTO dto) {
+        DepoimentoModel atualizado = depoimentoService.atualizar(id, dto);
+        return ResponseEntity.ok(atualizado);
+    }
 }

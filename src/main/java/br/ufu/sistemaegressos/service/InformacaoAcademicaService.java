@@ -60,7 +60,19 @@ public class InformacaoAcademicaService {
         Optional<InformacaoAcademicaModel> optionalInformacao = informacaoAcademicaRepository.findById(id);
         if (optionalInformacao.isPresent()) {
             InformacaoAcademicaModel informacaoAcademica = optionalInformacao.get();
-            BeanUtils.copyProperties(dto, informacaoAcademica);
+            Optional.ofNullable(dto.getInstitution_name()).ifPresent(informacaoAcademica::setInstitution_name);
+            Optional.ofNullable(dto.getCampus()).ifPresent(informacaoAcademica::setCampus);
+            Optional.ofNullable(dto.getCourse_name()).ifPresent(informacaoAcademica::setCourse_name);
+            Optional.ofNullable(dto.getCourse_level()).ifPresent(informacaoAcademica::setCourse_level);
+            Optional.ofNullable(dto.getMatricula()).ifPresent(informacaoAcademica::setMatricula);
+            Optional.ofNullable(dto.getStart_date()).ifPresent(informacaoAcademica::setStart_date);
+            Optional.ofNullable(dto.getEnd_date()).ifPresent(informacaoAcademica::setEnd_date);
+            Optional.ofNullable(dto.getInstitution_type()).ifPresent(informacaoAcademica::setInstitution_type);
+            Optional.ofNullable(dto.getCity()).ifPresent(informacaoAcademica::setCity);
+            Optional.ofNullable(dto.getState()).ifPresent(informacaoAcademica::setState);
+            Optional.ofNullable(dto.getCountry()).ifPresent(informacaoAcademica::setCountry);
+            Optional.ofNullable(dto.getRegistration_number()).ifPresent(informacaoAcademica::setRegistration_number);
+            Optional.ofNullable(dto.getAtivo()).ifPresent(informacaoAcademica::setAtivo);
             return informacaoAcademicaRepository.save(informacaoAcademica);
         }
         return null;

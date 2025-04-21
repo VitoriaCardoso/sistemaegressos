@@ -39,7 +39,7 @@ public class EgressoController {
         return egressoService.criar(egressoDTO);
     }
 
-    @PatchMapping("/{cpf}")
+    @PutMapping("/{cpf}")
     public ResponseEntity<EgressoModel> atualizarEgresso(@PathVariable String cpf, @RequestBody EgressoAtualizarDTO egressoDTO) {
         EgressoModel egressoAtualizado = egressoService.atualizar(cpf, egressoDTO);
         if (egressoAtualizado != null) {

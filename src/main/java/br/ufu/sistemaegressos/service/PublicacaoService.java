@@ -58,7 +58,18 @@ public class PublicacaoService {
         Optional<PublicacaoModel> optionalPublicacao = publicacaoRepository.findById(id);
         if (optionalPublicacao.isPresent()) {
             PublicacaoModel publicacao = optionalPublicacao.get();
-            BeanUtils.copyProperties(publicacaoDTO, publicacao);
+
+            Optional.ofNullable(publicacaoDTO.getTitulo()).ifPresent(publicacao::setTitulo);
+            Optional.ofNullable(publicacaoDTO.getAutores()).ifPresent(publicacao::setAutores);
+            Optional.ofNullable(publicacaoDTO.getAno_publicacao()).ifPresent(publicacao::setAno_publicacao);
+            Optional.ofNullable(publicacaoDTO.getVeiculo()).ifPresent(publicacao::setVeiculo);
+            Optional.ofNullable(publicacaoDTO.getUrl_publicacao()).ifPresent(publicacao::setUrl_publicacao);
+
+            Optional.ofNullable(publicacaoDTO.getId_informacao_academica()).ifPresent(idInfo -> {
+                Optional<InformacaoAcademicaModel> info = informacaoAcademicaRepository.findById(idInfo);
+                info.ifPresent(publicacao::setInformacao_academica);
+            });
+
             return publicacaoRepository.save(publicacao);
         }
         return null;

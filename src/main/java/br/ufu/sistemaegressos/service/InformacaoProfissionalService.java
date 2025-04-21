@@ -93,17 +93,29 @@ public class InformacaoProfissionalService {
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Informação profissional não encontrada para o ID: " + id));
 
-        BeanUtils.copyProperties(dto, informacaoProfissional);
+        Optional.ofNullable(dto.getEmpresa()).ifPresent(informacaoProfissional::setEmpresa);
+        Optional.ofNullable(dto.getCategoria()).ifPresent(informacaoProfissional::setCategoria);
+        Optional.ofNullable(dto.getTipo()).ifPresent(informacaoProfissional::setTipo);
+        Optional.ofNullable(dto.getLocalidade()).ifPresent(informacaoProfissional::setLocalidade);
+        Optional.ofNullable(dto.getCargo()).ifPresent(informacaoProfissional::setCargo);
+        Optional.ofNullable(dto.getNivel_cargo()).ifPresent(informacaoProfissional::setNivel_cargo);
+        Optional.ofNullable(dto.getFuncao()).ifPresent(informacaoProfissional::setFuncao);
+        Optional.ofNullable(dto.getMedia_salarial()).ifPresent(informacaoProfissional::setMedia_salarial);
+        Optional.ofNullable(dto.getData_inicio()).ifPresent(informacaoProfissional::setData_inicio);
+        Optional.ofNullable(dto.getData_fim()).ifPresent(informacaoProfissional::setData_fim);
 
-        InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
-                .findById(dto.getId_informacao_academica())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId_informacao_academica()));
+        Optional.ofNullable(dto.getId_informacao_academica()).ifPresent(idInfoAcademica -> {
+            InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
+                    .findById(idInfoAcademica)
+                    .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + idInfoAcademica));
 
-        informacaoProfissional.getInformacao_academica().clear();
-        informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
+            informacaoProfissional.getInformacao_academica().clear();
+            informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
+        });
 
         return informacaoProfissionalRepository.save(informacaoProfissional);
     }
+
 
     public void excluirInformacaoProfissional(UUID id) {
         informacaoProfissionalRepository.deleteById(id);
