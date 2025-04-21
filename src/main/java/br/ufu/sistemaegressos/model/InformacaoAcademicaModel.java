@@ -88,19 +88,19 @@ public class InformacaoAcademicaModel {
         this.institution_name = institution_name;
     }
 
-    public String getTipo_instituicao() {
+    public String getInstitution_type() {
         return institution_type;
     }
 
-    public void setTipo_instituicao(String institution_type) {
+    public void setInstitution_type(String institution_type) {
         this.institution_type = institution_type;
     }
 
-    public String getNome_curso() {
+    public String getCourse_name() {
         return course_name;
     }
 
-    public void setNome_curso(String course_name) {
+    public void setCourse_name(String course_name) {
         this.course_name = course_name;
     }
 

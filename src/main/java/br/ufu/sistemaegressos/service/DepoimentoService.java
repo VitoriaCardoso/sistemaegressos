@@ -59,14 +59,14 @@ public class DepoimentoService {
                 adicionar = false;
             }
 
-            if (curso != null && (infoAcademica.getNome_curso() == null || !infoAcademica.getNome_curso().equalsIgnoreCase(curso))) {
+            if (curso != null && (infoAcademica.getCourse_name() == null || !infoAcademica.getCourse_name().equalsIgnoreCase(curso))) {
                 adicionar = false;
             }
 
             if (totalEstudantes != null) {
                 Long estudantes = totalEstudantesMap
                         .getOrDefault(infoAcademica.getInstitution_name(), new HashMap<>())
-                        .getOrDefault(infoAcademica.getNome_curso(), 0L);
+                        .getOrDefault(infoAcademica.getCourse_name(), 0L);
 
                 if (estudantes.intValue() != totalEstudantes) {
                     adicionar = false;
