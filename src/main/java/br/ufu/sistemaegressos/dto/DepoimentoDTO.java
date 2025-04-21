@@ -23,7 +23,7 @@ public class DepoimentoDTO {
 
     @NotBlank
     @NotNull
-    private UUID id_informacao_academica;
+    private UUID id_informacao_academica; // associa o depoimento com a informação acadêmica
 
     public @NotBlank @NotNull String getTexto_depoimento() {
         return texto_depoimento;

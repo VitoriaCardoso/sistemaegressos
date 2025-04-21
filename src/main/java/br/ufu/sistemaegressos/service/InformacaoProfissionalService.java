@@ -68,11 +68,11 @@ public class InformacaoProfissionalService {
     public InformacaoProfissionalModel criarInformacaoProfissional(InformacaoProfissionalDTO dto) {
         InformacaoProfissionalModel informacaoProfissional = new InformacaoProfissionalModel();
         BeanUtils.copyProperties(dto, informacaoProfissional);
-        informacaoProfissional.setData_inicio(dto.getData_inicio());
+        informacaoProfissional.setStart_date(dto.getStart_date());
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
-                .findById(dto.getId_informacao_academica())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId_informacao_academica()));
+                .findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId()));
 
         informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
 
@@ -93,18 +93,18 @@ public class InformacaoProfissionalService {
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Informação profissional não encontrada para o ID: " + id));
 
-        Optional.ofNullable(dto.getEmpresa()).ifPresent(informacaoProfissional::setEmpresa);
-        Optional.ofNullable(dto.getCategoria()).ifPresent(informacaoProfissional::setCategoria);
-        Optional.ofNullable(dto.getTipo()).ifPresent(informacaoProfissional::setTipo);
-        Optional.ofNullable(dto.getLocalidade()).ifPresent(informacaoProfissional::setLocalidade);
-        Optional.ofNullable(dto.getCargo()).ifPresent(informacaoProfissional::setCargo);
-        Optional.ofNullable(dto.getNivel_cargo()).ifPresent(informacaoProfissional::setNivel_cargo);
-        Optional.ofNullable(dto.getFuncao()).ifPresent(informacaoProfissional::setFuncao);
-        Optional.ofNullable(dto.getMedia_salarial()).ifPresent(informacaoProfissional::setMedia_salarial);
-        Optional.ofNullable(dto.getData_inicio()).ifPresent(informacaoProfissional::setData_inicio);
-        Optional.ofNullable(dto.getData_fim()).ifPresent(informacaoProfissional::setData_fim);
+        Optional.ofNullable(dto.getCompany_name()).ifPresent(informacaoProfissional::setCompany_name);
+        Optional.ofNullable(dto.getCategory()).ifPresent(informacaoProfissional::setCategory);
+        Optional.ofNullable(dto.getJob_type()).ifPresent(informacaoProfissional::setJob_type);
+        Optional.ofNullable(dto.getLocation()).ifPresent(informacaoProfissional::setLocation);
+        Optional.ofNullable(dto.getJob_title()).ifPresent(informacaoProfissional::setJob_title);
+        Optional.ofNullable(dto.getJob_level()).ifPresent(informacaoProfissional::setJob_level);
+        Optional.ofNullable(dto.getFunction()).ifPresent(informacaoProfissional::setFunction);
+        Optional.ofNullable(dto.getSalary()).ifPresent(informacaoProfissional::setSalary);
+        Optional.ofNullable(dto.getStart_date()).ifPresent(informacaoProfissional::setStart_date);
+        Optional.ofNullable(dto.getEnd_date()).ifPresent(informacaoProfissional::setEnd_date);
 
-        Optional.ofNullable(dto.getId_informacao_academica()).ifPresent(idInfoAcademica -> {
+        Optional.ofNullable(dto.getId()).ifPresent(idInfoAcademica -> {
             InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
                     .findById(idInfoAcademica)
                     .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + idInfoAcademica));

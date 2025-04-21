@@ -4,103 +4,103 @@ import java.util.UUID;
 
 public class InformacaoProfissionalDTO {
 
-    private String empresa;
-    private String categoria;
-    private String tipo;
-    private String localidade;
-    private String cargo;
-    private String nivel_cargo;
-    private String funcao;
-    private Double media_salarial;
-    private LocalDate data_inicio;
-    private LocalDate data_fim;
-    private UUID id_informacao_academica;
+    private String company_name;
+    private String category;
+    private String job_type;
+    private String location;
+    private String job_title;
+    private String job_level;
+    private String function;
+    private Double salary;
+    private LocalDate start_date;
+    private LocalDate end_date;
+    private UUID id; //da informação academica
 
-    public String getEmpresa() {
-        return empresa;
+    public String getCompany_name() {
+        return company_name;
     }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getJob_type() {
+        return job_type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setJob_type(String job_type) {
+        this.job_type = job_type;
     }
 
-    public String getLocalidade() {
-        return localidade;
+    public String getLocation() {
+        return location;
     }
 
-    public void setLocalidade(String localidade) {
-        this.localidade = localidade;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getJob_title() {
+        return job_title;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setJob_title(String job_title) {
+        this.job_title = job_title;
     }
 
-    public String getNivel_cargo() {
-        return nivel_cargo;
+    public String getJob_level() {
+        return job_level;
     }
 
-    public void setNivel_cargo(String nivel_cargo) {
-        this.nivel_cargo = nivel_cargo;
+    public void setJob_level(String job_level) {
+        this.job_level = job_level;
     }
 
-    public String getFuncao() {
-        return funcao;
+    public String getFunction() {
+        return function;
     }
 
-    public void setFuncao(String funcao) {
-        this.funcao = funcao;
+    public void setFunction(String function) {
+        this.function = function;
     }
 
-    public Double getMedia_salarial() {
-        return media_salarial;
+    public Double getSalary() {
+        return salary;
     }
 
-    public void setMedia_salarial(Double media_salarial) {
-        this.media_salarial = media_salarial;
+    public void setSalary(Double salary) {
+        this.salary = salary;
     }
 
-    public LocalDate getData_inicio() {
-        return data_inicio;
+    public LocalDate getStart_date() {
+        return start_date;
     }
 
-    public void setData_inicio(LocalDate data_inicio) {
-        this.data_inicio = data_inicio;
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
     }
 
-    public LocalDate getData_fim() {
-        return data_fim;
+    public LocalDate getEnd_date() {
+        return end_date;
     }
 
-    public void setData_fim(LocalDate data_fim) {
-        this.data_fim = data_fim;
+    public void setEnd_date(LocalDate end_date) {
+        this.end_date = end_date;
     }
 
-    public UUID getId_informacao_academica() {
-        return id_informacao_academica;
+    public UUID getId() {
+        return id;
     }
 
-    public void setId_informacao_academica(UUID id_informacao_academica) {
-        this.id_informacao_academica = id_informacao_academica;
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

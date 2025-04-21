@@ -21,31 +21,31 @@ public class InformacaoProfissionalModel {
     private UUID id;
 
     @Column(nullable = false)
-    private String empresa;
+    private String company_name;
 
     @Column(nullable = false)
-    private String categoria;
+    private String category;
 
     @Column(length = 45, nullable = false)
-    private String tipo;
+    private String job_type;
 
     @Column(length = 45, nullable = false)
-    private String localidade;
+    private String location;
 
     @Column(length = 45, nullable = false)
-    private String cargo;
+    private String job_title;
 
     @Column(length = 45, nullable = false)
-    private String nivel_cargo;
+    private String job_level;
 
-    private String funcao;
+    private String function;
 
-    private Double media_salarial;
+    private Double salary;
 
     @Column(nullable = false)
-    private LocalDate data_inicio;
+    private LocalDate start_date;
 
-    private LocalDate data_fim;
+    private LocalDate end_date;
 
     @ManyToMany
     @JoinTable(
@@ -63,84 +63,84 @@ public class InformacaoProfissionalModel {
         this.id = id;
     }
 
-    public String getEmpresa() {
-        return empresa;
+    public String getCompany_name() {
+        return company_name;
     }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getJob_type() {
+        return job_type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setJob_type(String job_type) {
+        this.job_type = job_type;
     }
 
-    public String getLocalidade() {
-        return localidade;
+    public String getLocation() {
+        return location;
     }
 
-    public void setLocalidade(String localidade) {
-        this.localidade = localidade;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getJob_title() {
+        return job_title;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setJob_title(String job_title) {
+        this.job_title = job_title;
     }
 
-    public String getNivel_cargo() {
-        return nivel_cargo;
+    public String getJob_level() {
+        return job_level;
     }
 
-    public void setNivel_cargo(String nivel_cargo) {
-        this.nivel_cargo = nivel_cargo;
+    public void setJob_level(String job_level) {
+        this.job_level = job_level;
     }
 
-    public String getFuncao() {
-        return funcao;
+    public String getFunction() {
+        return function;
     }
 
-    public void setFuncao(String funcao) {
-        this.funcao = funcao;
+    public void setFunction(String function) {
+        this.function = function;
     }
 
-    public Double getMedia_salarial() {
-        return media_salarial;
+    public Double getSalary() {
+        return salary;
     }
 
-    public void setMedia_salarial(Double media_salarial) {
-        this.media_salarial = media_salarial;
+    public void setSalary(Double salary) {
+        this.salary = salary;
     }
 
-    public LocalDate getData_inicio() {
-        return data_inicio;
+    public LocalDate getStart_date() {
+        return start_date;
     }
 
-    public void setData_inicio(LocalDate data_inicio) {
-        this.data_inicio = data_inicio;
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
     }
 
-    public LocalDate getData_fim() {
-        return data_fim;
+    public LocalDate getEnd_date() {
+        return end_date;
     }
 
-    public void setData_fim(LocalDate data_fim) {
-        this.data_fim = data_fim;
+    public void setEnd_date(LocalDate end_date) {
+        this.end_date = end_date;
     }
 
     public Set<InformacaoAcademicaModel> getInformacao_academica() {
