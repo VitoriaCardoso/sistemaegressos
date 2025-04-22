@@ -18,6 +18,25 @@ public class EgressoCriarDTO {
     private String nome;
     @Size(max = 255)
     private String nome_social;
+    @NotBlank
+    @Email
+    @Size(max = 255)
+    private String email;
+    @Size(max = 255)
+    private String email_secundario;
+    @NotBlank
+    @Size(max = 255)
+    @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx")
+    private String telefone;
+    @Size(max = 255)
+    @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx")
+    private String telefone_secundario;
+    @Size(max = 255)
+    private String link_lattes;
+    @Size(max = 255)
+    private String link_orcid;
+    @Size(max = 255)
+    private String link_linkedin;
 
     public @NotBlank @Email @Size(max = 255) String getEmail() {
         return email;
@@ -90,26 +109,6 @@ public class EgressoCriarDTO {
     public void setLink_linkedin(@Size(max = 255) String link_linkedin) {
         this.link_linkedin = link_linkedin;
     }
-
-    @NotBlank
-    @Email
-    @Size(max = 255)
-    private String email;
-    @Size(max = 255)
-    private String email_secundario;
-    @NotBlank
-    @Size(max = 255)
-    @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx")
-    private String telefone;
-    @Size(max = 255)
-    @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "O telefone deve estar no formato (xx) xxxxx-xxxx")
-    private String telefone_secundario;
-    @Size(max = 255)
-    private String link_lattes;
-    @Size(max = 255)
-    private String link_orcid;
-    @Size(max = 255)
-    private String link_linkedin;
 
     public @NotBlank @Size(max = 14) String getCpf() {
         return cpf;

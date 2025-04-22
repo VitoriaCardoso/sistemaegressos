@@ -17,6 +17,8 @@ public class InformacaoAcademicaDTO {
     private String registration_number;
     private String campus;
     private Boolean ativo;
+    private Integer end_year;
+    private String end_semester;
 
     public String getMatricula() {
         return matricula;
@@ -128,5 +130,21 @@ public class InformacaoAcademicaDTO {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Integer getEnd_year() {
+        return end_year;
+    }
+
+    public void setEnd_year(Integer end_year) {
+        this.end_year = end_year;
+    }
+
+    public String getEnd_semester() {
+        return end_semester;
+    }
+
+    public void setEnd_semester(String end_semester) {
+        this.end_semester = end_semester;
     }
 }

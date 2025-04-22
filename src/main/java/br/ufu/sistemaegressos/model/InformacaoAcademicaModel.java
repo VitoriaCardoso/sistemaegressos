@@ -52,10 +52,9 @@ public class InformacaoAcademicaModel {
     @Column(nullable = true)
     private String registration_number;           // Código do curso
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 45)
     private String campus;
 
-    @Column(nullable = false)
     private Boolean ativo = false;
 
     @ManyToOne
