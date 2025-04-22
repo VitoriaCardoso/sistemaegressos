@@ -25,7 +25,7 @@ public class DepoimentoService {
         this.informacaoAcademicaRepository = informacaoAcademicaRepository;
     }
 
-    public List<DepoimentoModel> listarTodos(String campus, Integer totalEstudantes, String curso, String titulacao) {
+    public List<DepoimentoModel> listarTodos(String campus, String semestreLetivo, String curso, String titulacao) {
         List<DepoimentoModel> depoimentos = depoimentoRepository.findAll();
         List<DepoimentoModel> resultado = new ArrayList<>();
 
@@ -63,12 +63,23 @@ public class DepoimentoService {
                 adicionar = false;
             }
 
-            if (totalEstudantes != null) {
-                Long estudantes = totalEstudantesMap
-                        .getOrDefault(infoAcademica.getInstitution_name(), new HashMap<>())
-                        .getOrDefault(infoAcademica.getCourse_name(), 0L);
+            if (semestreLetivo != null) {
+                String[] partes = semestreLetivo.split("/");
+                if (partes.length == 2) {
+                    int ano = Integer.parseInt(partes[0]);
+                    String semestre = partes[1].equals("1") ? "1° Semestre" :
+                            partes[1].equals("2") ? "2° Semestre" : null;
 
-                if (estudantes.intValue() != totalEstudantes) {
+                    Integer anoFinal = infoAcademica.getEnd_year();
+                    String semestreFinal = infoAcademica.getEnd_semester();
+
+                    boolean correspondeSemestre = anoFinal != null && semestreFinal != null &&
+                            anoFinal == ano && semestreFinal.equalsIgnoreCase(semestre);
+
+                    if (!correspondeSemestre) {
+                        adicionar = false;
+                    }
+                } else {
                     adicionar = false;
                 }
             }

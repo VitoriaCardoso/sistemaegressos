@@ -36,6 +36,10 @@ public class InformacaoAcademicaModel {
 
     private LocalDate end_date;                  // Data Conslusão
 
+    private Integer end_year;                    // Ano de evasão
+
+    private String end_semester;                 // Periodo da evasão
+
     @Column(length = 45, nullable = false)
     private String city;                        // Cidade
 
@@ -52,7 +56,7 @@ public class InformacaoAcademicaModel {
     private String campus;
 
     @Column(nullable = false)
-    private Boolean ativo;
+    private Boolean ativo = false;
 
     @ManyToOne
     @JoinColumn(name = "egresso_cpf", referencedColumnName = "cpf", nullable = false)
@@ -198,5 +202,21 @@ public class InformacaoAcademicaModel {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Integer getEnd_year() {
+        return end_year;
+    }
+
+    public void setEnd_year(Integer end_year) {
+        this.end_year = end_year;
+    }
+
+    public String getEnd_semester() {
+        return end_semester;
+    }
+
+    public void setEnd_semester(String end_semester) {
+        this.end_semester = end_semester;
     }
 }

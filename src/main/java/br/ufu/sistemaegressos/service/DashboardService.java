@@ -27,9 +27,9 @@ public class DashboardService{
     @Autowired
     private InformacaoAcademicaRepository informacaoAcademicaRepository;
 
-    public EstatisticasDTO buscarEstatisticas(String campus, Integer totalEstudantes, String curso, String titulacao) {
+    public EstatisticasDTO buscarEstatisticas(String campus, String semestreLetivo, String curso, String titulacao) {
         long totalEgressos = egressoRepository.count();
-        List<DepoimentoModel> totalDepoimentos = depoimentoService.listarTodos(campus, totalEstudantes, curso, titulacao);
+        List<DepoimentoModel> totalDepoimentos = depoimentoService.listarTodos(campus, semestreLetivo, curso, titulacao);
 
         return new EstatisticasDTO(totalEgressos, totalDepoimentos);
     }
@@ -60,7 +60,7 @@ public class DashboardService{
         return totalPorTitulacao;
     }
 
-    public List<DepoimentoModel> listarDepoimentos(String campus, Integer totalEstudantes, String curso, String titulacao) {
-        return depoimentoService.listarTodos(campus,totalEstudantes,curso,titulacao);
+    public List<DepoimentoModel> listarDepoimentos(String campus, String semestreLetivo, String curso, String titulacao) {
+        return depoimentoService.listarTodos(campus,semestreLetivo,curso,titulacao);
     }
 }

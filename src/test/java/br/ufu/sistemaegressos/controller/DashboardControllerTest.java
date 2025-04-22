@@ -83,11 +83,11 @@ public class DashboardControllerTest {
         depoimento.setTexto_depoimento("Depoimento de teste");
         List<DepoimentoModel> depoimentos = Arrays.asList(depoimento);
 
-        when(dashboardService.listarDepoimentos("Campus A", 100, "Curso X", "Mestrado")).thenReturn(depoimentos);
+        when(dashboardService.listarDepoimentos("Campus A", "2023/2", "Curso X", "Mestrado")).thenReturn(depoimentos);
 
         mockMvc.perform(get("/api/dashboard/depoimentos")
                         .param("campus", "Campus A")
-                        .param("totalEstudantes", "100")
+                        .param("semestreLetivo", "2023/2")
                         .param("curso", "Curso X")
                         .param("titulacao", "Mestrado"))
                 .andExpect(status().isOk())

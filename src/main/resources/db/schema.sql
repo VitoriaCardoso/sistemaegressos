@@ -32,6 +32,8 @@ CREATE TABLE informacao_academica (
     registration_number VARCHAR(45),
     start_date DATE NOT NULL,
     end_date DATE,
+    end_year INTEGER,
+    end_semester VARCHAR(11) NOT NULL CHECK (end_semester IN ('1° Semestre', '2° Semestre')),
     city VARCHAR(45) NOT NULL,
     state VARCHAR(45) NOT NULL,
     country VARCHAR(45) NOT NULL,
