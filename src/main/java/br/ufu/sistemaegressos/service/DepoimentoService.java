@@ -120,7 +120,7 @@ public class DepoimentoService {
             depoimento.getInformacaoAcademica().setComunicados(null);
             depoimento.getInformacaoAcademica().setInformacao_profissional(null);
         } else {
-            throw new RuntimeException("Informação acadêmica não encontrada para a matrícula: " + depoimentoDTO.getId_informacao_academica());
+            throw new RuntimeException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());
         }
         return depoimentoRepository.save(depoimento);
     }
@@ -161,7 +161,7 @@ public class DepoimentoService {
                 info.setInformacao_profissional(null);
                 depoimentoExistente.setInformacaoAcademica(info);
             } else {
-                throw new RuntimeException("Informação acadêmica não encontrada para a matrícula: " + depoimentoDTO.getId_informacao_academica());
+                throw new RuntimeException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());
             }
         }
         return depoimentoRepository.save(depoimentoExistente);
