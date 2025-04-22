@@ -13,7 +13,7 @@ import java.util.UUID;
 public class InformacaoAcademicaModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
     private UUID id;
 
     @Column(length = 45)

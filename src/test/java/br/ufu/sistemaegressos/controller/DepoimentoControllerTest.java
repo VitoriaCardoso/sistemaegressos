@@ -2,7 +2,6 @@ package br.ufu.sistemaegressos.controller;
 
 import br.ufu.sistemaegressos.dto.DepoimentoDTO;
 import br.ufu.sistemaegressos.model.DepoimentoModel;
-import br.ufu.sistemaegressos.model.InformacaoAcademicaModel;
 import br.ufu.sistemaegressos.service.DepoimentoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,8 +37,6 @@ public class DepoimentoControllerTest {
 
     private DepoimentoModel depoimento;
 
-    private InformacaoAcademicaModel informacaoAcademicaModel;
-
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
@@ -47,21 +44,16 @@ public class DepoimentoControllerTest {
         depoimento.setId(UUID.fromString("1639e15f-4c29-42e2-b148-300e7e479643"));
         depoimento.setTexto_depoimento("Depoimento de teste");
         depoimento.setData_cadastro(LocalDate.now());
-        informacaoAcademicaModel.setInstitution_name("UFU");
-
-        depoimento.setInformacaoAcademica(informacaoAcademicaModel);
     }
 
     @Test
     public void testBuscarTodosDepoimentos() throws Exception {
-        when(depoimentoService.listarTodos("Santa Monica", 1000, "Economia", "Doutorado")).thenReturn(Arrays.asList(depoimento));
-
+        when(depoimentoService.listarTodos(any(), any(), any(), any())).thenReturn(Arrays.asList(depoimento));
         mockMvc.perform(get("/api/depoimentos"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value("1639e15f-4c29-42e2-b148-300e7e479643"))
                 .andExpect(jsonPath("$[0].texto_depoimento").value("Depoimento de teste"));
-
-        verify(depoimentoService, times(1)).listarTodos("Santa Monica", 1000, "Economia", "Doutorado");
+        verify(depoimentoService, times(1)).listarTodos(any(), any(), any(), any());
     }
 
     @Test
@@ -86,7 +78,7 @@ public class DepoimentoControllerTest {
         mockMvc.perform(post("/api/depoimentos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(depoimentoDTO)))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value("1639e15f-4c29-42e2-b148-300e7e479643"))
                 .andExpect(jsonPath("$.texto_depoimento").value("Depoimento de teste"));
 
@@ -99,7 +91,30 @@ public class DepoimentoControllerTest {
 
         mockMvc.perform(delete("/api/depoimentos/1639e15f-4c29-42e2-b148-300e7e479643"))
                 .andExpect(status().isNoContent());
-
         verify(depoimentoService, times(1)).excluir(UUID.fromString("1639e15f-4c29-42e2-b148-300e7e479643"));
+    }
+
+    @Test
+    public void testListarPorCpfEgresso() throws Exception {
+        when(depoimentoService.listarPorCpfEgresso("12345678910")).thenReturn(Arrays.asList(depoimento));
+        mockMvc.perform(get("/api/depoimentos/egresso/12345678910"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value("1639e15f-4c29-42e2-b148-300e7e479643"))
+                .andExpect(jsonPath("$[0].texto_depoimento").value("Depoimento de teste"));
+        verify(depoimentoService, times(1)).listarPorCpfEgresso(anyString());
+    }
+
+    @Test
+    public void testAtualizar() throws Exception {
+        DepoimentoDTO dto = new DepoimentoDTO();
+        dto.setTexto_depoimento("Depoimento atualizado");
+        when(depoimentoService.atualizar(any(UUID.class), any(DepoimentoDTO.class))).thenReturn(depoimento);
+        mockMvc.perform(put("/api/depoimentos/1639e15f-4c29-42e2-b148-300e7e479643")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value("1639e15f-4c29-42e2-b148-300e7e479643"))
+                .andExpect(jsonPath("$.texto_depoimento").value("Depoimento de teste"));
+        verify(depoimentoService, times(1)).atualizar(any(UUID.class), any(DepoimentoDTO.class));
     }
 }

@@ -1,6 +1,5 @@
 package br.ufu.sistemaegressos.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
 import br.ufu.sistemaegressos.dto.EgressoAtualizarDTO;
 import br.ufu.sistemaegressos.dto.EgressoCriarDTO;
 import br.ufu.sistemaegressos.model.EgressoModel;
@@ -8,9 +7,6 @@ import br.ufu.sistemaegressos.service.EgressoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -86,7 +82,7 @@ public class EgressoControllerTest {
         egresso.setNome("João Silva Atualizado");
         when(egressoService.atualizar(eq("12345678900"), any(EgressoAtualizarDTO.class))).thenReturn(egresso);
 
-        mockMvc.perform(patch("/api/egressos/12345678900")
+        mockMvc.perform(put("/api/egressos/12345678900")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(atualizarDTO)))
                 .andExpect(status().isOk())
