@@ -51,7 +51,7 @@ public class InformacaoAcademicaModel {
     @Column(length = 45, nullable = false)
     private String campus;
 
-    @Column(nullable = false)
+    @Column()
     private Boolean ativo;
 
     @ManyToOne

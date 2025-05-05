@@ -93,7 +93,8 @@ public class InformacaoProfissionalService {
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Informação profissional não encontrada para o ID: " + id));
 
-        BeanUtils.copyProperties(dto, informacaoProfissional);
+        //BeanUtils.copyProperties(dto, informacaoProfissional);
+        BeanUtils.copyProperties(dto, informacaoProfissional, "id");
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
                 .findById(dto.getId())
