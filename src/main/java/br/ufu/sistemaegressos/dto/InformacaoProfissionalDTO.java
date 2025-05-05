@@ -14,7 +14,7 @@ public class InformacaoProfissionalDTO {
     private Double salary;
     private LocalDate start_date;
     private LocalDate end_date;
-    private UUID id;
+    private UUID id; //da informação academica
 
     public String getCompany_name() {
         return company_name;

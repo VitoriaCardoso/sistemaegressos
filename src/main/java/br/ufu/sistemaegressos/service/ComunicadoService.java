@@ -28,10 +28,7 @@ public class ComunicadoService {
         List<ComunicadoModel> comunicados = comunicadoRepository.findAll();
         for (ComunicadoModel comunicado : comunicados) {
             if (comunicado.getInformacao_academica() != null) {
-                for (InformacaoAcademicaModel informacaoAcademica : comunicado.getInformacao_academica()) {
-                    informacaoAcademica.setInformacao_profissional(null);
-                    informacaoAcademica.setComunicados(null);
-                }
+                comunicado.setInformacao_academica(null);
             }
         }
         return comunicados;
@@ -40,24 +37,11 @@ public class ComunicadoService {
     public List<ComunicadoModel> buscarPorFiltro(String cursoDestino, String nivelCursoDestino, Boolean paraTodos) {
         List<ComunicadoModel> comunicados;
 
-        if (cursoDestino != null && nivelCursoDestino != null) {
-            comunicados = comunicadoRepository.buscarComunicadoPorCursoEnivel(cursoDestino, nivelCursoDestino);
-        } else if (cursoDestino != null) {
-            comunicados = comunicadoRepository.buscarComunicadoPorCurso(cursoDestino);
-        } else if (nivelCursoDestino != null) {
-            comunicados = comunicadoRepository.buscarComunicadosPorNivelCurso(nivelCursoDestino);
-        } else if (paraTodos != null) {
-            comunicados = comunicadoRepository.buscarComunicadosParaTodos(paraTodos);
-        } else {
-            comunicados = comunicadoRepository.findAll();
-        }
+        comunicados = comunicadoRepository.buscarComunicadosFiltrados(cursoDestino, nivelCursoDestino, paraTodos);
 
         for (ComunicadoModel comunicado : comunicados) {
             if (comunicado.getInformacao_academica() != null) {
-                for (InformacaoAcademicaModel informacaoAcademica : comunicado.getInformacao_academica()) {
-                    informacaoAcademica.setInformacao_profissional(null);
-                    informacaoAcademica.setComunicados(null);
-                }
+                comunicado.setInformacao_academica(null);
             }
         }
 
@@ -71,14 +55,29 @@ public class ComunicadoService {
 
         comunicado = comunicadoRepository.save(comunicado);
 
-        if (!comunicado.getPara_todos()) {
-            List<InformacaoAcademicaModel> informacoesAcademicas = informacaoAcademicaRepository.buscarPorNomeCurso(comunicado.getCurso_destino());
-            for (InformacaoAcademicaModel informacaoAcademica : informacoesAcademicas) {
-                informacaoAcademica.setInformacao_profissional(null);
-                informacaoAcademica.setComunicados(null);
-                comunicado.getInformacao_academica().add(informacaoAcademica);
+        boolean temCurso = comunicado.getCurso_destino() != null && !comunicado.getCurso_destino().isBlank();
+        boolean temNivel = comunicado.getNivel_curso_destino() != null && !comunicado.getNivel_curso_destino().isBlank();
+
+        if (temCurso || temNivel) {
+            List<InformacaoAcademicaModel> informacoesAcademicas;
+
+            if (temCurso && temNivel) {
+                informacoesAcademicas = informacaoAcademicaRepository.buscarPorNomeENivelCurso(
+                        comunicado.getCurso_destino(), comunicado.getNivel_curso_destino()
+                );
+            } else if (temCurso) {
+                informacoesAcademicas = informacaoAcademicaRepository.buscarPorNomeCurso(comunicado.getCurso_destino());
+            } else {
+                informacoesAcademicas = informacaoAcademicaRepository.buscarPorNivelCurso(comunicado.getNivel_curso_destino());
             }
-            comunicadoRepository.save(comunicado);
+
+            for (InformacaoAcademicaModel info : informacoesAcademicas) {
+                info.setInformacao_profissional(null);
+                info.setComunicados(null);
+                comunicado.getInformacao_academica().add(info);
+            }
+
+            comunicado = comunicadoRepository.save(comunicado);
         }
         return comunicado;
     }

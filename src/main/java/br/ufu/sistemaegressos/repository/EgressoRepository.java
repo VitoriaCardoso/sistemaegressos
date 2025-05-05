@@ -16,16 +16,14 @@ public interface EgressoRepository extends JpaRepository<EgressoModel, String> {
             "WHERE (:nome IS NULL OR e.nome LIKE %:nome%) " +
             "AND (:cpf IS NULL OR e.cpf = :cpf) " +
             "AND (:campus IS NULL OR ia.campus LIKE %:campus%) " +
-            "AND (:courseName IS NULL OR ia.course_name LIKE %:courseName%) " +
-            "AND (:registrationNumber IS NULL OR ia.registration_number = :registrationNumber) " +
+            "AND (:course IS NULL OR ia.course_name LIKE %:course% OR ia.registration_number LIKE %:course%) " +
             "AND (:courseLevel IS NULL OR ia.course_level = :courseLevel) " +
             "AND (:startDate IS NULL OR ia.start_date = :startDate) " +
             "AND (:endDate IS NULL OR ia.end_date = :endDate)")
     List<EgressoModel> buscarPorFiltro(@Param("nome") String nome,
                                        @Param("cpf") String cpf,
                                        @Param("campus") String campus,
-                                       @Param("courseName") String courseName,
-                                       @Param("registrationNumber") String registrationNumber,
+                                       @Param("course") String course,
                                        @Param("courseLevel") String courseLevel,
                                        @Param("startDate") LocalDate startDate,
                                        @Param("endDate") LocalDate endDate);

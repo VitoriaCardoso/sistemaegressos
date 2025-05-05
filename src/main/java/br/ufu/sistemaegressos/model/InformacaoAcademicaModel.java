@@ -13,7 +13,7 @@ import java.util.UUID;
 public class InformacaoAcademicaModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
     private UUID id;
 
     @Column(length = 45)
@@ -36,6 +36,10 @@ public class InformacaoAcademicaModel {
 
     private LocalDate end_date;                  // Data Conslusão
 
+    private Integer end_year;                    // Ano de evasão
+
+    private String end_semester;                 // Periodo da evasão
+
     @Column(length = 45, nullable = false)
     private String city;                        // Cidade
 
@@ -48,11 +52,10 @@ public class InformacaoAcademicaModel {
     @Column(nullable = true)
     private String registration_number;           // Código do curso
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 45)
     private String campus;
 
-    @Column()
-    private Boolean ativo;
+    private Boolean ativo = false;
 
     @ManyToOne
     @JoinColumn(name = "egresso_cpf", referencedColumnName = "cpf", nullable = false)
@@ -88,19 +91,19 @@ public class InformacaoAcademicaModel {
         this.institution_name = institution_name;
     }
 
-    public String getTipo_instituicao() {
+    public String getInstitution_type() {
         return institution_type;
     }
 
-    public void setTipo_instituicao(String institution_type) {
+    public void setInstitution_type(String institution_type) {
         this.institution_type = institution_type;
     }
 
-    public String getNome_curso() {
+    public String getCourse_name() {
         return course_name;
     }
 
-    public void setNome_curso(String course_name) {
+    public void setCourse_name(String course_name) {
         this.course_name = course_name;
     }
 
@@ -198,5 +201,21 @@ public class InformacaoAcademicaModel {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Integer getEnd_year() {
+        return end_year;
+    }
+
+    public void setEnd_year(Integer end_year) {
+        this.end_year = end_year;
+    }
+
+    public String getEnd_semester() {
+        return end_semester;
+    }
+
+    public void setEnd_semester(String end_semester) {
+        this.end_semester = end_semester;
     }
 }

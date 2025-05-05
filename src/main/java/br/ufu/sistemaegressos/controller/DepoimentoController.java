@@ -23,8 +23,13 @@ public class DepoimentoController {
     }
 
     @GetMapping
-    public List<DepoimentoModel> buscarTodosDepoimentos(String campus, Integer totalEstudantes, String curso, String titulacao) {
-        return depoimentoService.listarTodos(campus,totalEstudantes,curso,titulacao);
+    public List<DepoimentoModel> buscarTodosDepoimentos(
+            @RequestParam(required = false) String campus,
+            @RequestParam(required = false) String semestreLetivo,
+            @RequestParam(required = false) String curso,
+            @RequestParam(required = false) String titulacao
+    ) {
+        return depoimentoService.listarTodos(campus, semestreLetivo, curso, titulacao);
     }
 
     @GetMapping("/{id}")
@@ -51,4 +56,9 @@ public class DepoimentoController {
         return depoimentoService.listarPorCpfEgresso(cpf);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<DepoimentoModel> atualizar(@PathVariable UUID id, @RequestBody DepoimentoDTO dto) {
+        DepoimentoModel atualizado = depoimentoService.atualizar(id, dto);
+        return ResponseEntity.ok(atualizado);
+    }
 }

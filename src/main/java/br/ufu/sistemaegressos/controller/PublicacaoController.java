@@ -38,6 +38,7 @@ public class PublicacaoController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirPublicacao(@PathVariable UUID id) {
         publicacaoService.excluir(id);
     }

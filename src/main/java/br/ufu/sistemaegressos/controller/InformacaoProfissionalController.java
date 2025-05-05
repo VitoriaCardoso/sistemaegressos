@@ -52,6 +52,7 @@ public class InformacaoProfissionalController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirInformacaoProfissional(@PathVariable UUID id) {
         informacaoProfissionalService.excluirInformacaoProfissional(id);
     }

@@ -9,7 +9,7 @@ public class PublicacaoDTO {
     private Integer ano_publicacao;
     private String veiculo;
     private String url_publicacao;
-    private UUID id_informacao_academica;
+    private UUID id_informacao_academica; // associa a publicação com a informação acadêmica
 
     public String getTitulo() {
         return titulo;

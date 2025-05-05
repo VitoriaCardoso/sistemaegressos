@@ -25,7 +25,7 @@ public class DepoimentoService {
         this.informacaoAcademicaRepository = informacaoAcademicaRepository;
     }
 
-    public List<DepoimentoModel> listarTodos(String campus, Integer totalEstudantes, String curso, String titulacao) {
+    public List<DepoimentoModel> listarTodos(String campus, String semestreLetivo, String curso, String titulacao) {
         List<DepoimentoModel> depoimentos = depoimentoRepository.findAll();
         List<DepoimentoModel> resultado = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class DepoimentoService {
         for (Object[] row : totalEstudantesPorCursoECampus) {
             String nomeCurso = (String) row[0];
             String nomeCampus = (String) row[1];
-            Long total = (Long) row[2];
+            Long total = (Long) row[3];
 
             totalEstudantesMap
                     .computeIfAbsent(nomeCampus, k -> new HashMap<>())
@@ -44,6 +44,10 @@ public class DepoimentoService {
         }
 
         for (DepoimentoModel depoimento : depoimentos) {
+            if (!Arrays.asList("Público", "Anônimo").contains(depoimento.getPrivacidade())) {
+                continue;
+            }
+
             boolean adicionar = true;
             InformacaoAcademicaModel infoAcademica = depoimento.getInformacaoAcademica();
 
@@ -51,20 +55,31 @@ public class DepoimentoService {
                 continue;
             }
 
-            if (campus != null && (infoAcademica.getInstitution_name() == null || !infoAcademica.getInstitution_name().equalsIgnoreCase(campus))) {
+            if (campus != null && (infoAcademica.getCampus() == null || !infoAcademica.getCampus().equalsIgnoreCase(campus))) {
                 adicionar = false;
             }
 
-            if (curso != null && (infoAcademica.getNome_curso() == null || !infoAcademica.getNome_curso().equalsIgnoreCase(curso))) {
+            if (curso != null && (infoAcademica.getCourse_name() == null || !infoAcademica.getCourse_name().equalsIgnoreCase(curso))) {
                 adicionar = false;
             }
 
-            if (totalEstudantes != null) {
-                Long estudantes = totalEstudantesMap
-                        .getOrDefault(infoAcademica.getInstitution_name(), new HashMap<>())
-                        .getOrDefault(infoAcademica.getNome_curso(), 0L);
+            if (semestreLetivo != null) {
+                String[] partes = semestreLetivo.split("/");
+                if (partes.length == 2) {
+                    int ano = Integer.parseInt(partes[0]);
+                    String semestre = partes[1].equals("1") ? "1° Semestre" :
+                            partes[1].equals("2") ? "2° Semestre" : null;
 
-                if (estudantes.intValue() != totalEstudantes) {
+                    Integer anoFinal = infoAcademica.getEnd_year();
+                    String semestreFinal = infoAcademica.getEnd_semester();
+
+                    boolean correspondeSemestre = anoFinal != null && semestreFinal != null &&
+                            anoFinal == ano && semestreFinal.equalsIgnoreCase(semestre);
+
+                    if (!correspondeSemestre) {
+                        adicionar = false;
+                    }
+                } else {
                     adicionar = false;
                 }
             }
@@ -105,7 +120,7 @@ public class DepoimentoService {
             depoimento.getInformacaoAcademica().setComunicados(null);
             depoimento.getInformacaoAcademica().setInformacao_profissional(null);
         } else {
-            throw new RuntimeException("Informação acadêmica não encontrada para a matrícula: " + depoimentoDTO.getId_informacao_academica());
+            throw new RuntimeException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());
         }
         return depoimentoRepository.save(depoimento);
     }
@@ -119,5 +134,36 @@ public class DepoimentoService {
             depoimento.setInformacaoAcademica(null);
             return depoimento;
         }).collect(Collectors.toList());
+    }
+
+    public DepoimentoModel atualizar(UUID id, DepoimentoDTO depoimentoDTO) {
+        Optional<DepoimentoModel> depoimentoOptional = depoimentoRepository.findById(id);
+
+        if (depoimentoOptional.isEmpty()) {
+            throw new RuntimeException("Depoimento não encontrado com o id: " + id);
+        }
+
+        DepoimentoModel depoimentoExistente = depoimentoOptional.get();
+
+        if (depoimentoDTO.getTexto_depoimento() != null) {
+            depoimentoExistente.setTexto_depoimento(depoimentoDTO.getTexto_depoimento());
+        }
+
+        if (depoimentoDTO.getPrivacidade() != null) {
+            depoimentoExistente.setPrivacidade(depoimentoDTO.getPrivacidade());
+        }
+
+        if (depoimentoDTO.getId_informacao_academica() != null) {
+            Optional<InformacaoAcademicaModel> infoAcademicaOptional = informacaoAcademicaRepository.findById(depoimentoDTO.getId_informacao_academica());
+            if (infoAcademicaOptional.isPresent()) {
+                InformacaoAcademicaModel info = infoAcademicaOptional.get();
+                info.setComunicados(null);
+                info.setInformacao_profissional(null);
+                depoimentoExistente.setInformacaoAcademica(info);
+            } else {
+                throw new RuntimeException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());
+            }
+        }
+        return depoimentoRepository.save(depoimentoExistente);
     }
 }

@@ -28,15 +28,17 @@ CREATE TABLE informacao_academica (
     institution_type VARCHAR(255) NOT NULL,
     course_name VARCHAR(255) NOT NULL,
     course_level VARCHAR(45) NOT NULL,
-    campus VARCHAR(45) NOT NULL,
+    campus VARCHAR(45),
     registration_number VARCHAR(45),
     start_date DATE NOT NULL,
     end_date DATE,
+    end_year INTEGER,
+    end_semester VARCHAR(11) CHECK (end_semester IN ('1° Semestre', '2° Semestre')),
     city VARCHAR(45) NOT NULL,
     state VARCHAR(45) NOT NULL,
     country VARCHAR(45) NOT NULL,
     egresso_cpf VARCHAR(14) NOT NULL,
-    ativo BOOLEAN DEFAULT TRUE,
+    ativo BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (egresso_cpf) REFERENCES egresso (cpf)
 );
 

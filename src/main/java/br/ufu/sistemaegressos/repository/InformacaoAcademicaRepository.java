@@ -18,6 +18,12 @@ public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoA
     @Query("SELECT i FROM InformacaoAcademicaModel i WHERE i.course_name = :courseName")
     List<InformacaoAcademicaModel> buscarPorNomeCurso(String courseName);
 
+    @Query("SELECT i FROM InformacaoAcademicaModel i WHERE i.course_level = :courseLevel")
+    List<InformacaoAcademicaModel> buscarPorNivelCurso(String courseLevel);
+
+    @Query("SELECT i FROM InformacaoAcademicaModel i WHERE i.course_name = :courseName AND i.course_level = :courseLevel")
+    List<InformacaoAcademicaModel> buscarPorNomeENivelCurso(String courseName, String courseLevel);
+
     @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.course_name = :courseName AND i.campus = :campus")
     Long contarEstudantesPorCursoECampus(@Param("courseName") String courseName, @Param("campus") String campus);
 
@@ -27,7 +33,7 @@ public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoA
     @Query("SELECT COUNT(i) FROM InformacaoAcademicaModel i WHERE i.ativo = false")
     Long contarEstudantesInativos();
 
-    @Query("SELECT i.course_name, i.course_level, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.course_name, i.campus")
+    @Query("SELECT i.course_name, i.campus, i.course_level, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.course_name, i.campus, i.course_level")
     List<Object[]> contarEstudantesPorCursoECampus();
 
     @Query("SELECT i.campus, COUNT(i) FROM InformacaoAcademicaModel i GROUP BY i.campus")

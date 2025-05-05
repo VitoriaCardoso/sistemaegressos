@@ -2,7 +2,6 @@ package br.ufu.sistemaegressos.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -10,9 +9,9 @@ import java.util.UUID;
 @Table(name = "publicacao")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PublicacaoModel {
+
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(nullable = false)
     private UUID id;
 

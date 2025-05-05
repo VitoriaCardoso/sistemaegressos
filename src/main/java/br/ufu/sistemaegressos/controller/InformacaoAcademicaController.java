@@ -45,6 +45,7 @@ public class InformacaoAcademicaController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirInformacaoAcademica(@PathVariable UUID id) {
         informacaoAcademicaService.excluir(id);
     }
