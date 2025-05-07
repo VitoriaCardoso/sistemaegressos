@@ -1,5 +1,6 @@
 package br.ufu.sistemaegressos.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
@@ -31,9 +32,10 @@ public class InformacaoAcademicaModel {
     @Column(length = 45, nullable = false)
     private String course_level;                 // Titulacao
 
-    @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd" )
     private LocalDate start_date;                // Data Ingresso
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd" )
     private LocalDate end_date;                  // Data Conslusão
 
     private Integer end_year;                    // Ano de evasão
