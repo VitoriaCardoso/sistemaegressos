@@ -41,7 +41,7 @@ class InformacaoProfissionalServiceTest {
         informacaoProfissional = new InformacaoProfissionalModel();
         informacaoProfissional.setId(UUID.randomUUID());
         informacaoProfissional.setCompany_name("Empresa Teste");
-        informacaoProfissional.setInformacao_academica(new HashSet<>(Collections.singletonList(informacaoAcademica)));
+        informacaoProfissional.setInformacao_academica(informacaoAcademica);
 
         informacaoProfissionalDTO = new InformacaoProfissionalDTO();
         informacaoProfissionalDTO.setCompany_name("Empresa Teste");

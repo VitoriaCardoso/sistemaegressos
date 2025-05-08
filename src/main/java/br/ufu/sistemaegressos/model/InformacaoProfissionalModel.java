@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -45,13 +43,9 @@ public class InformacaoProfissionalModel {
 
     private LocalDate end_date;
 
-    @ManyToMany
-    @JoinTable(
-            name = "informacao_academica_profissional",
-            joinColumns = @JoinColumn(name = "id_informacao_profissional"),
-            inverseJoinColumns = @JoinColumn(name = "id_informacao_academica")
-    )
-    private Set<InformacaoAcademicaModel> informacao_academica = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "informacao_academica", referencedColumnName = "id", nullable = false)
+    private InformacaoAcademicaModel informacao_academica;
 
     public UUID getId() {
         return id;
@@ -141,11 +135,11 @@ public class InformacaoProfissionalModel {
         this.end_date = end_date;
     }
 
-    public Set<InformacaoAcademicaModel> getInformacao_academica() {
+    public InformacaoAcademicaModel getInformacao_academica() {
         return informacao_academica;
     }
 
-    public void setInformacao_academica(Set<InformacaoAcademicaModel> informacao_academica) {
+    public void setInformacao_academica(InformacaoAcademicaModel informacao_academica) {
         this.informacao_academica = informacao_academica;
     }
 }

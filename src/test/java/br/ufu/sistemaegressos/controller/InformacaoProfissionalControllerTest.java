@@ -55,7 +55,7 @@ public class InformacaoProfissionalControllerTest {
     @Test
     public void testListarTodos() throws Exception {
         when(informacaoProfissionalService.listarTodos()).thenReturn(Arrays.asList(informacaoProfissional));
-        mockMvc.perform(get("/api/informacao/profissional"))
+        mockMvc.perform(get("/api/informacoes/profissionais"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].company_name").value("Company Test"));
         verify(informacaoProfissionalService, times(1)).listarTodos();
@@ -64,7 +64,7 @@ public class InformacaoProfissionalControllerTest {
     @Test
     public void testListarPorId() throws Exception {
         when(informacaoProfissionalService.listarPeloId(informacaoProfissional.getId())).thenReturn(Optional.of(informacaoProfissional));
-        mockMvc.perform(get("/api/informacao/profissional/editar/" + informacaoProfissional.getId()))
+        mockMvc.perform(get("/api/informacoes/profissionais/editar/" + informacaoProfissional.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.company_name").value("Company Test"));
         verify(informacaoProfissionalService, times(1)).listarPeloId(informacaoProfissional.getId());
@@ -73,7 +73,7 @@ public class InformacaoProfissionalControllerTest {
     @Test
     public void testBuscarPorEgressoCpf() throws Exception {
         when(informacaoProfissionalService.buscarPorEgressoCpf("12345678900")).thenReturn(Arrays.asList(informacaoProfissional));
-        mockMvc.perform(get("/api/informacao/profissional/egresso/12345678900"))
+        mockMvc.perform(get("/api/informacoes/profissionais/egresso/12345678900"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].company_name").value("Company Test"));
         verify(informacaoProfissionalService, times(1)).buscarPorEgressoCpf("12345678900");
@@ -84,7 +84,7 @@ public class InformacaoProfissionalControllerTest {
         InformacaoProfissionalDTO dto = new InformacaoProfissionalDTO();
         dto.setCompany_name("Company Test");
         when(informacaoProfissionalService.criarInformacaoProfissional(any(InformacaoProfissionalDTO.class))).thenReturn(informacaoProfissional);
-        mockMvc.perform(post("/api/informacao/profissional")
+        mockMvc.perform(post("/api/informacoes/profissionais")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isCreated())
@@ -97,7 +97,7 @@ public class InformacaoProfissionalControllerTest {
         InformacaoProfissionalDTO dto = new InformacaoProfissionalDTO();
         dto.setCompany_name("Updated Company");
         when(informacaoProfissionalService.atualizarInformacaoProfissional(eq(informacaoProfissional.getId()), any(InformacaoProfissionalDTO.class))).thenReturn(informacaoProfissional);
-        mockMvc.perform(put("/api/informacao/profissional/" + informacaoProfissional.getId())
+        mockMvc.perform(put("/api/informacoes/profissionais/" + informacaoProfissional.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())
@@ -108,7 +108,7 @@ public class InformacaoProfissionalControllerTest {
     @Test
     public void testExcluirInformacaoProfissional() throws Exception {
         doNothing().when(informacaoProfissionalService).excluirInformacaoProfissional(informacaoProfissional.getId());
-        mockMvc.perform(delete("/api/informacao/profissional/" + informacaoProfissional.getId()))
+        mockMvc.perform(delete("/api/informacoes/profissionais/" + informacaoProfissional.getId()))
                 .andExpect(status().isNoContent());
         verify(informacaoProfissionalService, times(1)).excluirInformacaoProfissional(informacaoProfissional.getId());
     }

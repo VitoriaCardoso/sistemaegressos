@@ -64,9 +64,6 @@ public class InformacaoAcademicaModel {
     private EgressoModel egresso;
 
     @ManyToMany(mappedBy = "informacao_academica")
-    private Set<InformacaoProfissionalModel> informacao_profissional;
-
-    @ManyToMany(mappedBy = "informacao_academica")
     private Set<ComunicadoModel> comunicados;
 
     public UUID getId() {
@@ -179,14 +176,6 @@ public class InformacaoAcademicaModel {
 
     public void setEgresso(EgressoModel egresso) {
         this.egresso = egresso;
-    }
-
-    public Set<InformacaoProfissionalModel> getInformacao_profissional() {
-        return informacao_profissional;
-    }
-
-    public void setInformacao_profissional(Set<InformacaoProfissionalModel> informacao_profissional) {
-        this.informacao_profissional = informacao_profissional;
     }
 
     public Set<ComunicadoModel> getComunicados() {

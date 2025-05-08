@@ -72,7 +72,6 @@ public class ComunicadoService {
             }
 
             for (InformacaoAcademicaModel info : informacoesAcademicas) {
-                info.setInformacao_profissional(null);
                 info.setComunicados(null);
                 comunicado.getInformacao_academica().add(info);
             }

@@ -26,7 +26,7 @@ public class DepoimentoModel {
     @Column(nullable = false, length = 7)
     private String privacidade;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_informacao_academica", referencedColumnName = "id", nullable = false)
     private InformacaoAcademicaModel informacao_academica;
 

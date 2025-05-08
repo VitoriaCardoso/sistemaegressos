@@ -3,6 +3,7 @@ package br.ufu.sistemaegressos.service;
 import br.ufu.sistemaegressos.dto.InformacaoAcademicaDTO;
 import br.ufu.sistemaegressos.model.InformacaoAcademicaModel;
 import br.ufu.sistemaegressos.model.EgressoModel;
+import br.ufu.sistemaegressos.repository.DepoimentoRepository;
 import br.ufu.sistemaegressos.repository.InformacaoAcademicaRepository;
 import br.ufu.sistemaegressos.repository.EgressoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +20,22 @@ public class InformacaoAcademicaService {
 
     private final InformacaoAcademicaRepository informacaoAcademicaRepository;
     private final EgressoRepository egressoRepository;
+    private final DepoimentoRepository depoimentoRepository;
 
     @Autowired
-    public InformacaoAcademicaService(InformacaoAcademicaRepository informacaoAcademicaRepository, EgressoRepository egressoRepository) {
+    public InformacaoAcademicaService(
+            InformacaoAcademicaRepository informacaoAcademicaRepository,
+            EgressoRepository egressoRepository,
+            DepoimentoRepository depoimentoRepository) {
         this.informacaoAcademicaRepository = informacaoAcademicaRepository;
         this.egressoRepository = egressoRepository;
+        this.depoimentoRepository = depoimentoRepository;
     }
 
     public List<InformacaoAcademicaModel> buscarPorEgresso(String cpf) {
         List<InformacaoAcademicaModel> informacaoAcademica = informacaoAcademicaRepository.buscarPorEgresso(cpf);
 
         return informacaoAcademica.stream().map(informacao -> {
-            informacao.setInformacao_profissional(null);
             informacao.setComunicados(null);
             return informacao;
         }).collect(Collectors.toList());
@@ -40,7 +45,6 @@ public class InformacaoAcademicaService {
         List<InformacaoAcademicaModel> informacaoAcademica = informacaoAcademicaRepository.buscarPorInformacaoAcademica(id);
 
         return informacaoAcademica.stream().map(informacao -> {
-            informacao.setInformacao_profissional(null);
             informacao.setComunicados(null);
             return informacao;
         }).collect(Collectors.toList());
@@ -80,5 +84,14 @@ public class InformacaoAcademicaService {
 
     public void excluir(UUID id) {
         informacaoAcademicaRepository.deleteById(id);
+    }
+
+    public List<InformacaoAcademicaModel> buscarInformacoesAcademicasSemDepoimento(String cpf) {
+        List<InformacaoAcademicaModel> informacoesAcademicas = informacaoAcademicaRepository.buscarInformacoesAcademicasSemDepoimento(cpf);
+        return informacoesAcademicas.stream().map(informacao -> {
+            informacao.setComunicados(null);
+            informacao.setEgresso(null);
+            return informacao;
+        }).collect(Collectors.toList());
     }
 }

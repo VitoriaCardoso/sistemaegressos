@@ -62,15 +62,8 @@ CREATE TABLE informacao_profissional (
     function VARCHAR(255),
     salary DECIMAL,
     start_date DATE NOT NULL,
-    end_date DATE
-);
-
-CREATE TABLE informacao_academica_profissional (
-    id_informacao_profissional UUID NOT NULL,
-    id_informacao_academica UUID NOT NULL,
-    PRIMARY KEY (id_informacao_profissional, id_informacao_academica),
-    FOREIGN KEY (id_informacao_profissional) REFERENCES informacao_profissional (id),
-    FOREIGN KEY (id_informacao_academica) REFERENCES informacao_academica (id)
+    end_date DATE,
+    informacao_academica UUID NOT NULL
 );
 
 CREATE TABLE comunicado (
@@ -96,7 +89,7 @@ CREATE TABLE publicacao (
     titulo VARCHAR(255) NOT NULL,
     autores VARCHAR(255) NOT NULL,
     ano_publicacao INTEGER NOT NULL,
-    veiculo VARCHAR(45) NOT NULL,
+    veiculo VARCHAR(255) NOT NULL,
     url_publicacao VARCHAR(255) NOT NULL,
     id_informacao_academica UUID NOT NULL,
     FOREIGN KEY (id_informacao_academica) REFERENCES informacao_academica (id)

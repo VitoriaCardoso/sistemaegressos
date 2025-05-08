@@ -31,8 +31,8 @@ public class PublicacaoService {
 
         return publicacoes.stream().map(publicacao -> {
             InformacaoAcademicaModel informacaoAcademica = publicacao.getInformacao_academica();
-            informacaoAcademica.setInformacao_profissional(null);
             informacaoAcademica.setComunicados(null);
+            informacaoAcademica.setEgresso(null);
             return publicacao;
         }).collect(Collectors.toList());
     }
@@ -48,7 +48,6 @@ public class PublicacaoService {
         publicacao = publicacaoRepository.save(publicacao);
 
         informacaoAcademica = publicacao.getInformacao_academica();
-        informacaoAcademica.setInformacao_profissional(null);
         informacaoAcademica.setComunicados(null);
 
         return publicacao;

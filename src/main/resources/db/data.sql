@@ -164,11 +164,144 @@ INSERT INTO informacao_academica (id, matricula, institution_name, institution_t
 (uuid_generate_v4(),'11111BCC140', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Ciência da Computação: Bacharelado - Integral', 'Bacharelado', 'Santa Mônica', '1452BI', '2016-07-19', '2024-04-25', '2023', '1° Semestre', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-78'),
 (uuid_generate_v4(),'11111BCC141', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Ciência da Computação: Bacharelado - Integral', 'Bacharelado', 'Santa Mônica', '1452BI', '2018-09-10', '2024-05-09', '2023', '2° Semestre', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-79'),
 (uuid_generate_v4(),'11111BCC142', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Ciência da Computação: Bacharelado - Integral', 'Bacharelado', 'Santa Mônica', '1452BI', '2017-08-11', '2023-12-04', '2023', '2° Semestre', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-80'),
-(uuid_generate_v4(),'11111BCC143', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Ciência da Computação: Bacharelado - Integral', 'Bacharelado', 'Santa Mônica', '1452BI', '2019-08-07', '2024-04-25', '2023', '1° Semestre', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-81');
-
+(uuid_generate_v4(),'11111BCC143', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Ciência da Computação: Bacharelado - Integral', 'Bacharelado', 'Santa Mônica', '1452BI', '2019-08-07', '2024-04-25', '2023', '1° Semestre', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-81'),
+(uuid_generate_v4(),'11221MEV112', 'Universidade Federal de Uberlandia', 'Instituição Pública', 'Graduação em Medicina Veterinária: Bacharelado - Integral', 'Bacharelado', 'Glória', NULL, '2012-03-22', '2017-04-25', '2017', '1° Semestre', 'Uberlândia', 'Minas Gerais', 'Brasil', '123.456.789-14');
 
 INSERT INTO informacao_profissional (id, company_name, category, job_type, location, job_title,
-	job_level, function, salary, start_date, end_date) VALUES
-(uuid_generate_v4(), 'Tech Solutions', 'TI', 'CLT', 'São Paulo - SP', 'Desenvolvedor Backend','Pleno', 'Desenvolvimento de APIs e microsserviços', 7000.00, '2024-02-01', NULL),
-(uuid_generate_v4(), 'Inova Digital', 'TI', 'PJ', 'Belo Horizonte - MG', 'Analista de Sistemas','Sênior', 'Análise de requisitos e modelagem', 9500.00, '2023-10-01', '2024-04-01'),
-(uuid_generate_v4(), 'CloudTech', 'TI', 'CLT', 'Uberlândia - MG', 'Engenheiro de Software','Júnior', 'Desenvolvimento de soluções em nuvem', 6200.00, '2022-06-01', NULL);
+    job_level, function, salary, start_date, end_date, informacao_academica)
+SELECT
+    uuid_generate_v4(), 'Tech Solutions', 'TI', 'CLT', 'São Paulo - SP', 'Desenvolvedor Backend',
+    'Pleno', 'Desenvolvimento de APIs e microsserviços', 7000.00, '2024-02-01', NULL, ia.id
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Santa Mônica';
+
+INSERT INTO informacao_profissional (id, company_name, category, job_type, location, job_title,
+    job_level, function, salary, start_date, end_date, informacao_academica)
+SELECT
+    uuid_generate_v4(), 'Inova Digital', 'TI', 'PJ', 'Belo Horizonte - MG', 'Analista de Sistemas',
+    'Sênior', 'Análise de requisitos e modelagem', 9500.00, '2023-10-01', '2024-04-01', ia.id
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Santa Mônica';
+
+INSERT INTO informacao_profissional (id, company_name, category, job_type, location, job_title,
+    job_level, function, salary, start_date, end_date, informacao_academica)
+SELECT
+    uuid_generate_v4(), 'CloudTech', 'TI', 'CLT', 'Uberlândia - MG', 'Engenheiro de Software',
+    'Júnior', 'Desenvolvimento de soluções em nuvem', 6200.00, '2022-06-01', NULL, ia.id
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Santa Mônica';
+
+INSERT INTO informacao_profissional (
+    id, company_name, category, job_type, location, job_title,
+    job_level, function, salary, start_date, end_date, informacao_academica
+)
+SELECT
+    uuid_generate_v4(), 'Clínica Vida Animal', 'Privada', 'Tempo Integral', 'Presencial', 'Médico Veterinário',
+    'Pleno', 'Atendimento clínico de animais de pequeno porte', 7200.00, '2019-03-15', '2022-05-15', ia.id
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Glória';
+
+
+INSERT INTO depoimento (
+    id,
+    id_informacao_academica,
+    texto_depoimento,
+    data_cadastro,
+    privacidade
+)
+SELECT
+    uuid_generate_v4(),
+    ia.id,
+    'Estudar Medicina Veterinária na UFU foi uma experiência transformadora. Desde o primeiro semestre, fui desafiado por professores extremamente capacitados e apaixonados pelo que fazem. A estrutura do Campus Glória contribuiu muito para a minha formação prática — especialmente com os laboratórios e o hospital veterinário, que me proporcionaram contato direto com os animais e situações reais da profissão. Além disso, pude participar de projetos de extensão e pesquisa que abriram portas no mercado de trabalho e ampliaram minha visão sobre o papel social do veterinário.',
+    CURRENT_DATE,
+    'Público'
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Glória';
+
+INSERT INTO depoimento (
+    id,
+    id_informacao_academica,
+    texto_depoimento,
+    data_cadastro,
+    privacidade
+)
+SELECT
+    uuid_generate_v4(),
+    ia.id,
+    'Apesar de ser uma universidade federal de renome, tive uma experiência abaixo do esperado no curso de Sistemas de Informação da UFU. Muitos professores não tinham didática e alguns conteúdos estavam defasados em relação ao que o mercado exige. Além disso, faltava incentivo à prática e projetos reais. Saí com a sensação de que poderia ter aprendido mais em menos tempo em outra instituição ou até por conta própria.',
+    CURRENT_DATE,
+    'Público'
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Santa Mônica';
+
+
+INSERT INTO publicacao (
+    id, titulo, autores, ano_publicacao, veiculo, url_publicacao, id_informacao_academica
+)
+SELECT
+    uuid_generate_v4(),
+    'Diagnóstico e Tratamento de Zoonoses Raras',
+    'Sandro Vieira, Carlos Silva',
+    2020,
+    'Revista Brasileira de Medicina Veterinária',
+    'https://revbrasmedvet.com.br/artigo-zoonoses',
+    ia.id
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Glória';
+
+INSERT INTO publicacao (
+    id, titulo, autores, ano_publicacao, veiculo, url_publicacao, id_informacao_academica
+)
+SELECT
+    uuid_generate_v4(),
+    'Impacto da Nutrição em Bovinos de Corte',
+    'Fernanda Costa, Sandro Vieira',
+    2022,
+    'Zootecnia Atual',
+    'https://zootecniaatual.com.br/nutricao-bovinos',
+    ia.id
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Glória';
+
+INSERT INTO publicacao (
+    id, titulo, autores, ano_publicacao, veiculo, url_publicacao, id_informacao_academica
+)
+SELECT
+    uuid_generate_v4(),
+    'Uso de Terapias Alternativas em Animais Domésticos',
+    'Maria Eduarda Ribeiro, Rafael Lima, Sandro Vieira',
+    2021,
+    'Ciência Animal',
+    'https://cienciaanimal.com.br/terapias-alternativas',
+    ia.id
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Glória';
+
+INSERT INTO publicacao (
+    id, titulo, autores, ano_publicacao, veiculo, url_publicacao, id_informacao_academica
+)
+SELECT
+    uuid_generate_v4(),
+    'Análise de Algoritmos de Machine Learning para Diagnóstico Médico',
+    'Sandro Vieira',
+    2023,
+    'Simpósio Brasileiro de Computação Aplicada à Saúde',
+    'https://sbcas.org.br/ml-diagnostico-medico',
+    ia.id
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Santa Mônica';
+
+INSERT INTO publicacao (
+    id, titulo, autores, ano_publicacao, veiculo, url_publicacao, id_informacao_academica
+)
+SELECT
+    uuid_generate_v4(),
+    'Desafios na Implementação de Microserviços em Startups',
+    'Bruno Figueiredo, Carla Nunes',
+    2025,
+    'Revista de Engenharia de Software',
+    'https://resoft.org/microservicos-startups',
+    ia.id
+FROM informacao_academica ia
+WHERE ia.egresso_cpf = '123.456.789-14' AND ia.campus = 'Santa Mônica';
+

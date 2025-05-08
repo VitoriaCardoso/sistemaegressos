@@ -89,7 +89,6 @@ public class DepoimentoService {
             }
 
             if (adicionar) {
-                infoAcademica.setInformacao_profissional(null);
                 infoAcademica.setComunicados(null);
                 resultado.add(depoimento);
             }
@@ -103,7 +102,6 @@ public class DepoimentoService {
         if (depoimento.isPresent()) {
             InformacaoAcademicaModel informacaoAcademica = depoimento.get().getInformacaoAcademica();
             if (informacaoAcademica != null) {
-                informacaoAcademica.setInformacao_profissional(null);
                 informacaoAcademica.setComunicados(null);
             }
         }
@@ -118,7 +116,6 @@ public class DepoimentoService {
         if (informacaoAcademica.isPresent()) {
             depoimento.setInformacaoAcademica(informacaoAcademica.get());
             depoimento.getInformacaoAcademica().setComunicados(null);
-            depoimento.getInformacaoAcademica().setInformacao_profissional(null);
         } else {
             throw new RuntimeException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());
         }
@@ -131,7 +128,9 @@ public class DepoimentoService {
         List<DepoimentoModel> depoimentos = depoimentoRepository.buscarPorEgresso(cpf);
 
         return depoimentos.stream().map(depoimento -> {
-            depoimento.setInformacaoAcademica(null);
+            InformacaoAcademicaModel informacaoAcademica = depoimento.getInformacaoAcademica();
+            informacaoAcademica.setEgresso(null);
+            informacaoAcademica.setComunicados(null);
             return depoimento;
         }).collect(Collectors.toList());
     }
@@ -158,7 +157,6 @@ public class DepoimentoService {
             if (infoAcademicaOptional.isPresent()) {
                 InformacaoAcademicaModel info = infoAcademicaOptional.get();
                 info.setComunicados(null);
-                info.setInformacao_profissional(null);
                 depoimentoExistente.setInformacaoAcademica(info);
             } else {
                 throw new RuntimeException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());

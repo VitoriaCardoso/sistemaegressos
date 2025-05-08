@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -30,11 +29,8 @@ public class InformacaoProfissionalService {
     public List<InformacaoProfissionalModel> listarTodos() {
         List<InformacaoProfissionalModel> informacoesProfissionais = informacaoProfissionalRepository.findAll();
         for (InformacaoProfissionalModel informacaoProfissional : informacoesProfissionais) {
-            Set<InformacaoAcademicaModel> informacoesAcademicas = informacaoProfissional.getInformacao_academica();
-            for (InformacaoAcademicaModel informacaoAcademica : informacoesAcademicas) {
-                informacaoAcademica.setInformacao_profissional(null);
+            InformacaoAcademicaModel informacaoAcademica = informacaoProfissional.getInformacao_academica();
                 informacaoAcademica.setComunicados(null);
-            }
         }
         return informacoesProfissionais;
     }
@@ -42,11 +38,8 @@ public class InformacaoProfissionalService {
     public Optional<InformacaoProfissionalModel> listarPeloId(UUID id) {
         Optional<InformacaoProfissionalModel> informacaoProfissional = informacaoProfissionalRepository.findById(id);
         if (informacaoProfissional.isPresent()) {
-            Set<InformacaoAcademicaModel> informacoesAcademicas = informacaoProfissional.get().getInformacao_academica();
-            for (InformacaoAcademicaModel informacaoAcademica : informacoesAcademicas) {
-                informacaoAcademica.setInformacao_profissional(null);
+            InformacaoAcademicaModel informacaoAcademica = informacaoProfissional.get().getInformacao_academica();
                 informacaoAcademica.setComunicados(null);
-            }
         }
         return informacaoProfissional;
     }
@@ -55,12 +48,8 @@ public class InformacaoProfissionalService {
         List<InformacaoProfissionalModel> informacaoProfissional = informacaoProfissionalRepository.buscarPorEgresso(cpf);
 
         return informacaoProfissional.stream().map(informacao -> {
-            Set<InformacaoAcademicaModel> informacoesAcademicas = informacao.getInformacao_academica();
-            informacoesAcademicas.stream().map(informacaoAcademica -> {
-                informacaoAcademica.setInformacao_profissional(null);
+            InformacaoAcademicaModel informacaoAcademica = informacao.getInformacao_academica();
                 informacaoAcademica.setComunicados(null);
-                return informacaoAcademica;
-            }).collect(Collectors.toList());
             return informacao;
         }).collect(Collectors.toList());
     }
@@ -74,16 +63,9 @@ public class InformacaoProfissionalService {
                 .findById(dto.getId())
                 .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId()));
 
-        informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
+        informacaoProfissional.setInformacao_academica(informacaoAcademica);
 
         informacaoProfissional = informacaoProfissionalRepository.save(informacaoProfissional);
-
-        Set<InformacaoAcademicaModel> informacoesAcademicas = informacaoProfissional.getInformacao_academica();
-        informacoesAcademicas.stream().map(informacao -> {
-            informacao.setInformacao_profissional(null);
-            informacao.setComunicados(null);
-            return informacao;
-        }).collect(Collectors.toList());
 
         return informacaoProfissional;
     }
@@ -103,7 +85,6 @@ public class InformacaoProfissionalService {
         Optional.ofNullable(dto.getSalary()).ifPresent(informacaoProfissional::setSalary);
         Optional.ofNullable(dto.getStart_date()).ifPresent(informacaoProfissional::setStart_date);
         Optional.ofNullable(dto.getEnd_date()).ifPresent(informacaoProfissional::setEnd_date);
-        //BeanUtils.copyProperties(dto, informacaoProfissional);
         BeanUtils.copyProperties(dto, informacaoProfissional, "id");
 
         Optional.ofNullable(dto.getId()).ifPresent(idInfoAcademica -> {
@@ -111,8 +92,7 @@ public class InformacaoProfissionalService {
                     .findById(idInfoAcademica)
                     .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + idInfoAcademica));
 
-            informacaoProfissional.getInformacao_academica().clear();
-            informacaoProfissional.getInformacao_academica().add(informacaoAcademica);
+            informacaoProfissional.setInformacao_academica(informacaoAcademica);
         });
 
         return informacaoProfissionalRepository.save(informacaoProfissional);

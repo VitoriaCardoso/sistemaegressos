@@ -49,4 +49,9 @@ public class InformacaoAcademicaController {
     public void excluirInformacaoAcademica(@PathVariable UUID id) {
         informacaoAcademicaService.excluir(id);
     }
+
+    @GetMapping("/sem-depoimento")
+    public List<InformacaoAcademicaModel> buscarInformacoesAcademicasSemDepoimento(@RequestParam String cpf) {
+        return informacaoAcademicaService.buscarInformacoesAcademicasSemDepoimento(cpf);
+    }
 }

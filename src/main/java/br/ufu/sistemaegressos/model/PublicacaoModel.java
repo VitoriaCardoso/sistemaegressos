@@ -24,7 +24,7 @@ public class PublicacaoModel {
     @Column(nullable = false)
     private Integer ano_publicacao;
 
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false, length = 255)
     private String veiculo;
 
     @Column(nullable = false, length = 255)

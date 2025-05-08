@@ -43,5 +43,15 @@ public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoA
     List<Object[]> contarEstudantesPorTitulacao();
 
     @Query("SELECT ia FROM InformacaoAcademicaModel ia WHERE ia.id = :id")
-    List<InformacaoAcademicaModel> buscarPorInformacaoAcademica(@Param("id")UUID id);
+    List<InformacaoAcademicaModel> buscarPorInformacaoAcademica(@Param("id") UUID id);
+
+    @Query("""
+                SELECT ia FROM InformacaoAcademicaModel ia
+                WHERE ia.egresso.cpf = :cpf
+                  AND ia.matricula IS NOT NULL
+                  AND ia.id NOT IN (
+                      SELECT d.informacao_academica.id FROM DepoimentoModel d
+                  )
+            """)
+    List<InformacaoAcademicaModel> buscarInformacoesAcademicasSemDepoimento(@Param("cpf") String cpf);
 }
