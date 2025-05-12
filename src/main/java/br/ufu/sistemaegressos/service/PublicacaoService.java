@@ -53,6 +53,21 @@ public class PublicacaoService {
         return publicacao;
     }
 
+    public PublicacaoModel buscarPorId(UUID id) {
+        Optional<PublicacaoModel> optional = publicacaoRepository.findById(id);
+        if (optional.isPresent()) {
+            PublicacaoModel pub = optional.get();
+            if (pub.getInformacao_academica() != null) {
+                pub.getInformacao_academica().setComunicados(null);
+                pub.getInformacao_academica().setEgresso(null);
+            }
+            return pub;
+        } else {
+            throw new RuntimeException("Publicação não encontrada");
+        }
+    }
+
+
     public PublicacaoModel atualizar(UUID id, PublicacaoDTO publicacaoDTO) {
         Optional<PublicacaoModel> optionalPublicacao = publicacaoRepository.findById(id);
         if (optionalPublicacao.isPresent()) {
