@@ -1,6 +1,7 @@
 package br.ufu.sistemaegressos.service;
 
 import br.ufu.sistemaegressos.dto.PublicacaoDTO;
+import br.ufu.sistemaegressos.exceptions.ResourceNotFoundException;
 import br.ufu.sistemaegressos.model.PublicacaoModel;
 import br.ufu.sistemaegressos.model.InformacaoAcademicaModel;
 import br.ufu.sistemaegressos.repository.PublicacaoRepository;
@@ -29,18 +30,21 @@ public class PublicacaoService {
     public List<PublicacaoModel> buscarPorEgresso(String cpf) {
         List<PublicacaoModel> publicacoes = publicacaoRepository.buscarPublicacaoPorEgresso(cpf);
 
-        return publicacoes.stream().map(publicacao -> {
+        if (publicacoes.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhuma publicação encontrada para o CPF: " + cpf);
+        }
+
+        return publicacoes.stream().peek(publicacao -> {
             InformacaoAcademicaModel informacaoAcademica = publicacao.getInformacao_academica();
             informacaoAcademica.setComunicados(null);
             informacaoAcademica.setEgresso(null);
-            return publicacao;
         }).collect(Collectors.toList());
     }
 
     public PublicacaoModel criar(PublicacaoDTO publicacaoDTO) {
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
                 .findById(publicacaoDTO.getId_informacao_academica())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Informação acadêmica não encontrada para o ID: " + publicacaoDTO.getId_informacao_academica()));
 
         PublicacaoModel publicacao = new PublicacaoModel();
         BeanUtils.copyProperties(publicacaoDTO, publicacao);
@@ -65,16 +69,21 @@ public class PublicacaoService {
             Optional.ofNullable(publicacaoDTO.getUrl_publicacao()).ifPresent(publicacao::setUrl_publicacao);
 
             Optional.ofNullable(publicacaoDTO.getId_informacao_academica()).ifPresent(idInfo -> {
-                Optional<InformacaoAcademicaModel> info = informacaoAcademicaRepository.findById(idInfo);
-                info.ifPresent(publicacao::setInformacao_academica);
+                InformacaoAcademicaModel info = informacaoAcademicaRepository.findById(idInfo)
+                        .orElseThrow(() -> new ResourceNotFoundException("Informação acadêmica não encontrada para o ID: " + idInfo));
+                publicacao.setInformacao_academica(info);
             });
 
             return publicacaoRepository.save(publicacao);
+        } else {
+            throw new ResourceNotFoundException("Publicação não encontrada para o ID: " + id);
         }
-        return null;
     }
 
     public void excluir(UUID id) {
+        if (!publicacaoRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Publicação não encontrada para exclusão com o ID: " + id);
+        }
         publicacaoRepository.deleteById(id);
     }
 }

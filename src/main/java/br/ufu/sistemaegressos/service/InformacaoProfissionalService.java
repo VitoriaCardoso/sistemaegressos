@@ -1,6 +1,7 @@
 package br.ufu.sistemaegressos.service;
 
 import br.ufu.sistemaegressos.dto.InformacaoProfissionalDTO;
+import br.ufu.sistemaegressos.exceptions.ResourceNotFoundException;
 import br.ufu.sistemaegressos.model.*;
 import br.ufu.sistemaegressos.repository.*;
 import org.springframework.beans.BeanUtils;
@@ -28,9 +29,14 @@ public class InformacaoProfissionalService {
 
     public List<InformacaoProfissionalModel> listarTodos() {
         List<InformacaoProfissionalModel> informacoesProfissionais = informacaoProfissionalRepository.findAll();
+
+        if (informacoesProfissionais.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhuma informação profissional encontrada.");
+        }
+
         for (InformacaoProfissionalModel informacaoProfissional : informacoesProfissionais) {
             InformacaoAcademicaModel informacaoAcademica = informacaoProfissional.getInformacao_academica();
-                informacaoAcademica.setComunicados(null);
+            informacaoAcademica.setComunicados(null);
         }
         return informacoesProfissionais;
     }
@@ -39,18 +45,23 @@ public class InformacaoProfissionalService {
         Optional<InformacaoProfissionalModel> informacaoProfissional = informacaoProfissionalRepository.findById(id);
         if (informacaoProfissional.isPresent()) {
             InformacaoAcademicaModel informacaoAcademica = informacaoProfissional.get().getInformacao_academica();
-                informacaoAcademica.setComunicados(null);
+            informacaoAcademica.setComunicados(null);
+            return informacaoProfissional;
+        } else {
+            throw new ResourceNotFoundException("Informação profissional não encontrada para o ID: " + id);
         }
-        return informacaoProfissional;
     }
 
     public List<InformacaoProfissionalModel> buscarPorEgressoCpf(String cpf) {
         List<InformacaoProfissionalModel> informacaoProfissional = informacaoProfissionalRepository.buscarPorEgresso(cpf);
 
-        return informacaoProfissional.stream().map(informacao -> {
+        if (informacaoProfissional.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhuma informação profissional encontrada para o CPF: " + cpf);
+        }
+
+        return informacaoProfissional.stream().peek(informacao -> {
             InformacaoAcademicaModel informacaoAcademica = informacao.getInformacao_academica();
-                informacaoAcademica.setComunicados(null);
-            return informacao;
+            informacaoAcademica.setComunicados(null);
         }).collect(Collectors.toList());
     }
 
@@ -61,7 +72,7 @@ public class InformacaoProfissionalService {
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
                 .findById(dto.getId())
-                .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + dto.getId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Informação acadêmica não encontrada para o ID: " + dto.getId()));
 
         informacaoProfissional.setInformacao_academica(informacaoAcademica);
 
@@ -73,7 +84,7 @@ public class InformacaoProfissionalService {
     public InformacaoProfissionalModel atualizarInformacaoProfissional(UUID id, InformacaoProfissionalDTO dto) {
         InformacaoProfissionalModel informacaoProfissional = informacaoProfissionalRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Informação profissional não encontrada para o ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Informação profissional não encontrada para o ID: " + id));
 
         Optional.ofNullable(dto.getCompany_name()).ifPresent(informacaoProfissional::setCompany_name);
         Optional.ofNullable(dto.getCategory()).ifPresent(informacaoProfissional::setCategory);
@@ -90,7 +101,7 @@ public class InformacaoProfissionalService {
         Optional.ofNullable(dto.getId()).ifPresent(idInfoAcademica -> {
             InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
                     .findById(idInfoAcademica)
-                    .orElseThrow(() -> new RuntimeException("Informação acadêmica não encontrada para o ID: " + idInfoAcademica));
+                    .orElseThrow(() -> new ResourceNotFoundException("Informação acadêmica não encontrada para o ID: " + idInfoAcademica));
 
             informacaoProfissional.setInformacao_academica(informacaoAcademica);
         });
@@ -100,6 +111,9 @@ public class InformacaoProfissionalService {
 
 
     public void excluirInformacaoProfissional(UUID id) {
+        if (!informacaoProfissionalRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Informação profissional não encontrada para exclusão com o ID: " + id);
+        }
         informacaoProfissionalRepository.deleteById(id);
     }
 }

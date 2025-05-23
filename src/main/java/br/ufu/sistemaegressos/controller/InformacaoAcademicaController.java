@@ -50,8 +50,8 @@ public class InformacaoAcademicaController {
         informacaoAcademicaService.excluir(id);
     }
 
-    @GetMapping("/sem-depoimento")
-    public List<InformacaoAcademicaModel> buscarInformacoesAcademicasSemDepoimento(@RequestParam String cpf) {
+    @GetMapping("/sem-depoimento/{cpf}")
+    public List<InformacaoAcademicaModel> buscarInformacoesAcademicasSemDepoimento(@PathVariable String cpf) {
         return informacaoAcademicaService.buscarInformacoesAcademicasSemDepoimento(cpf);
     }
 }

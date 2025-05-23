@@ -1,6 +1,7 @@
 package br.ufu.sistemaegressos.service;
 
 import br.ufu.sistemaegressos.dto.DepoimentoDTO;
+import br.ufu.sistemaegressos.exceptions.ResourceNotFoundException;
 import br.ufu.sistemaegressos.model.DepoimentoModel;
 import br.ufu.sistemaegressos.model.InformacaoAcademicaModel;
 import br.ufu.sistemaegressos.repository.DepoimentoRepository;
@@ -27,6 +28,11 @@ public class DepoimentoService {
 
     public List<DepoimentoModel> listarTodos(String campus, String semestreLetivo, String curso, String titulacao) {
         List<DepoimentoModel> depoimentos = depoimentoRepository.findAll();
+
+        if (depoimentos.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum depoimento encontrado.");
+        }
+
         List<DepoimentoModel> resultado = new ArrayList<>();
 
         // Buscar total de estudantes agrupados por curso e campus
@@ -93,6 +99,11 @@ public class DepoimentoService {
                 resultado.add(depoimento);
             }
         }
+
+        if (resultado.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum depoimento encontrado com os filtros aplicados.");
+        }
+
         return resultado;
     }
 
@@ -104,11 +115,13 @@ public class DepoimentoService {
             if (informacaoAcademica != null) {
                 informacaoAcademica.setComunicados(null);
             }
+        } else {
+            throw new ResourceNotFoundException("Depoimento não encontrado com o id: " + id);
         }
         return depoimento;
     }
 
-    public DepoimentoModel criarDepoimento(DepoimentoDTO depoimentoDTO){
+    public DepoimentoModel criarDepoimento(DepoimentoDTO depoimentoDTO) {
         DepoimentoModel depoimento = new DepoimentoModel();
         BeanUtils.copyProperties(depoimentoDTO, depoimento);
         depoimento.setData_cadastro(LocalDate.now());
@@ -117,21 +130,29 @@ public class DepoimentoService {
             depoimento.setInformacaoAcademica(informacaoAcademica.get());
             depoimento.getInformacaoAcademica().setComunicados(null);
         } else {
-            throw new RuntimeException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());
+            throw new ResourceNotFoundException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());
         }
         return depoimentoRepository.save(depoimento);
     }
 
-    public void excluir(UUID id){ depoimentoRepository.deleteById(id);}
+    public void excluir(UUID id) {
+        if (!depoimentoRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Depoimento não encontrado para exclusão com o id: " + id);
+        }
+        depoimentoRepository.deleteById(id);
+    }
 
     public List<DepoimentoModel> listarPorCpfEgresso(String cpf) {
         List<DepoimentoModel> depoimentos = depoimentoRepository.buscarPorEgresso(cpf);
 
-        return depoimentos.stream().map(depoimento -> {
+        if (depoimentos.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum depoimento encontrado para o CPF informado.");
+        }
+
+        return depoimentos.stream().peek(depoimento -> {
             InformacaoAcademicaModel informacaoAcademica = depoimento.getInformacaoAcademica();
             informacaoAcademica.setEgresso(null);
             informacaoAcademica.setComunicados(null);
-            return depoimento;
         }).collect(Collectors.toList());
     }
 
@@ -139,7 +160,7 @@ public class DepoimentoService {
         Optional<DepoimentoModel> depoimentoOptional = depoimentoRepository.findById(id);
 
         if (depoimentoOptional.isEmpty()) {
-            throw new RuntimeException("Depoimento não encontrado com o id: " + id);
+            throw new ResourceNotFoundException("Depoimento não encontrado com o id: " + id);
         }
 
         DepoimentoModel depoimentoExistente = depoimentoOptional.get();
@@ -159,7 +180,7 @@ public class DepoimentoService {
                 info.setComunicados(null);
                 depoimentoExistente.setInformacaoAcademica(info);
             } else {
-                throw new RuntimeException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());
+                throw new ResourceNotFoundException("Informação acadêmica não encontrada para o ID: " + depoimentoDTO.getId_informacao_academica());
             }
         }
         return depoimentoRepository.save(depoimentoExistente);
