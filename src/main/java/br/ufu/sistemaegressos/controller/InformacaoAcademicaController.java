@@ -1,5 +1,6 @@
 package br.ufu.sistemaegressos.controller;
 
+import br.ufu.sistemaegressos.dto.CursoNameDTO;
 import br.ufu.sistemaegressos.dto.InformacaoAcademicaDTO;
 import br.ufu.sistemaegressos.model.InformacaoAcademicaModel;
 import br.ufu.sistemaegressos.service.InformacaoAcademicaService;
@@ -25,6 +26,11 @@ public class InformacaoAcademicaController {
     @GetMapping("/egresso/{cpf}")
     public List<InformacaoAcademicaModel> buscarPorEgresso(@PathVariable String cpf) {
         return informacaoAcademicaService.buscarPorEgresso(cpf);
+    }
+
+    @GetMapping("/cursos/{cpf}")
+    public List<CursoNameDTO> buscarCursosPorCpf(@PathVariable String cpf) {
+        return informacaoAcademicaService.buscarCursosPorCpf(cpf);
     }
 
     @GetMapping("/editar/{id}")

@@ -1,5 +1,6 @@
 package br.ufu.sistemaegressos.repository;
 
+import br.ufu.sistemaegressos.dto.CursoNameDTO;
 import br.ufu.sistemaegressos.model.InformacaoAcademicaModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +15,9 @@ public interface InformacaoAcademicaRepository extends JpaRepository<InformacaoA
 
     @Query("SELECT ia FROM InformacaoAcademicaModel ia WHERE ia.egresso.cpf = :cpf")
     List<InformacaoAcademicaModel> buscarPorEgresso(String cpf);
+
+    @Query("SELECT new br.ufu.sistemaegressos.dto.CursoNameDTO(ia.course_name, ia.id) FROM InformacaoAcademicaModel ia WHERE ia.egresso.cpf = :cpf")
+    List<CursoNameDTO> buscarCursoPorCPF(@Param("cpf") String cpf);
 
     @Query("SELECT i FROM InformacaoAcademicaModel i WHERE i.course_name = :courseName")
     List<InformacaoAcademicaModel> buscarPorNomeCurso(String courseName);
