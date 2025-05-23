@@ -67,7 +67,7 @@ public class PublicacaoService {
             }
             return pub;
         } else {
-            throw new RuntimeException("Publicação não encontrada");
+            throw new ResourceNotFoundException("Publicação não encontrada para o ID: " + id);
         }
     }
 
