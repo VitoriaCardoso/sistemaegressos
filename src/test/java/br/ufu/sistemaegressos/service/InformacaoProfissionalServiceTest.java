@@ -45,7 +45,7 @@ class InformacaoProfissionalServiceTest {
 
         informacaoProfissionalDTO = new InformacaoProfissionalDTO();
         informacaoProfissionalDTO.setCompany_name("Empresa Teste");
-        informacaoProfissionalDTO.setId(informacaoAcademica.getId());
+        informacaoProfissionalDTO.setInformacao_academica(informacaoAcademica.getId());
     }
 
     @Test
@@ -77,7 +77,7 @@ class InformacaoProfissionalServiceTest {
 
     @Test
     void testCriarInformacaoProfissional() {
-        when(informacaoAcademicaRepository.findById(informacaoProfissionalDTO.getId())).thenReturn(Optional.of(informacaoAcademica));
+        when(informacaoAcademicaRepository.findById(informacaoProfissionalDTO.getInformacao_academica())).thenReturn(Optional.of(informacaoAcademica));
         when(informacaoProfissionalRepository.save(any(InformacaoProfissionalModel.class))).thenReturn(informacaoProfissional);
         InformacaoProfissionalModel result = informacaoProfissionalService.criarInformacaoProfissional(informacaoProfissionalDTO);
         assertNotNull(result);
@@ -87,7 +87,7 @@ class InformacaoProfissionalServiceTest {
 
     @Test
     void testAtualizarInformacaoProfissional() {
-        when(informacaoAcademicaRepository.findById(informacaoProfissionalDTO.getId()))
+        when(informacaoAcademicaRepository.findById(informacaoProfissionalDTO.getInformacao_academica()))
                 .thenReturn(Optional.of(informacaoAcademica));
 
         when(informacaoProfissionalRepository.findById(informacaoProfissional.getId()))

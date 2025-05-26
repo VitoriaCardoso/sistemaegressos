@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface PublicacaoRepository extends JpaRepository<PublicacaoModel, UUID> {
     @Query("SELECT p FROM PublicacaoModel p WHERE p.informacao_academica.egresso.cpf = :cpf")
     List<PublicacaoModel> buscarPublicacaoPorEgresso(String cpf);
+
 }

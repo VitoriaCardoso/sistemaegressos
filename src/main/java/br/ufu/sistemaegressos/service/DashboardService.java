@@ -19,6 +19,9 @@ public class DashboardService{
     private DepoimentoService depoimentoService;
 
     @Autowired
+    private DepoimentoRepository depoimentoRepository;
+
+    @Autowired
     private PublicacaoRepository publicacaoRepository;
 
     @Autowired
@@ -26,6 +29,25 @@ public class DashboardService{
 
     @Autowired
     private InformacaoAcademicaRepository informacaoAcademicaRepository;
+
+    @Autowired
+    private DashboardRepository dashboardRepository;
+
+    public List<EgressoDepoimentoDTO> listarDepoimentos() {
+        return depoimentoRepository.buscarDepoimentos();
+    }
+
+    public List<StatusEstudanteDTO> buscarStatusEstudantesComTotal() {
+        return dashboardRepository.buscarStatusEstudantesComTotal();
+    }
+
+    public List<StatusEstudanteDTO> buscarNivelEstudantes() {
+        return dashboardRepository.buscarLevelEstudantesComTotal();
+    }
+
+    public List<StatusEstudanteDTO> buscarCampusEstudantes() {
+        return dashboardRepository.buscarCampusEstudantesComTotal();
+    }
 
     public EstatisticasDTO buscarEstatisticas(String campus, String semestreLetivo, String curso, String titulacao) {
         long totalEgressos = egressoRepository.count();
@@ -40,6 +62,15 @@ public class DashboardService{
 
     public Long buscarTotalEstudantesInativos() {
         return informacaoAcademicaRepository.contarEstudantesInativos();
+    }
+
+    public List<CursoCampusTitulacaoDTO> buscarTotalPorCursoCampusTitulacao(
+            String campus,
+            String semestre,
+            String titulacao,
+            String curso
+    ) {
+        return dashboardRepository.buscarTotalPorCursoCampusTitulacao(campus, semestre, titulacao, curso);
     }
 
     public Map<String, Long> buscarTotalPorCampus() {

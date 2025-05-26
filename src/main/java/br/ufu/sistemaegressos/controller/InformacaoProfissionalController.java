@@ -43,6 +43,7 @@ public class InformacaoProfissionalController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public InformacaoProfissionalModel criarInformacaoProfissional(@RequestBody InformacaoProfissionalDTO dto) {
+        System.out.println("Recebido: " + dto);
         return informacaoProfissionalService.criarInformacaoProfissional(dto);
     }
 
