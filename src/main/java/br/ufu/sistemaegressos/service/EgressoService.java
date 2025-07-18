@@ -2,6 +2,7 @@ package br.ufu.sistemaegressos.service;
 
 import br.ufu.sistemaegressos.dto.EgressoAtualizarDTO;
 import br.ufu.sistemaegressos.dto.EgressoCriarDTO;
+import br.ufu.sistemaegressos.exceptions.ResourceNotFoundException;
 import br.ufu.sistemaegressos.model.EgressoModel;
 import br.ufu.sistemaegressos.repository.EgressoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,21 @@ public class EgressoService {
     }
 
     public List<EgressoModel> buscarTodos() {
-        return egressoRepository.findAll();
+        List<EgressoModel> egressos = egressoRepository.findAll();
+        if (egressos.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum egresso encontrado.");
+        }
+        return egressos;
     }
 
     public Optional<EgressoModel> buscarPeloCPF(String cpf) {
-        return egressoRepository.findById(cpf);
+        Optional<EgressoModel> egresso = egressoRepository.findById(cpf);
+
+        if (egresso.isEmpty()) {
+            throw new ResourceNotFoundException("Egresso não encontrado com o CPF: " + cpf);
+        }
+
+        return egresso;
     }
 
     public EgressoModel criar(EgressoCriarDTO egressoDTO) {
@@ -43,11 +54,15 @@ public class EgressoService {
             atualizarCamposEgresso(egresso, egressoDTO);
             egresso.setData_atualizacao(LocalDate.now());
             return egressoRepository.save(egresso);
+        } else {
+            throw new ResourceNotFoundException("Egresso não encontrado com o CPF: " + cpf);
         }
-        return null;
     }
 
     public void excluir(String cpf) {
+        if (!egressoRepository.existsById(cpf)) {
+            throw new ResourceNotFoundException("Egresso não encontrado para exclusão com o CPF: " + cpf);
+        }
         egressoRepository.deleteById(cpf);
     }
 
@@ -65,6 +80,12 @@ public class EgressoService {
                                               String curso,
                                               String titulacao, LocalDate dataIngresso,
                                               LocalDate dataConclusao) {
-        return egressoRepository.buscarPorFiltro(nome, cpf, campus, curso, titulacao, dataIngresso, dataConclusao);
+        List<EgressoModel> resultado = egressoRepository.buscarPorFiltro(nome, cpf, campus, curso, titulacao, dataIngresso, dataConclusao);
+
+        if (resultado.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum egresso encontrado com os filtros aplicados.");
+        }
+
+        return resultado;
     }
 }

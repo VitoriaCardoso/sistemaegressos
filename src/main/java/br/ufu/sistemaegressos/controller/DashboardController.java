@@ -5,6 +5,9 @@ import br.ufu.sistemaegressos.dto.EgressoDepoimentoDTO;
 import br.ufu.sistemaegressos.dto.StatusEstudanteDTO;
 import br.ufu.sistemaegressos.model.DepoimentoModel;
 import br.ufu.sistemaegressos.service.DashboardService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/dashboard")
+@Tag(name = "Dashboard")
 public class DashboardController {
 
     @Autowired
@@ -37,18 +41,39 @@ public class DashboardController {
     }
 
     @GetMapping("/estudantes/ativos")
+    @Operation(
+            summary = "Total de estudantes ativos",
+            description = "Retorna o número total de estudantes ativos registrados no sistema."
+    )
     public Long getTotalEstudantesAtivos() {
         return dashboardService.buscarTotalEstudantesAtivos();
     }
 
     @GetMapping("/estudantes/inativos")
+    @Operation(
+            summary = "Total de estudantes inativos",
+            description = "Retorna o número total de estudantes inativos registrados no sistema."
+    )
     public Long getTotalEstudantesInativos() {
         return dashboardService.buscarTotalEstudantesInativos();
     }
 
     @GetMapping("/estudantes/campus/total")
+    @Operation(
+            summary = "Total de estudantes por campus",
+            description = "Agrupa e retorna o total de estudantes por campus."
+    )
     public Map<String, Long> getTotalPorCampus() {
         return dashboardService.buscarTotalPorCampus();
+    }
+
+    @GetMapping("/estudantes/titulacao")
+    @Operation(
+            summary = "Total de estudantes por titulação",
+            description = "Agrupa e retorna o total de estudantes por nível de titulação (ex: graduação, mestrado, doutorado)."
+    )
+    public Map<String, Long> getTotalPorTitulacao() {
+        return dashboardService.buscarTotalPorTitulacao();
     }
 
     @GetMapping("/estudantes/curso-campus-titulacao")
@@ -65,5 +90,4 @@ public class DashboardController {
     public List<EgressoDepoimentoDTO> listar() {
         return dashboardService.listarDepoimentos();
     }
-
 }

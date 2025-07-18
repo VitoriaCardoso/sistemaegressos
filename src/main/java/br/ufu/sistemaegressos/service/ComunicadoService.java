@@ -1,6 +1,7 @@
 package br.ufu.sistemaegressos.service;
 
 import br.ufu.sistemaegressos.dto.ComunicadoDTO;
+import br.ufu.sistemaegressos.exceptions.ResourceNotFoundException;
 import br.ufu.sistemaegressos.model.*;
 import br.ufu.sistemaegressos.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class ComunicadoService {
 
     public List<ComunicadoModel> listarTodos() {
         List<ComunicadoModel> comunicados = comunicadoRepository.findAll();
+
+        if (comunicados.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum comunicado encontrado.");
+        }
+
         for (ComunicadoModel comunicado : comunicados) {
             if (comunicado.getInformacao_academica() != null) {
                 comunicado.setInformacao_academica(null);
@@ -35,9 +41,11 @@ public class ComunicadoService {
     }
 
     public List<ComunicadoModel> buscarPorFiltro(String cursoDestino, String nivelCursoDestino, Boolean paraTodos) {
-        List<ComunicadoModel> comunicados;
+        List<ComunicadoModel> comunicados = comunicadoRepository.buscarComunicadosFiltrados(cursoDestino, nivelCursoDestino, paraTodos);
 
-        comunicados = comunicadoRepository.buscarComunicadosFiltrados(cursoDestino, nivelCursoDestino, paraTodos);
+        if (comunicados.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum comunicado encontrado com os filtros informados.");
+        }
 
         for (ComunicadoModel comunicado : comunicados) {
             if (comunicado.getInformacao_academica() != null) {
@@ -69,6 +77,10 @@ public class ComunicadoService {
                 informacoesAcademicas = informacaoAcademicaRepository.buscarPorNomeCurso(comunicado.getCurso_destino());
             } else {
                 informacoesAcademicas = informacaoAcademicaRepository.buscarPorNivelCurso(comunicado.getNivel_curso_destino());
+            }
+
+            if (informacoesAcademicas.isEmpty()) {
+                throw new ResourceNotFoundException("Nenhuma informação acadêmica encontrada para o filtro aplicado ao comunicado.");
             }
 
             for (InformacaoAcademicaModel info : informacoesAcademicas) {
