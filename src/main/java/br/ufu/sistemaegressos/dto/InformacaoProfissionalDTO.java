@@ -14,7 +14,7 @@ public class InformacaoProfissionalDTO {
     private Double salary;
     private LocalDate start_date;
     private LocalDate end_date;
-    private UUID id; //da informação academica
+    private UUID informacao_academica; //da informação academica
 
     public String getCompany_name() {
         return company_name;
@@ -96,11 +96,11 @@ public class InformacaoProfissionalDTO {
         this.end_date = end_date;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getInformacao_academica() {
+        return informacao_academica;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setInformacao_academica(UUID informacao_academica) {
+        this.informacao_academica = informacao_academica;
     }
 }

@@ -51,6 +51,7 @@ public class InformacaoProfissionalController {
             description = "Cria e salva uma nova entrada de informação profissional associada a um egresso e à sua informação acadêmica."
     )
     public InformacaoProfissionalModel criarInformacaoProfissional(@RequestBody InformacaoProfissionalDTO dto) {
+        System.out.println("Recebido: " + dto);
         return informacaoProfissionalService.criarInformacaoProfissional(dto);
     }
 

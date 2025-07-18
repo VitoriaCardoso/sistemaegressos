@@ -1,6 +1,8 @@
 package br.ufu.sistemaegressos.model;
 
+import br.ufu.sistemaegressos.config.CustomLocalDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -38,9 +40,11 @@ public class InformacaoProfissionalModel {
 
     private Double salary;
 
+    @JsonDeserialize(using = CustomLocalDateDeserializer.class)
     @Column(nullable = false)
     private LocalDate start_date;
 
+    @JsonDeserialize(using = CustomLocalDateDeserializer.class)
     private LocalDate end_date;
 
     @ManyToOne

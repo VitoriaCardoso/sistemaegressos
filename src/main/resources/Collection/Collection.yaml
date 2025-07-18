@@ -1,0 +1,549 @@
+type: spec.insomnia.rest/5.0
+name: Sistemas de Egressos
+meta:
+  id: wrk_47c2ab493f0a479b9fbe3018ecfd3634
+  created: 1745275786054
+  modified: 1746483357428
+collection:
+  - name: Informação Academica
+    meta:
+      id: fld_098b7caa42294173b8426ce82627be5e
+      created: 1746483934160
+      modified: 1746483934160
+      sortKey: -1746483934160
+    children:
+      - url: http://localhost:8080/api/informacoes/academicas/df3ead66-b75d-4bf4-93cc-0181ae668e14
+        name: Editar Informacao Acad
+        meta:
+          id: req_6589b49780794263b50c1c20a881bb8a
+          created: 1745275799975
+          modified: 1746483953623
+          isPrivate: false
+          sortKey: -1746483949148
+        method: PUT
+        body:
+          mimeType: application/json
+          text: >-
+            {
+                "institution_name": "Universidade Federal de Uberlandiaaa",
+                "tipo_instituicao": "Instituição Pública",
+                "nome_curso": "Graduação em Sistemas de Informação: Bacharelado - Integral - Monte Carmelo",
+                "course_level": "Bacharelado",
+                "country": "Brasil",
+                "start_date": "2015-03-19",
+                "end_date": "2024-04-25",
+                "state": "Minas Gerais",
+                "city": "Uberlândia"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/informacoes/academicas/egresso/123.456.789-14
+        name: Buscar Informacao Acad
+        meta:
+          id: req_2756c50dd682436f8841f3e14af6f48f
+          created: 1746483689065
+          modified: 1746484090887
+          isPrivate: false
+          sortKey: -1746483949198
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/informacoes/academicas
+        name: Criar Informacao Acad
+        meta:
+          id: req_238dbf432603444693fab6c0cee0d6e6
+          created: 1746483866658
+          modified: 1746552035876
+          isPrivate: false
+          sortKey: -1746483949098
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            		"matricula": "11111BCC117",
+            		"institution_name": "Universidade Federal de Uberlandia",
+            		"institution_type": "Instituição Pública",
+            		"course_name": "Ciencias Contabil: Integral",
+            		"course_level": "Bacharelado",
+            		"start_date": "2018-03-22",
+            		"end_date": "2024-04-25",
+            		"city": "Uberlândia",
+            		"state": "Minas Gerais",
+            		"country": "Brasil",
+            		"registration_number": "115528BN",
+            		"campus": "Santa Mônica",
+            		"ativo": true,
+            		"egresso_cpf": "123.456.789-14"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/informacoes/academicas/cursos/123.456.789-14
+        name: Buscar Curso por CPF
+        meta:
+          id: req_703342752577405094fe66363446ce00
+          created: 1746912305603
+          modified: 1746912352199
+          isPrivate: false
+          sortKey: -1746483949298
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Informação Profisional
+    meta:
+      id: fld_2cdf200a463c4135be0b19cac4513a52
+      created: 1746483973789
+      modified: 1746483979567
+      sortKey: -1746483973789
+    children:
+      - url: http://localhost:8080/api/informacoes/profissionais/8a2fc41b-6666-4475-995b-be068fe6ecb1
+        name: Salvar Informacao Prof
+        meta:
+          id: req_6832e61608bf45359bf486440e9d8cb3
+          created: 1745367083671
+          modified: 1746483983644
+          isPrivate: false
+          sortKey: -1746483983590
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+                "category": "teste",
+                "company_name" : "teste",
+                "function": "teste",
+                "id": "b848dfce-d263-4034-b881-5c75876b35e7",
+            		"job_level": "teste",
+            		"job_title": "teste",
+            		"job_type": "teste",
+            		"location": "teste",
+            		"salary": 7000,
+            		"start_date": "2024-02-01"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/informacoes/profissionais/egresso/123.456.789-14
+        name: Buscar Informacao Prof
+        meta:
+          id: req_5c081d544d6d46e2bb8e421032a0cbe8
+          created: 1747085637901
+          modified: 1747085671150
+          isPrivate: false
+          sortKey: -1746483983690
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/informacoes/profissionais
+        name: Criar Informacao Prof
+        meta:
+          id: req_3a0a1f60d29c45c48d5f8dd24c5f5b54
+          created: 1747096419710
+          modified: 1747097041207
+          isPrivate: false
+          sortKey: -1746483983640
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+            	"company_name": "dfgb", 
+            	"job_title": "hhh", 
+            	"job_level": "Nível Médio", 
+            	"job_type": "Tempo Integral", 
+            	"category": "Privada",
+            	"end_date": "2022-05-15",
+            	"function": "hhh",
+            	"informacao_academica": "3235b2bd-6a44-4f0a-a2f6-8ef828a56c34",
+            	"location": "Pessoalmente",
+            	"salary": "50",
+            	"start_date": "2019-04-20"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Publicacao
+    meta:
+      id: fld_767a48b872a34968976a3cc9596f8b83
+      created: 1746902510522
+      modified: 1746902510522
+      sortKey: -1746902510522
+    children:
+      - url: http://localhost:8080/api/publicacoes/egresso/123.456.789-14
+        name: Buscar por CPF
+        meta:
+          id: req_9cde98ec1780445cbe2025cd5c34a0d1
+          created: 1746902513720
+          modified: 1746907750979
+          isPrivate: false
+          sortKey: -1746902516819
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/publicacoes
+        name: Criar Publicacao
+        meta:
+          id: req_cc6b83d7f0a1401bb51bd991ccb58570
+          created: 1746906627356
+          modified: 1746907393273
+          isPrivate: false
+          sortKey: -1746902516919
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "titulo": "Inteligência Artificial Aplicada à Medicina",
+              "autores": "João Silva, Maria Oliveira",
+              "ano_publicacao": 2023,
+              "veiculo": "Revista Brasileira de Tecnologia em Saúde",
+              "url_publicacao": "https://revistatecsaude.org/ai-medicina",
+              "id_informacao_academica": "57a4960e-eafa-473d-a109-8b3aa974e5dd"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Depoimento
+    meta:
+      id: fld_08e1c527404a4c65b213c6899898153f
+      created: 1747071016600
+      modified: 1747071016600
+      sortKey: -1747071016600
+    children:
+      - url: http://localhost:8080/api/depoimentos/egresso/123.456.789-14
+        name: Buscar Depoimento por CPF
+        meta:
+          id: req_95d03bc264554123ae21657a061451db
+          created: 1747071316328
+          modified: 1748283434817
+          isPrivate: false
+          sortKey: -1747071318148
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/depoimentos
+        name: Criar Depoimento
+        meta:
+          id: req_61572509860f4999b2d217c97a0e5e82
+          created: 1747075314706
+          modified: 1747075371886
+          isPrivate: false
+          sortKey: -1746986917533.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+            		"texto_depoimento": "Estudar Medicina Veterinária na UFU foi uma experiência transformadora. Desde o primeiro semestre, fui desafiado por professores extremamente capacitados e apaixonados pelo que fazem. A estrutura do Campus Glória contribuiu muito para a minha formação prática — especialmente com os laboratórios e o hospital veterinário, que me proporcionaram contato direto com os animais e situações reais da profissão. Além disso, pude participar de projetos de extensão e pesquisa que abriram portas no mercado de trabalho e ampliaram minha visão sobre o papel social do veterinário.",
+            		"data_cadastro": "2025-05-08",
+            		"privacidade": "Público",
+            		"informacaoAcademica": {
+            			"id": "3235b2bd-6a44-4f0a-a2f6-8ef828a56c34",
+            			"matricula": "11221MEV112",
+            			"institution_name": "Universidade Federal de Uberlandia",
+            			"institution_type": "Instituição Pública",
+            			"course_name": "Graduação em Medicina Veterinária: Bacharelado - Integral",
+            			"course_level": "Bacharelado",
+            			"start_date": "2012/03/22",
+            			"end_date": "2017/04/25",
+            			"end_year": 2017,
+            			"end_semester": "1° Semestre",
+            			"city": "Uberlândia",
+            			"state": "Minas Gerais",
+            			"country": "Brasil",
+            			"campus": "Glória",
+            			"ativo": false
+            		}
+            	},
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/depoimentos
+        name: Buscar DepoimentoS
+        meta:
+          id: req_8450b1b4f1984fb68d595177ddfc271e
+          created: 1748283440996
+          modified: 1748283445155
+          isPrivate: false
+          sortKey: -1747029117840.75
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Dashboard
+    meta:
+      id: fld_d29400acb8914b779a2fe96a3fc543a2
+      created: 1747139941983
+      modified: 1747146316423
+      sortKey: -1746483934110
+    children:
+      - url: http://localhost:8080/api/dashboard/estudantes/status
+        name: Buscar Total Ativos
+        meta:
+          id: req_9afba84148964c45bf560e6a529c4e6a
+          created: 1747139941985
+          modified: 1747146335241
+          isPrivate: false
+          sortKey: -1746483949298
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/dashboard/estudantes/nivel
+        name: Buscar Nivel Estudantes
+        meta:
+          id: req_534e4fe4e712437ab4e953539d96c840
+          created: 1747146353824
+          modified: 1747146377057
+          isPrivate: false
+          sortKey: -1746483949248
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/dashboard/estudantes/campus
+        name: Buscar Campus Estudantes
+        meta:
+          id: req_1f36883e09834412bd510975361cef9a
+          created: 1747148073599
+          modified: 1747148077856
+          isPrivate: false
+          sortKey: -1746483949223
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/dashboard/estudantes/curso-campus-titulacao
+        name: Buscar Total Estudantes Por Filtro
+        meta:
+          id: req_101d2042f7f241fea75acc5b9c8ac35a
+          created: 1747154545301
+          modified: 1748293934764
+          isPrivate: false
+          sortKey: -1746483949210.5
+        method: GET
+        parameters:
+          - id: pair_27fe4d1cf7bf4a139eb85fe28b5be50c
+            name: campus
+            value: Glória
+            disabled: true
+          - id: pair_1974f928bbca4fa0b54dafd6c46f1250
+            name: semestre
+            value: 1° Semestre/2023
+            disabled: false
+          - id: pair_7546cd497d814d0bb80d1232282dc6ca
+            name: curso
+            value: Sistemas de Informação
+            disabled: false
+          - id: pair_dfccf692ae25455f81581da26475c41b
+            name: titulacao
+            value: Bacharelado
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+            id: pair_b0b2a4099e3248adba3177ccabcf4bf0
+            disabled: true
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/dashboard/estudantes/curso-campus-titulacao
+        name: Buscar Depoimentos
+        meta:
+          id: req_74d3576bad7643b09a9263dd39723b64
+          created: 1747359931407
+          modified: 1747613896500
+          isPrivate: false
+          sortKey: -1746483949204.25
+        method: GET
+        parameters:
+          - id: pair_27fe4d1cf7bf4a139eb85fe28b5be50c
+            name: campus
+            value: Monte Carmelo
+            disabled: false
+          - id: pair_1974f928bbca4fa0b54dafd6c46f1250
+            name: semestreLetivo
+            value: "20232"
+            disabled: true
+          - id: pair_7546cd497d814d0bb80d1232282dc6ca
+            name: curso
+            disabled: true
+          - id: pair_dfccf692ae25455f81581da26475c41b
+            name: titulacao
+            value: Bacharelado
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+            id: pair_b0b2a4099e3248adba3177ccabcf4bf0
+            disabled: true
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_901d0595ae5e17c90b1cd7734dfac3b94c146211
+    created: 1745275786057
+    modified: 1745275786057
+environments:
+  name: Base Environment
+  meta:
+    id: env_901d0595ae5e17c90b1cd7734dfac3b94c146211
+    created: 1745275786057
+    modified: 1745275786057
+    isPrivate: false
+spec:
+  meta:
+    id: spc_775afdf6b08b4cc58bc106ba3b587bfc
+    created: 1745275786056
+    modified: 1746483357427

@@ -1,5 +1,8 @@
 package br.ufu.sistemaegressos.controller;
 
+import br.ufu.sistemaegressos.dto.CursoCampusTitulacaoDTO;
+import br.ufu.sistemaegressos.dto.EgressoDepoimentoDTO;
+import br.ufu.sistemaegressos.dto.StatusEstudanteDTO;
 import br.ufu.sistemaegressos.model.DepoimentoModel;
 import br.ufu.sistemaegressos.service.DashboardService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,6 +25,21 @@ public class DashboardController {
     @Autowired
     private DashboardService dashboardService;
 
+    @GetMapping("/estudantes/status")
+    public List<StatusEstudanteDTO> buscarStatusEstudantes() {
+        return dashboardService.buscarStatusEstudantesComTotal();
+    }
+
+    @GetMapping("/estudantes/nivel")
+    public List<StatusEstudanteDTO> buscarNivelEstudantes() {
+        return dashboardService.buscarNivelEstudantes();
+    }
+
+    @GetMapping("/estudantes/campus")
+    public List<StatusEstudanteDTO> buscarCampusEstudantes() {
+        return dashboardService.buscarCampusEstudantes();
+    }
+
     @GetMapping("/estudantes/ativos")
     @Operation(
             summary = "Total de estudantes ativos",
@@ -40,7 +58,7 @@ public class DashboardController {
         return dashboardService.buscarTotalEstudantesInativos();
     }
 
-    @GetMapping("/estudantes/campus")
+    @GetMapping("/estudantes/campus/total")
     @Operation(
             summary = "Total de estudantes por campus",
             description = "Agrupa e retorna o total de estudantes por campus."
@@ -58,23 +76,18 @@ public class DashboardController {
         return dashboardService.buscarTotalPorTitulacao();
     }
 
-    @GetMapping("/depoimentos")
-    @Operation(
-            summary = "Listar depoimentos filtrados",
-            description = "Retorna os depoimentos com base nos filtros opcionais de campus, semestre letivo, curso e titulação.",
-            parameters = {
-                    @Parameter(name = "campus", description = "Nome do campus", required = false),
-                    @Parameter(name = "semestreLetivo", description = "Semestre letivo (ex: 2023/2)", required = false),
-                    @Parameter(name = "curso", description = "Nome do curso", required = false),
-                    @Parameter(name = "titulacao", description = "Titulação (ex: Graduação, Mestrado)", required = false)
-            }
-    )
-    public List<DepoimentoModel> listarDepoimentos(
+    @GetMapping("/estudantes/curso-campus-titulacao")
+    public List<CursoCampusTitulacaoDTO> getCursoCampusTitulacao(
             @RequestParam(required = false) String campus,
-            @RequestParam(required = false) String semestreLetivo,
-            @RequestParam(required = false) String curso,
-            @RequestParam(required = false) String titulacao) {
+            @RequestParam(required = false) String semestre,
+            @RequestParam(required = false) String titulacao,
+            @RequestParam(required = false) String curso) {
 
-        return dashboardService.listarDepoimentos(campus, semestreLetivo, curso, titulacao);
+        return dashboardService.buscarTotalPorCursoCampusTitulacao(campus, semestre, titulacao, curso);
+    }
+
+    @GetMapping("/depoimentos")
+    public List<EgressoDepoimentoDTO> listar() {
+        return dashboardService.listarDepoimentos();
     }
 }

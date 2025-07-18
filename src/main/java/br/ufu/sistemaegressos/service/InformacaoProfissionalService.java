@@ -71,8 +71,8 @@ public class InformacaoProfissionalService {
         informacaoProfissional.setStart_date(dto.getStart_date());
 
         InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
-                .findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Informação acadêmica não encontrada para o ID: " + dto.getId()));
+                .findById(dto.getInformacao_academica())
+                .orElseThrow(() -> new ResourceNotFoundException("Informação acadêmica não encontrada para o ID: " + dto.getInformacao_academica()));
 
         informacaoProfissional.setInformacao_academica(informacaoAcademica);
 
@@ -98,7 +98,7 @@ public class InformacaoProfissionalService {
         Optional.ofNullable(dto.getEnd_date()).ifPresent(informacaoProfissional::setEnd_date);
         BeanUtils.copyProperties(dto, informacaoProfissional, "id");
 
-        Optional.ofNullable(dto.getId()).ifPresent(idInfoAcademica -> {
+        Optional.ofNullable(dto.getInformacao_academica()).ifPresent(idInfoAcademica -> {
             InformacaoAcademicaModel informacaoAcademica = informacaoAcademicaRepository
                     .findById(idInfoAcademica)
                     .orElseThrow(() -> new ResourceNotFoundException("Informação acadêmica não encontrada para o ID: " + idInfoAcademica));
